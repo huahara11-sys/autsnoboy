@@ -201,21 +201,15 @@ Learning Adventure • Owned & Developed by Varun Mamta
 
 <div class="card">
 
-<div class="mission-title" id="missionTitle">
-Mission 1
-</div>
+<div class="mission-title" id="missionTitle"></div>
 
-<div class="instruction" id="instruction">
-Find the RED object 🔴
-</div>
+<div class="instruction" id="instruction"></div>
 
 <div class="choices" id="choices"></div>
 
 <div class="feedback" id="feedback"></div>
 
-<div class="progress" id="progress">
-Mission 1 of 7
-</div>
+<div class="progress" id="progress"></div>
 
 <button class="next" id="nextBtn" onclick="nextMission()">
 ➡️ Next Mission
@@ -235,11 +229,11 @@ Mission 1 of 7
 A fun learning experience for children 🌟
 </div>
 
-<!-- REAL APPLAUSE + AUDIENCE CHEER -->
+<!-- YOUR REAL APPLAUSE + AUDIENCE CHEER MP3 -->
 
 <audio
 id="cheerSound"
-src="cheer.mp3"
+src="driken5482-applause-cheer-236786.mp3"
 preload="auto"> </audio>
 
 <script>
@@ -251,7 +245,7 @@ let answered=false;
 
 
 /* =========================
-   MISSIONS
+MISSIONS
 ========================= */
 
 const missions=[
@@ -259,7 +253,6 @@ const missions=[
 {
 enTitle:"Mission 1 — Focus Explorer",
 hiTitle:"मिशन 1 — ध्यान खोजकर्ता",
-
 enInstruction:"Find the RED object 🔴",
 hiInstruction:"लाल वस्तु 🔴 ढूंढो",
 
@@ -274,7 +267,6 @@ choices:[
 {
 enTitle:"Mission 2 — Sharp Eyes",
 hiTitle:"मिशन 2 — तेज़ नज़र",
-
 enInstruction:"Find the SAME pair 👀",
 hiInstruction:"एक जैसी जोड़ी 👀 ढूंढो",
 
@@ -289,7 +281,6 @@ choices:[
 {
 enTitle:"Mission 3 — Pattern Star",
 hiTitle:"मिशन 3 — पैटर्न स्टार",
-
 enInstruction:"What comes next? 🔴 🔵 🔴 🔵 ?",
 hiInstruction:"इसके बाद क्या आएगा? 🔴 🔵 🔴 🔵 ?",
 
@@ -304,7 +295,6 @@ choices:[
 {
 enTitle:"Mission 4 — Feelings Explorer",
 hiTitle:"मिशन 4 — भावनाओं का खोजकर्ता",
-
 enInstruction:"Autsnoboy got a gift! How does he feel? 😊",
 hiInstruction:"Autsnoboy को gift मिला! वह कैसा महसूस करेगा? 😊",
 
@@ -319,7 +309,6 @@ choices:[
 {
 enTitle:"Mission 5 — Little Communicator",
 hiTitle:"मिशन 5 — छोटा कम्युनिकेटर",
-
 enInstruction:"What can you say when you need help? 🗣️",
 hiInstruction:"जब आपको मदद चाहिए तो क्या कह सकते हैं? 🗣️",
 
@@ -334,7 +323,6 @@ choices:[
 {
 enTitle:"Mission 6 — Daily Hero",
 hiTitle:"मिशन 6 — डेली हीरो",
-
 enInstruction:"What do we do before eating? 🧼",
 hiInstruction:"खाना खाने से पहले क्या करते हैं? 🧼",
 
@@ -349,7 +337,6 @@ choices:[
 {
 enTitle:"Mission 7 — Friendship Hero",
 hiTitle:"मिशन 7 — फ्रेंडशिप हीरो",
-
 enInstruction:"Your friend is playing. What should you do? 🤝",
 hiInstruction:"आपका दोस्त खेल रहा है। आपको क्या करना चाहिए? 🤝",
 
@@ -365,28 +352,33 @@ choices:[
 
 
 /* =========================
-   CHEER SOUND
+REAL MP3 CHEER
 ========================= */
 
 function playCheer(){
 
 const sound=document.getElementById("cheerSound");
 
-if(!sound) return;
+if(!sound){
+console.log("Cheer audio element not found");
+return;
+}
 
 sound.pause();
-
 sound.currentTime=0;
-
 sound.volume=1.0;
 
-const promise=sound.play();
+let p=sound.play();
 
-if(promise!==undefined){
+if(p!==undefined){
 
-promise.catch(function(error){
+p.then(function(){
 
-console.log("Cheer audio could not play:",error);
+console.log("👏 Audience applause playing");
+
+}).catch(function(error){
+
+console.log("Cheer audio blocked:",error);
 
 });
 
@@ -396,7 +388,7 @@ console.log("Cheer audio could not play:",error);
 
 
 /* =========================
-   VOICE
+VOICE
 ========================= */
 
 function speak(text,language){
@@ -420,12 +412,12 @@ window.speechSynthesis.speak(voice);
 
 
 /* =========================
-   SUCCESS
+SUCCESS
 ========================= */
 
 function celebrate(){
 
-/* REAL APPLAUSE + CHEER */
+/* REAL DOWNLOADED MP3 */
 
 playCheer();
 
@@ -438,386 +430,4 @@ speak(
 
 }else{
 
-speak(
-"Well done! Great job!",
-"en-IN"
-);
-
-}
-
-}
-
-
-/* =========================
-   TRY AGAIN
-========================= */
-
-function tryAgain(){
-
-if(hindi){
-
-speak(
-"फिर कोशिश करो। तुम कर सकते हो!",
-"hi-IN"
-);
-
-}else{
-
-speak(
-"Try again. You can do it!",
-"en-IN"
-);
-
-}
-
-}
-
-
-/* =========================
-   LOAD MISSION
-========================= */
-
-function loadMission(){
-
-answered=false;
-
-const mission=
-missions[currentMission];
-
-document.getElementById("missionTitle")
-.innerText=
-hindi
-?mission.hiTitle
-:mission.enTitle;
-
-document.getElementById("instruction")
-.innerText=
-hindi
-?mission.hiInstruction
-:mission.enInstruction;
-
-document.getElementById("progress")
-.innerText=
-hindi
-?
-"मिशन "+
-(currentMission+1)+
-" / "+
-missions.length
-:
-"Mission "+
-(currentMission+1)+
-" of "+
-missions.length;
-
-document.getElementById("feedback")
-.innerText="";
-
-document.getElementById("nextBtn")
-.style.display="none";
-
-const choices=
-document.getElementById("choices");
-
-choices.innerHTML="";
-
-mission.choices.forEach(function(choice){
-
-const btn=
-document.createElement("button");
-
-btn.className="choice";
-
-btn.innerHTML=
-choice.emoji+
-"<br>"+
-(hindi?choice.hi:choice.en);
-
-btn.onclick=function(){
-
-checkAnswer(choice,btn);
-
-};
-
-choices.appendChild(btn);
-
-});
-
-}
-
-
-/* =========================
-   CHECK ANSWER
-========================= */
-
-function checkAnswer(choice,button){
-
-if(answered)
-return;
-
-if(choice.correct){
-
-answered=true;
-
-button.style.borderColor="#159957";
-
-document.getElementById("feedback")
-.innerText=
-hindi
-?
-"⭐ बहुत अच्छा! शाबाश!"
-:
-"⭐ Well done! Great job!";
-
-/* PLAY REAL MP3 */
-
-celebrate();
-
-document.getElementById("nextBtn")
-.style.display="inline-block";
-
-showBadge();
-
-}else{
-
-button.style.borderColor="#e85d75";
-
-document.getElementById("feedback")
-.innerText=
-hindi
-?
-"💙 फिर कोशिश करो। तुम कर सकते हो!"
-:
-"💙 Try again. You can do it!";
-
-tryAgain();
-
-setTimeout(function(){
-
-button.style.borderColor="transparent";
-
-},800);
-
-}
-
-}
-
-
-/* =========================
-   NEXT
-========================= */
-
-function nextMission(){
-
-if(currentMission<missions.length-1){
-
-currentMission++;
-
-loadMission();
-
-}else{
-
-finishGame();
-
-}
-
-}
-
-
-/* =========================
-   BADGES
-========================= */
-
-function showBadge(){
-
-const badgeList=[
-
-"🌱 I Tried",
-"🔍 Focus Explorer",
-"👀 Sharp Eyes",
-"🎵 Rhythm Star",
-"🗣️ Little Communicator",
-"😊 Feelings Explorer",
-"🤝 Friendship Hero",
-"⭐ Try-Again Champion"
-
-];
-
-const badge=
-badgeList[
-Math.min(
-currentMission+1,
-badgeList.length-1
-)
-];
-
-const div=
-document.createElement("div");
-
-div.className="badge";
-
-div.innerText=badge;
-
-document
-.getElementById("badges")
-.appendChild(div);
-
-}
-
-
-/* =========================
-   FINISH
-========================= */
-
-function finishGame(){
-
-document.getElementById("missionTitle")
-.innerText=
-hindi
-?
-"🎉 मिशन पूरा!"
-:
-"🎉 Adventure Complete!";
-
-document.getElementById("instruction")
-.innerText=
-hindi
-?
-"तुमने बहुत अच्छा किया! ⭐"
-:
-"You did a wonderful job! ⭐";
-
-document.getElementById("choices")
-.innerHTML=
-"<div style='font-size:70px'>🏆🌟🦸</div>";
-
-document.getElementById("feedback")
-.innerText=
-hindi
-?
-"हर कोशिश मायने रखती है!"
-:
-"Every step counts!";
-
-/* FINAL CHEER */
-
-playCheer();
-
-if(hindi){
-
-speak(
-"शाबाश! मिशन पूरा हो गया!",
-"hi-IN"
-);
-
-}else{
-
-speak(
-"Amazing! You completed the adventure!",
-"en-IN"
-);
-
-}
-
-document.getElementById("nextBtn")
-.style.display="none";
-
-}
-
-
-/* =========================
-   LANGUAGE
-========================= */
-
-function toggleLanguage(){
-
-hindi=!hindi;
-
-loadMission();
-
-}
-
-
-/* =========================
-   BACKGROUND MUSIC
-========================= */
-
-const backgroundMusic=
-new Audio(
-"bmdkbandara-whispers-of-the-stream-417622.mp3"
-);
-
-backgroundMusic.loop=true;
-backgroundMusic.volume=0.22;
-
-
-function startMusic(){
-
-if(!musicOn)
-return;
-
-backgroundMusic
-.play()
-.catch(function(){
-
-console.log(
-"Background music needs user interaction."
-);
-
-});
-
-}
-
-
-function toggleMusic(){
-
-musicOn=!musicOn;
-
-const btn=
-document.getElementById("musicBtn");
-
-if(musicOn){
-
-btn.innerText="🎵 Music ON";
-
-startMusic();
-
-}else{
-
-btn.innerText="🔇 Music OFF";
-
-backgroundMusic.pause();
-
-}
-
-}
-
-
-/* =========================
-   RESTART
-========================= */
-
-function restartGame(){
-
-currentMission=0;
-
-document.getElementById("badges")
-.innerHTML="";
-
-loadMission();
-
-startMusic();
-
-}
-
-
-/* =========================
-   INITIAL LOAD
-========================= */
-
-loadMission();
-
-</script>
-
-</body>
-</html>
+spe
