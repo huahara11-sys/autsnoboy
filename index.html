@@ -289,6 +289,116 @@ h1{
     padding:20px;
   }
 }
+
+/* =========================
+   STORY + HOLOGRAM
+   ========================= */
+.storyCard{
+  background:linear-gradient(135deg,#071d35,#123e63);
+  color:white;
+  border:2px solid #55eaff;
+  box-shadow:0 0 30px #20dfff55, 0 12px 40px #0003;
+}
+.storyHero{
+  width:min(360px,80vw);
+  max-height:330px;
+  object-fit:contain;
+  border-radius:30px;
+  filter:drop-shadow(0 0 18px #22eaff);
+}
+.storyText{
+  font-size:21px;
+  line-height:1.7;
+  text-align:left;
+  white-space:pre-line;
+  max-height:390px;
+  overflow:auto;
+  padding:18px;
+  border-radius:22px;
+  background:#ffffff12;
+}
+.storyAudio{
+  width:100%;
+  margin:15px 0;
+}
+.storyLangRow{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:15px 0;
+}
+.storyLangBtn{
+  padding:12px 18px;
+  border-radius:22px;
+  background:#ffffff22;
+  color:white;
+  border:1px solid #8befff;
+  font-weight:bold;
+}
+.storyLangBtn.active{
+  background:#55eaff;
+  color:#06223a;
+}
+.holoGuide{
+  position:fixed;
+  left:14px;
+  bottom:14px;
+  z-index:9998;
+  width:135px;
+  padding:10px;
+  border-radius:28px;
+  background:linear-gradient(180deg,#06233cdd,#0a5b7ddd);
+  border:2px solid #56efff;
+  box-shadow:0 0 25px #28eaff88;
+  text-align:center;
+  color:white;
+  pointer-events:none;
+}
+.holoGuide img{
+  width:105px;
+  height:105px;
+  object-fit:contain;
+  opacity:.72;
+  filter:grayscale(.25) hue-rotate(135deg) saturate(1.8) drop-shadow(0 0 15px #55efff);
+}
+.holoGuide .holoFace{
+  font-size:30px;
+  margin-top:-10px;
+}
+.holoGuide .holoMsg{
+  font-size:13px;
+  font-weight:bold;
+  line-height:1.25;
+}
+.holoGuide.celebrate{
+  animation:holoCelebrate .75s ease 2;
+}
+.holoGuide.encourage{
+  animation:holoEncourage .55s ease 2;
+}
+@keyframes holoCelebrate{
+  0%,100%{transform:scale(1) rotate(0)}
+  30%{transform:scale(1.12) rotate(-4deg)}
+  60%{transform:scale(1.12) rotate(4deg)}
+}
+@keyframes holoEncourage{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-7px)}
+  50%{transform:translateX(7px)}
+  75%{transform:translateX(-4px)}
+}
+@media(max-width:600px){
+  .holoGuide{
+    width:100px;
+    left:8px;
+    bottom:8px;
+    padding:6px;
+  }
+  .holoGuide img{width:72px;height:72px}
+  .holoGuide .holoMsg{font-size:11px}
+}
+
 </style>
 </head>
 
@@ -349,7 +459,7 @@ h1{
       Learn, play, explore and celebrate every step.
     </p>
 
-    <button class="startBtn" onclick="showWorlds()">
+    <button class="startBtn" onclick="showStory()">
       🚀 Start Adventure
     </button>
 
@@ -470,6 +580,224 @@ h1{
 
 </section>
 
+
+
+<!-- STORY -->
+<section id="story" class="hidden">
+  <div class="card storyCard center">
+    <img src="autsnoboy.png" class="storyHero" alt="Autsnoboy">
+    <h2 id="storyTitle">🦸 Autsnoboy's Story</h2>
+    <p id="storyIntro" style="font-size:20px;">Listen, read and begin your learning adventure.</p>
+
+    <div class="storyLangRow">
+      <button id="storyEnglishBtn" class="storyLangBtn active" onclick="setStoryLanguage('en')">🇬🇧 English</button>
+      <button id="storyHindiBtn" class="storyLangBtn" onclick="setStoryLanguage('hi')">🇮🇳 हिन्दी</button>
+    </div>
+
+    <audio id="storyEnglishAudio" class="storyAudio" controls preload="none"
+           src="ElevenLabs_2026-10-26T17_03_44_Chintu - Versatile Cartoon Character_pvc_sp100_s50_sb75_v4.mp3"></audio>
+    <audio id="storyHindiAudio" class="storyAudio hidden" controls preload="none"
+           src="ElevenLabs_2026-10-26T16_56_11_Chintu - Versatile Cartoon Character_pvc_sp100_s50_sb75_v4.mp3"></audio>
+
+    <div id="storyTextEn" class="storyText">
+Hi, my friend!
+
+I am Autsnoboy.
+
+And today, I am here to tell you my story.
+
+My name is Bannu.
+
+I see the world in my own special way.
+
+I love looking carefully at things, discovering new things, and learning something new every day.
+
+And when something feels difficult, I keep trying.
+
+But there is something special inside me.
+
+A hidden power that I did not know about at first.
+
+One day, I discovered that this power becomes stronger whenever I learn.
+
+When I focus… my power grows.
+
+When I learn a new word… my power grows.
+
+When I practise something new… my power grows.
+
+And when I make a mistake and try again…
+
+That is when my power grows the most!
+
+That is when I chose a new name for myself—
+
+Autsnoboy!
+
+But I don't want to go on this adventure alone.
+
+I want you to come with me.
+
+We will learn together.
+
+We will play together.
+
+We will discover new things together.
+
+Some missions will be easy…
+
+And some missions may be a little difficult.
+
+But remember—
+
+Being difficult does not mean we should stop.
+
+We will try.
+
+We will try again.
+
+And if we need to…
+
+We will try one more time.
+
+Every time you learn something new, you will unlock a new learning level.
+
+And as your levels grow…
+
+Your superhero power will grow stronger too.
+
+The power of Focus.
+
+The power of Communication.
+
+The power of Thinking.
+
+The power of Understanding Feelings.
+
+The power of Daily Life Skills.
+
+And the greatest power of all—
+
+The power to never give up!
+
+So, are you ready?
+
+Because our learning adventure is about to begin.
+
+I am Autsnoboy…
+
+And now, I am going to share my power with you.
+
+Come on, my friend…
+
+Let's begin our first mission!
+
+Are you ready to join me on this superhero learning adventure?
+
+Let's go!
+
+The adventure begins now!
+    </div>
+
+    <div id="storyTextHi" class="storyText hidden">
+नमस्ते दोस्त!
+
+मैं हूँ ऑट्सनोबॉय।
+
+और आज मैं तुम्हें अपनी कहानी सुनाने आया हूँ।
+
+मेरा नाम बन्नू है।
+
+मैं दुनिया को थोड़ा अलग तरीके से देखता हूँ।
+
+मैं चीज़ों को ध्यान से देखता हूँ, नई चीज़ें सीखना पसंद करता हूँ और जब कोई काम मुश्किल लगता है, तो मैं उसे बार-बार करने की कोशिश करता हूँ।
+
+लेकिन मेरे अंदर एक ऐसी शक्ति है, जिसके बारे में मुझे खुद भी पहले पता नहीं था।
+
+एक दिन मुझे एहसास हुआ कि मेरी यह शक्ति तब और मजबूत होती है, जब मैं सीखता हूँ।
+
+जब मैं ध्यान लगाता हूँ… मेरी शक्ति बढ़ती है।
+
+जब मैं कोई नया शब्द सीखता हूँ… मेरी शक्ति बढ़ती है।
+
+जब मैं किसी काम की practice करता हूँ… मेरी शक्ति बढ़ती है।
+
+और जब मैं गलती के बाद फिर से कोशिश करता हूँ…
+
+तब मेरी शक्ति सबसे ज्यादा बढ़ती है!
+
+तभी मैंने अपने लिए एक नया नाम चुना—
+
+ऑट्सनोबॉय!
+
+लेकिन मैं यह adventure अकेले नहीं करना चाहता।
+
+मैं चाहता हूँ कि तुम भी मेरे साथ चलो।
+
+हम साथ में सीखेंगे।
+
+हम खेलेंगे।
+
+हम नई चीज़ें खोजेंगे।
+
+कभी कोई mission आसान होगा…
+
+और कभी कोई mission थोड़ा मुश्किल।
+
+लेकिन याद रखना—
+
+मुश्किल होने का मतलब यह नहीं कि हम रुक जाएँ।
+
+हम कोशिश करेंगे।
+
+फिर कोशिश करेंगे।
+
+और जरूरत पड़े तो फिर से कोशिश करेंगे।
+
+हर बार जब तुम कुछ नया सीखोगे, तुम्हारा एक नया learning level unlock होगा।
+
+और जैसे-जैसे तुम्हारे levels बढ़ेंगे…
+
+तुम्हारी superhero power भी बढ़ती जाएगी।
+
+Focus की power।
+
+Communication की power।
+
+Thinking की power।
+
+Feelings समझने की power।
+
+Daily Life Skills की power।
+
+और सबसे बड़ी power—
+
+कभी हार न मानने की power!
+
+तो तैयार हो?
+
+क्योंकि अब हमारी learning adventure शुरू होने वाली है।
+
+मैं हूँ ऑट्सनोबॉय…
+
+और अब मैं अपनी power तुम्हारे साथ share करने वाला हूँ।
+
+चलो दोस्त…
+
+पहला mission शुरू करते हैं!
+
+क्या तुम मेरे साथ superhero बनने के इस adventure पर चलोगे?
+
+चलो!
+
+Adventure शुरू करते हैं!
+    </div>
+
+    <button class="startBtn" onclick="startAdventure()">🚀 Start Learning Adventure</button>
+    <br>
+    <button class="actionBtn backBtn" onclick="goHome()">🏠 Home</button>
+  </div>
+</section>
 
 <!-- WORLDS -->
 <section id="worlds" class="hidden">
@@ -803,6 +1131,14 @@ h1{
 </section>
 
 
+
+<!-- HOLOGRAM GUIDE -->
+<div id="holoGuide" class="holoGuide">
+  <img src="autsnoboy.png" alt="Autsnoboy Hologram">
+  <div id="holoFace" class="holoFace">🙂</div>
+  <div id="holoMsg" class="holoMsg">I'm here to help you!</div>
+</div>
+
 <!-- AUDIO -->
 <audio id="flute"
        src="bmdkbandara-whispers-of-the-stream-417622.mp3"
@@ -818,7 +1154,6 @@ fluteAudio.addEventListener("error",function(){
 </script>
 
 <audio id="flute_backup" style="display:none"></audio>
-</audio>
 
 <audio id="cheer"
        src="driken5482-applause-cheer-236786.mp3"
@@ -1127,6 +1462,120 @@ const householdObjects = [
 
 
 /* =========================
+   STORY AUDIO + HOLOGRAM
+========================= */
+
+let storyLanguage = language || "en";
+
+function stopStoryAudio(){
+  ["storyEnglishAudio", "storyHindiAudio"].forEach(function(id){
+    const audio = document.getElementById(id);
+    if(audio){
+      try { audio.pause(); audio.currentTime = 0; } catch(e) {}
+    }
+  });
+}
+
+function playStoryAudio(lang){
+  const audio = document.getElementById(lang === "hi" ? "storyHindiAudio" : "storyEnglishAudio");
+  if(!audio) return;
+  try {
+    audio.currentTime = 0;
+    const playPromise = audio.play();
+    if(playPromise && typeof playPromise.catch === "function"){
+      playPromise.catch(function(){
+        // If the browser blocks automatic playback, the visible audio controls remain available.
+      });
+    }
+  } catch(e) {}
+}
+
+function showStory(){
+  hideAll();
+  document.getElementById("story").classList.remove("hidden");
+  storyLanguage = language;
+  setStoryLanguage(storyLanguage, false);
+  showHologram("story");
+  // The Start Adventure button is a user gesture, so try to play the selected story immediately.
+  playStoryAudio(storyLanguage);
+}
+
+function setStoryLanguage(lang, playOnSelect){
+  storyLanguage = lang === "hi" ? "hi" : "en";
+  language = storyLanguage;
+  localStorage.setItem("autsnoboyLanguage", language);
+  stopStoryAudio();
+
+  const isEnglish = storyLanguage === "en";
+  document.getElementById("storyEnglishBtn").classList.toggle("active", isEnglish);
+  document.getElementById("storyHindiBtn").classList.toggle("active", !isEnglish);
+  document.getElementById("storyTextEn").classList.toggle("hidden", !isEnglish);
+  document.getElementById("storyTextHi").classList.toggle("hidden", isEnglish);
+  document.getElementById("storyEnglishAudio").classList.toggle("hidden", !isEnglish);
+  document.getElementById("storyHindiAudio").classList.toggle("hidden", isEnglish);
+
+  showHologram("story");
+  if(playOnSelect !== false) playStoryAudio(storyLanguage);
+}
+
+function startAdventure(){
+  language = storyLanguage;
+  localStorage.setItem("autsnoboyLanguage", language);
+  stopStoryAudio();
+  updateLanguage();
+  showWorlds();
+}
+
+function updateMusicButton(){
+  const button = document.getElementById("musicBtn");
+  if(button) button.innerText = musicOn ? "🎵 Music ON" : "🔇 Music OFF";
+}
+
+["storyEnglishAudio", "storyHindiAudio"].forEach(function(id){
+  const audio = document.getElementById(id);
+  if(audio){
+    audio.addEventListener("error", function(){
+      console.warn("Autsnoboy story audio could not be loaded:", audio.src);
+    });
+  }
+});
+
+function showHologram(type){
+  const guide = document.getElementById("holoGuide");
+  const face = document.getElementById("holoFace");
+  const msg = document.getElementById("holoMsg");
+  if(!guide || !face || !msg) return;
+
+  guide.classList.remove("celebrate", "encourage");
+
+  if(type === "correct"){
+    face.innerText = "👏✨";
+    msg.innerText = language === "hi"
+      ? "बहुत अच्छा! तुम्हारी power बढ़ रही है!"
+      : "Amazing! Your power is growing!";
+    guide.classList.add("celebrate");
+  }else if(type === "wrong"){
+    face.innerText = "💙🙂";
+    msg.innerText = language === "hi"
+      ? "कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
+      : "That's okay! You can do it. Try again!";
+    guide.classList.add("encourage");
+  }else if(type === "story"){
+    face.innerText = "📖✨";
+    msg.innerText = language === "hi" ? "मेरी कहानी सुनो!" : "Listen to my story!";
+  }else{
+    face.innerText = "🙂";
+    msg.innerText = language === "hi"
+      ? "मैं तुम्हारे साथ हूँ! सीखते रहो!"
+      : "I'm here to help you! Keep learning!";
+  }
+
+  setTimeout(function(){
+    guide.classList.remove("celebrate", "encourage");
+  }, 1700);
+}
+
+/* =========================
    INITIALIZE
 ========================= */
 
@@ -1139,6 +1588,7 @@ document.addEventListener("DOMContentLoaded",function(){
   updateLanguage();
 
   updateMusicButton();
+  showHologram("guide");
 
 });
 
@@ -1149,8 +1599,11 @@ document.addEventListener("DOMContentLoaded",function(){
 
 function hideAll(){
 
+  stopStoryAudio();
+
   const sections=[
     "home",
+    "story",
     "worlds",
     "mission",
     "result",
@@ -1181,6 +1634,9 @@ function goHome(){
     .classList.remove("hidden");
 
   stopSpeech();
+  stopStoryAudio();
+  updateLanguage();
+  showHologram("guide");
 
 }
 
@@ -1191,6 +1647,7 @@ function showWorlds(){
 
   document.getElementById("worlds")
     .classList.remove("hidden");
+  showHologram("guide");
 
 }
 
@@ -1260,6 +1717,8 @@ function updateLanguage(){
       "Learn, play, explore and celebrate every step.";
 
   }
+
+  showHologram("guide");
 
 }
 
@@ -1397,6 +1856,7 @@ function sayWord(en,hi){
 
 function startMission(index){
 
+  showHologram("guide");
   currentMission=index;
   currentQuestion=0;
   missionScore=0;
@@ -1510,6 +1970,7 @@ function checkMissionAnswer(
       : "🎉 Great job! Correct!";
 
     playCheer();
+    showHologram("correct");
 
     document.getElementById(
       "nextBtn"
@@ -1519,8 +1980,10 @@ function checkMissionAnswer(
 
     feedback.innerText=
       language==="hi"
-      ? "💙 कोई बात नहीं। फिर कोशिश करें!"
-      : "💙 That's okay. Try again!";
+      ? "💙 कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
+      : "💙 That's okay! You can do it. Try again!";
+
+    showHologram("wrong");
 
     buttons.forEach(
       function(btn){
@@ -1645,6 +2108,7 @@ function openSpeech(){
 
   document.getElementById("speech")
     .classList.remove("hidden");
+  showHologram("guide");
 
 }
 
@@ -1709,6 +2173,7 @@ function openHousehold(){
   ).classList.remove("hidden");
 
   renderHouseholdObjects();
+  showHologram("guide");
 
 }
 
@@ -1856,6 +2321,7 @@ function startHouseholdQuiz(){
     "householdQuiz"
   ).classList.remove("hidden");
 
+  showHologram("guide");
   loadHouseholdQuestion();
 
 }
@@ -2026,6 +2492,7 @@ function checkHouseholdAnswer(
       : "🎉 Correct!";
 
     playCheer();
+    showHologram("correct");
 
     document.getElementById(
       "hqNext"
@@ -2052,8 +2519,10 @@ function checkHouseholdAnswer(
 
     feedback.innerText=
       language==="hi"
-      ? "💙 कोई बात नहीं, फिर कोशिश करें!"
-      : "💙 Try again!";
+      ? "💙 कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
+      : "💙 That's okay! You can do it. Try again!";
+
+    showHologram("wrong");
 
     speak(
       language==="hi"
@@ -2189,6 +2658,7 @@ window.addEventListener(
   function(){
 
     stopSpeech();
+    stopStoryAudio();
 
   }
 );
