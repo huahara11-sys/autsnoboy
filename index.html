@@ -1,92 +1,1324 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#6d5dfc"><title>Autsnoboy - Learn & Play</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6d5dfc">
+<title>Autsnoboy - Learn & Play</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#f5f6fb;color:#202338}.app{max-width:860px;margin:auto;padding:16px}
-header{display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:12px;align-items:center}.hero{width:60px;height:60px;border-radius:16px;object-fit:cover;background:#ddd}h1{margin:0}.sub{color:#697087;font-size:13px}
-button{font:inherit;cursor:pointer}.lang,.tab,.secondary{background:white;border:1px solid #ddd;border-radius:12px;padding:11px 14px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}.tab.active{background:#eeeaff;color:#6354db}
-.card{background:white;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 5px 22px #20233812}.worlds{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.world{text-align:left;background:#fff;border:2px solid #ececf2;border-radius:17px;padding:15px;min-height:110px}.emoji{font-size:30px}.world b{display:block;margin:5px 0}
-.mission{display:none}.mission.show{display:block}.prompt{text-align:center;font-size:21px;font-weight:800;margin:18px 0}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.choice{min-height:105px;border:2px solid #e4e4ee;border-radius:17px;background:#fafafe;font-size:34px}.choice span{display:block;font-size:14px;font-weight:700}.choice small{display:block;font-size:15px;margin-top:5px}.correct{background:#e7f8ef!important;border-color:#35a96f!important}.wrong{background:#fff3e4!important;border-color:#e7a65e!important}
-.feedback{text-align:center;font-weight:800;min-height:28px;margin:12px}.actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}.primary{background:#6d5dfc;color:white;border:0;border-radius:12px;padding:12px 16px;font-weight:800}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{text-align:center;background:#f8f8fc;border-radius:14px;padding:12px}.stat b{font-size:22px;display:block}.ach{padding:10px 0;border-bottom:1px solid #eee}.notice{background:#fff8df;border-radius:14px;padding:13px;font-size:14px}.progress{height:9px;background:#ececf3;border-radius:20px}.bar{height:100%;background:#6d5dfc;border-radius:20px}
-footer{text-align:center;color:#697087;font-size:12px;padding:12px}
-@media(max-width:520px){.app{padding:10px}.worlds{grid-template-columns:1fr 1fr}.hero{width:52px;height:52px}}
-</style></head><body><main class="app">
-<header><div class="brand"><img id="hero" class="hero" alt="Autsnoboy character"><div><h1>Autsnoboy</h1><div class="sub">Learn • Play • Grow</div></div></div><button id="lang" class="lang">हिन्दी</button></header>
-<nav class="tabs"><button class="tab active" data-tab="play">🎮 Play</button><button class="tab" data-tab="progress">🌱 Progress</button><button class="tab" data-tab="home">🏠 Home Play</button></nav>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:system-ui,sans-serif;
+ background:#f5f6fb;
+ color:#202338
+}
+.app{
+ max-width:860px;
+ margin:auto;
+ padding:16px
+}
+header{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px
+}
+.brand{
+ display:flex;
+ gap:12px;
+ align-items:center
+}
+.hero{
+ width:60px;
+ height:60px;
+ border-radius:16px;
+ object-fit:cover;
+ background:#ddd
+}
+h1{margin:0}
+.sub{
+ color:#697087;
+ font-size:13px
+}
+button{
+ font:inherit;
+ cursor:pointer
+}
+.lang,.tab,.secondary{
+ background:white;
+ border:1px solid #ddd;
+ border-radius:12px;
+ padding:11px 14px
+}
+.tabs{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+ margin:16px 0
+}
+.tab.active{
+ background:#eeeaff;
+ color:#6354db
+}
+.card{
+ background:white;
+ border-radius:20px;
+ padding:18px;
+ margin-bottom:14px;
+ box-shadow:0 5px 22px #20233812
+}
+.worlds{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px
+}
+.world{
+ text-align:left;
+ background:#fff;
+ border:2px solid #ececf2;
+ border-radius:17px;
+ padding:15px;
+ min-height:110px
+}
+.world .emoji{font-size:30px}
+.world b{
+ display:block;
+ margin:5px 0
+}
+.mission{display:none}
+.mission.show{display:block}
+.prompt{
+ text-align:center;
+ font-size:21px;
+ font-weight:800;
+ margin:18px 0
+}
+.choices{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px
+}
+.choice{
+ min-height:120px;
+ border:2px solid #e4e4ee;
+ border-radius:17px;
+ background:#fafafe;
+ font-size:34px
+}
+.choice span{
+ display:block;
+ font-size:16px;
+ font-weight:800
+}
+.choice small{
+ display:block;
+ font-size:15px;
+ margin-top:7px
+}
+.correct{
+ background:#e7f8ef!important;
+ border-color:#35a96f!important
+}
+.wrong{
+ background:#fff3e4!important;
+ border-color:#e7a65e!important
+}
+.feedback{
+ text-align:center;
+ font-weight:800;
+ min-height:28px;
+ margin:12px
+}
+.actions{
+ display:flex;
+ gap:9px;
+ justify-content:center;
+ flex-wrap:wrap
+}
+.primary{
+ background:#6d5dfc;
+ color:white;
+ border:0;
+ border-radius:12px;
+ padding:12px 16px;
+ font-weight:800
+}
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px
+}
+.stat{
+ text-align:center;
+ background:#f8f8fc;
+ border-radius:14px;
+ padding:12px
+}
+.stat b{
+ font-size:22px;
+ display:block
+}
+.ach{
+ padding:10px 0;
+ border-bottom:1px solid #eee
+}
+.notice{
+ background:#fff8df;
+ border-radius:14px;
+ padding:13px;
+ font-size:14px
+}
+.progress{
+ height:9px;
+ background:#ececf3;
+ border-radius:20px
+}
+.bar{
+ height:100%;
+ background:#6d5dfc;
+ border-radius:20px
+}
+footer{
+ text-align:center;
+ color:#697087;
+ font-size:12px;
+ padding:12px
+}
+@media(max-width:520px){
+ .app{padding:10px}
+ .worlds{grid-template-columns:1fr 1fr}
+ .hero{
+  width:52px;
+  height:52px
+ }
+}
+</style>
+</head>
+
+<body>
+
+<main class="app">
+
+<header>
+
+<div class="brand">
+<img id="hero" class="hero" alt="Autsnoboy character">
+<div>
+<h1>Autsnoboy</h1>
+<div class="sub">Learn • Play • Grow</div>
+</div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center">
+<button id="fluteButton" class="lang" type="button">
+🎵 Flute: ON
+</button>
+
+<button id="lang" class="lang" type="button">
+हिन्दी
+</button>
+</div>
+
+</header>
+
+
+<nav class="tabs">
+
+<button class="tab active" data-tab="play">
+🎮 Play
+</button>
+
+<button class="tab" data-tab="progress">
+🌱 Progress
+</button>
+
+<button class="tab" data-tab="home">
+🏠 Home Play
+</button>
+
+</nav>
+
 
 <section id="play">
-<div class="card"><h2>Choose a Learning World</h2><div class="worlds">
-<button class="world" data-w="focus">🎯 <b>Focus Forest</b><small>Attention & finding</small></button>
-<button class="world" data-w="visual">🌈 <b>Color City</b><small>Colours & matching</small></button>
-<button class="world" data-w="music">🎵 <b>Music Planet</b><small>Rhythm & sounds</small></button>
-<button class="world" data-w="communication">💬 <b>Word Village</b><small>Communication</small></button>
-<button class="world" data-w="emotion">😊 <b>Emotion Island</b><small>Feelings</small></button>
-<button class="world" data-w="daily">🧼 <b>Daily Life</b><small>Everyday routines</small></button>
-</div></div>
-<div id="mission" class="card mission"><h2 id="mt"></h2><div class="sub" id="ms"></div><div id="prompt" class="prompt"></div><button id="speakInstruction" class="secondary" style="display:block;margin:0 auto 14px">🔊 Hear Instruction</button><div id="choices" class="choices"></div><div id="feedback" class="feedback"></div><div class="actions"><button id="next" class="primary" style="display:none">Next Mission ⭐</button><button id="retry" class="secondary" style="display:none">Try Again 🔄</button></div></div>
+
+<div class="card">
+
+<h2>Choose a Learning World</h2>
+
+<div class="worlds">
+
+<button class="world" data-w="focus">
+🎯
+<b>Focus Forest</b>
+<small>Attention & finding</small>
+</button>
+
+<button class="world" data-w="visual">
+🌈
+<b>Color City</b>
+<small>Colours & matching</small>
+</button>
+
+<button class="world" data-w="music">
+🎵
+<b>Music Planet</b>
+<small>Rhythm & sounds</small>
+</button>
+
+<button class="world" data-w="communication">
+💬
+<b>Word Village</b>
+<small>Communication</small>
+</button>
+
+<button class="world" data-w="emotion">
+😊
+<b>Emotion Island</b>
+<small>Feelings</small>
+</button>
+
+<button class="world" data-w="daily">
+🧼
+<b>Daily Life</b>
+<small>Everyday routines</small>
+</button>
+
+</div>
+</div>
+
+
+<div id="mission" class="card mission">
+
+<h2 id="mt"></h2>
+
+<div class="sub" id="ms"></div>
+
+<div id="prompt" class="prompt"></div>
+
+<button
+id="speakInstruction"
+class="secondary"
+style="display:block;margin:0 auto 14px">
+🔊 Hear Instruction
+</button>
+
+<div id="choices" class="choices"></div>
+
+<div id="feedback" class="feedback"></div>
+
+<div class="actions">
+
+<button id="next" class="primary" style="display:none">
+Next Mission ⭐
+</button>
+
+<button id="retry" class="secondary" style="display:none">
+Try Again 🔄
+</button>
+
+</div>
+
+</div>
+
 </section>
 
-<section id="progress" style="display:none"><div class="card"><h2>🌱 Today's Learning Journey</h2><div class="stats"><div class="stat"><b id="a">0</b>Attempts</div><div class="stat"><b id="t">0</b>Try-agains</div><div class="stat"><b id="i">0</b>Independent</div></div></div><div class="card"><h3>🏆 Achievements</h3><div id="ach"></div></div><div class="card"><h3>📈 Skill Growth</h3><div id="skills"></div></div><div class="notice">Learning indicators only — no grades, rankings, diagnosis or medical scores.</div></section>
 
-<section id="home" style="display:none"><div class="card"><h2>🏠 Play Together</h2><p><b>Today's 5-minute family mission</b></p><div class="notice">Find 3 red objects around the room. Let the child point, name, gesture, or ask for help. Celebrate the attempt.</div><p><b>How did it go?</b></p><div class="actions"><button class="primary home" data-f="enjoyed">🟢 We enjoyed it</button><button class="secondary home" data-f="help">🟡 We needed some help</button><button class="secondary home" data-f="later">🔵 Try again later</button></div><div id="hf" class="feedback"></div></div></section>
-<footer>Owned & Developed by Varun Mamta • Every Step Counts ❤️</footer>
+<section id="progress" style="display:none">
+
+<div class="card">
+
+<h2>🌱 Today's Learning Journey</h2>
+
+<div class="stats">
+
+<div class="stat">
+<b id="a">0</b>
+Attempts
+</div>
+
+<div class="stat">
+<b id="t">0</b>
+Try-agains
+</div>
+
+<div class="stat">
+<b id="i">0</b>
+Independent
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🏆 Achievements</h3>
+
+<div id="ach"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>📈 Skill Growth</h3>
+
+<div id="skills"></div>
+
+</div>
+
+<div class="notice">
+Learning indicators only — no grades, rankings, diagnosis or medical scores.
+</div>
+
+</section>
+
+
+<section id="home" style="display:none">
+
+<div class="card">
+
+<h2>🏠 Play Together</h2>
+
+<p><b>Today's 5-minute family mission</b></p>
+
+<div class="notice">
+Find 3 red objects around the room. Let the child point,
+name, gesture, or ask for help. Celebrate the attempt.
+</div>
+
+<p><b>How did it go?</b></p>
+
+<div class="actions">
+
+<button class="primary home" data-f="enjoyed">
+🟢 We enjoyed it
+</button>
+
+<button class="secondary home" data-f="help">
+🟡 We needed some help
+</button>
+
+<button class="secondary home" data-f="later">
+🔵 Try again later
+</button>
+
+</div>
+
+<div id="hf" class="feedback"></div>
+
+</div>
+
+</section>
+
+
+<footer>
+Owned & Developed by Varun Mamta • Every Step Counts ❤️
+</footer>
+
 </main>
+
+
 <script>
-const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
-const data={focus:[["🔴","Red","🔵","Blue"],["🐶","Dog","🐱","Cat"],["⭐","Star","❤️","Heart"]],
-visual:[["🔴","Red","🟢","Green"],["🔵","Blue","🟡","Yellow"],["⬛","Square","⚪","Circle"]],
-music:[["👏","Clap","👣","Step"],["🥁","Drum","🔔","Bell"],["🎵","Music","🔇","Quiet"]],
-communication:[["🍎","I want apple","🧸","I want toy"],["🙋","Help","🛑","Stop"],["➕","More","✅","Finished"]],
-emotion:[["😊","Happy","😢","Sad"],["😡","Angry","😌","Calm"],["😨","Scared","😊","Happy"]],
-daily:[["🪥","Brush teeth","🍽️","Eat"],["🧼","Wash hands","👟","Wear shoes"],["🛏️","Sleep","🎒","Pack bag"]]};
-let st=JSON.parse(localStorage.getItem("auts_state")||'{"attempts":0,"tries":0,"independent":0,"skills":{},"home":{"enjoyed":0,"help":0,"later":0}}'),world=null,n=0,answered=false,lang="en";
-function save(){localStorage.setItem("auts_state",JSON.stringify(st));render()}
-function render(){qs("#a").textContent=st.attempts;qs("#t").textContent=st.tries;qs("#i").textContent=st.independent;
-let x=[];if(st.attempts)x.push("🌱 First Try — You started learning!");if(st.tries>=2)x.push("💪 Try-Again Champion — You kept trying!");if(st.independent>=3)x.push("⭐ Independent Star — You did missions yourself!");if(st.home.enjoyed+st.home.help+st.home.later)x.push("🏠 Family Player — You played together!");
-qs("#ach").innerHTML=x.map(v=>'<div class="ach">'+v+'</div>').join("")||'<div class="sub">Play a mission to unlock an achievement.</div>';
-const names={focus:"🎯 Focus",visual:"👀 Visual",music:"🎵 Music",communication:"💬 Communication",emotion:"😊 Emotions",daily:"🧼 Daily Skills"};
-qs("#skills").innerHTML=Object.keys(names).map(k=>'<div style="margin:12px 0"><b>'+names[k]+'</b><small style="float:right">'+(st.skills[k]||0)+' activities</small><div class="progress"><div class="bar" style="width:'+Math.min(100,(st.skills[k]||0)*20)+'%"></div></div></div>').join("")}
 
-function speak(text, hindiText){
-  if(!("speechSynthesis" in window)){ alert("Voice is not supported on this device/browser."); return; }
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(lang==="en"?text:hindiText);
-  u.lang=lang==="en"?"en-IN":"hi-IN";
-  u.rate=0.82; u.pitch=1;
-  speechSynthesis.speak(u);
-}
-function currentInstruction(){
-  const p={
-    focus:["Find the first object","पहली वस्तु चुनो"],
-    visual:["Find the matching colour or shape","समान रंग या आकार चुनो"],
-    music:["Choose the sound","आवाज़ चुनो"],
-    communication:["Choose what you want","जो चाहिए उसे चुनो"],
-    emotion:["Choose the feeling","भावना चुनो"],
-    daily:["Choose the daily skill","दैनिक काम चुनो"]
-  };
-  return p[world]||["Choose an option","एक विकल्प चुनो"];
+/* ================================
+   AUTSNOBOY FLUTE BACKGROUND
+   ================================ */
+
+let fluteAudio = null;
+let flutePlaying = false;
+
+
+/* Create audio */
+
+function createFluteAudio(){
+
+ if(fluteAudio) return;
+
+ fluteAudio = new Audio("flute_background.wav");
+
+ fluteAudio.loop = true;
+
+ fluteAudio.preload = "auto";
+
+ fluteAudio.volume = 0.22;
+
 }
 
-function start(w){world=w;n=0;answered=false;qs("#mission").classList.add("show");question()}
-function question(){let d=data[world][n%3];qs("#mt").textContent="Mission "+(n+1);qs("#ms").textContent="Practice: "+world;let p={focus:"Find the first object",visual:"Find the matching colour/shape",music:"Choose the sound",communication:"Choose what you want",emotion:"Choose the feeling",daily:"Choose the daily skill"};const ins=currentInstruction(); qs("#prompt").textContent=lang==="en"?ins[0]:ins[1]; qs("#speakInstruction").textContent=lang==="en"?"🔊 Hear Instruction":"🔊 निर्देश सुनें";const hiNames={
-Red:"लाल",Blue:"नीला",Dog:"कुत्ता",Cat:"बिल्ली",Star:"तारा",Heart:"दिल",
-Green:"हरा",Yellow:"पीला",Square:"वर्ग",Circle:"गोला",Clap:"ताली",Step:"कदम",
-Drum:"ढोल",Bell:"घंटी",Music:"संगीत",Quiet:"शांत","I want apple":"मुझे सेब चाहिए",
-"I want toy":"मुझे खिलौना चाहिए",Help:"मदद",Stop:"रुको",More:"और",Finished:"खत्म",
-Happy:"खुश",Sad:"उदास",Angry:"गुस्सा",Calm:"शांत",Scared:"डरा हुआ",
-"Brush teeth":"दाँत साफ करो",Eat:"खाना", "Wash hands":"हाथ धोओ",
-"Wear shoes":"जूते पहनो",Sleep:"सोना","Pack bag":"बैग तैयार करो"
+
+/* Start flute */
+
+async function startFlute(){
+
+ try{
+
+  createFluteAudio();
+
+  await fluteAudio.play();
+
+  flutePlaying = true;
+
+  updateFluteButton();
+
+ }catch(error){
+
+  console.log(
+   "Flute waiting for user interaction",
+   error
+  );
+
+ }
+
+}
+
+
+/* Stop flute */
+
+function stopFlute(){
+
+ if(fluteAudio){
+
+  fluteAudio.pause();
+
+  fluteAudio.currentTime = 0;
+
+ }
+
+ flutePlaying = false;
+
+ updateFluteButton();
+
+}
+
+
+/* Update button */
+
+function updateFluteButton(){
+
+ const button =
+ document.querySelector("#fluteButton");
+
+ if(!button) return;
+
+ if(flutePlaying){
+
+  button.textContent =
+  lang==="hi"
+  ? "🎵 बाँसुरी: चालू"
+  : "🎵 Flute: ON";
+
+ }else{
+
+  button.textContent =
+  lang==="hi"
+  ? "🔇 बाँसुरी: बंद"
+  : "🔇 Flute: OFF";
+
+ }
+
+}
+
+
+/* Toggle */
+
+function toggleFlute(){
+
+ if(flutePlaying){
+
+  stopFlute();
+
+ }else{
+
+  startFlute();
+
+ }
+
+}
+
+
+/*
+First touch/click starts flute.
+This solves Android Chrome autoplay restriction.
+*/
+
+document.addEventListener(
+ "pointerdown",
+ function firstTap(){
+
+  startFlute();
+
+ },
+ {once:true}
+);
+
+
+/* Also start after keyboard interaction */
+
+document.addEventListener(
+ "keydown",
+ function firstKey(){
+
+  startFlute();
+
+ },
+ {once:true}
+);
+
+
+/* Resume after returning to browser */
+
+document.addEventListener(
+ "visibilitychange",
+ async function(){
+
+  if(
+   !document.hidden &&
+   fluteAudio &&
+   flutePlaying
+  ){
+
+   try{
+
+    await fluteAudio.play();
+
+   }catch(e){
+
+    console.log("Waiting for interaction");
+
+   }
+
+  }
+
+ });
+
+
+/* ================================
+   GAME
+   ================================ */
+
+const qs =
+ s => document.querySelector(s);
+
+const qsa =
+ s => document.querySelectorAll(s);
+
+
+const data = {
+
+focus:[
+ ["🔴","Red","🔵","Blue"],
+ ["🐶","Dog","🐱","Cat"],
+ ["⭐","Star","❤️","Heart"]
+],
+
+visual:[
+ ["🔴","Red","🟢","Green"],
+ ["🔵","Blue","🟡","Yellow"],
+ ["⬛","Square","⚪","Circle"]
+],
+
+music:[
+ ["👏","Clap","👣","Step"],
+ ["🥁","Drum","🔔","Bell"],
+ ["🎵","Music","🔇","Quiet"]
+],
+
+communication:[
+ ["🍎","I want apple","🧸","I want toy"],
+ ["🙋","Help","🛑","Stop"],
+ ["➕","More","✅","Finished"]
+],
+
+emotion:[
+ ["😊","Happy","😢","Sad"],
+ ["😡","Angry","😌","Calm"],
+ ["😨","Scared","😊","Happy"]
+],
+
+daily:[
+ ["🪥","Brush teeth","🍽️","Eat"],
+ ["🧼","Wash hands","👟","Wear shoes"],
+ ["🛏️","Sleep","🎒","Pack bag"]
+]
+
 };
-qs("#choices").innerHTML=[[d[0],d[1],1],[d[2],d[3],0]].map((c,i)=>'<button class="choice" data-i="'+i+'">'+c[0]+'<span>'+c[1]+'</span><small>🔊</small></button>').join("");
-qsa(".choice").forEach(b=>b.querySelector("small").onclick=(ev)=>{ev.stopPropagation(); speak(b.querySelector("span").textContent,hiNames[b.querySelector("span").textContent]||b.querySelector("span").textContent);});qs("#feedback").textContent="";qs("#next").style.display="none";qs("#retry").style.display="none";qsa(".choice").forEach(b=>b.onclick=()=>answer(+b.dataset.i))}
-function answer(i){if(answered)return;answered=true;st.attempts++;st.skills[world]=(st.skills[world]||0)+1;let ok=i===0,b=qsa(".choice");if(ok){st.correct=(st.correct||0)+1;st.independent++;b[i].classList.add("correct");qs("#feedback").textContent=lang==="en"?"⭐ Great job! You did it yourself!":"⭐ बहुत अच्छा! तुमने खुद किया!";qs("#next").style.display="inline-block"}else{st.tries++;b[i].classList.add("wrong");qs("#feedback").textContent=lang==="en"?"Good try! Autsnoboy gives you a hint. Try again!":"अच्छी कोशिश! Autsnoboy संकेत देगा। फिर कोशिश करो!";qs("#retry").style.display="inline-block"}save()}
-qs(".worlds")?.addEventListener("click",e=>{let b=e.target.closest(".world");if(b)start(b.dataset.w)});
-qsa(".tab").forEach(b=>b.onclick=()=>{qsa(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");["play","progress","home"].forEach(id=>qs("#"+id).style.display=id===b.dataset.tab?"block":"none");render()});
-qs("#next").onclick=()=>{n++;answered=false;question()};qs("#retry").onclick=()=>{answered=false;question()};qs("#speakInstruction").onclick=()=>{const ins=currentInstruction();speak(ins[0],ins[1])};
-qsa(".home").forEach(b=>b.onclick=()=>{st.home[b.dataset.f]++;save();qs("#hf").textContent=lang==="en"?"Thank you! Autsnoboy will use this to improve future suggestions.":"धन्यवाद! Autsnoboy आगे की गतिविधियाँ बेहतर सुझाएगा।"});
-qs("#lang").onclick=()=>{lang=lang==="en"?"hi":"en";qs("#lang").textContent=lang==="en"?"हिन्दी":"English"};
-qs("#hero").src="autsnoboy.png";render();
-</script></body></html>
+
+
+let st = JSON.parse(
+ localStorage.getItem("auts_state") ||
+ '{"attempts":0,"tries":0,"independent":0,"skills":{},"home":{"enjoyed":0,"help":0,"later":0}}'
+);
+
+
+let world = null;
+
+let n = 0;
+
+let answered = false;
+
+let lang = "en";
+
+
+function save(){
+
+ localStorage.setItem(
+  "auts_state",
+  JSON.stringify(st)
+ );
+
+ render();
+
+}
+
+
+function render(){
+
+ qs("#a").textContent =
+ st.attempts;
+
+ qs("#t").textContent =
+ st.tries;
+
+ qs("#i").textContent =
+ st.independent;
+
+
+ let achievements = [];
+
+
+ if(st.attempts){
+
+  achievements.push(
+   "🌱 First Try — You started learning!"
+  );
+
+ }
+
+
+ if(st.tries >= 2){
+
+  achievements.push(
+   "💪 Try-Again Champion — You kept trying!"
+  );
+
+ }
+
+
+ if(st.independent >= 3){
+
+  achievements.push(
+   "⭐ Independent Star — You did missions yourself!"
+  );
+
+ }
+
+
+ if(
+  st.home.enjoyed +
+  st.home.help +
+  st.home.later
+ ){
+
+  achievements.push(
+   "🏠 Family Player — You played together!"
+  );
+
+ }
+
+
+ qs("#ach").innerHTML =
+ achievements.map(
+  x => '<div class="ach">'+x+'</div>'
+ ).join("")
+ ||
+ '<div class="sub">Play a mission to unlock an achievement.</div>';
+
+
+ const names = {
+
+  focus:"🎯 Focus",
+
+  visual:"👀 Visual",
+
+  music:"🎵 Music",
+
+  communication:"💬 Communication",
+
+  emotion:"😊 Emotions",
+
+  daily:"🧼 Daily Skills"
+
+ };
+
+
+ qs("#skills").innerHTML =
+ Object.keys(names).map(
+
+  k =>
+
+  '<div style="margin:12px 0">'+
+
+  '<b>'+names[k]+'</b>'+
+
+  '<small style="float:right">'+
+  (st.skills[k]||0)+
+  ' activities</small>'+
+
+  '<div class="progress">'+
+
+  '<div class="bar" style="width:'+
+  Math.min(
+   100,
+   (st.skills[k]||0)*20
+  )+
+  '%"></div>'+
+
+  '</div>'+
+
+  '</div>'
+
+ ).join("");
+
+}
+
+
+/* ================================
+   VOICE
+   ================================ */
+
+function speak(text,hindiText){
+
+ if(!("speechSynthesis" in window)){
+
+  alert(
+   "Voice is not supported on this device/browser."
+  );
+
+  return;
+
+ }
+
+ speechSynthesis.cancel();
+
+ const u =
+ new SpeechSynthesisUtterance(
+  lang==="en"
+  ? text
+  : hindiText
+ );
+
+ u.lang =
+ lang==="en"
+ ? "en-IN"
+ : "hi-IN";
+
+ u.rate = 0.82;
+
+ u.pitch = 1;
+
+ speechSynthesis.speak(u);
+
+}
+
+
+/* ================================
+   INSTRUCTIONS
+   ================================ */
+
+function currentInstruction(){
+
+ const p = {
+
+  focus:[
+   "Find the first object",
+   "पहली वस्तु चुनो"
+  ],
+
+  visual:[
+   "Find the matching colour or shape",
+   "समान रंग या आकार चुनो"
+  ],
+
+  music:[
+   "Choose the sound",
+   "आवाज़ चुनो"
+  ],
+
+  communication:[
+   "Choose what you want",
+   "जो चाहिए उसे चुनो"
+  ],
+
+  emotion:[
+   "Choose the feeling",
+   "भावना चुनो"
+  ],
+
+  daily:[
+   "Choose the daily skill",
+   "दैनिक काम चुनो"
+  ]
+
+ };
+
+ return p[world] ||
+ [
+  "Choose an option",
+  "एक विकल्प चुनो"
+ ];
+
+}
+
+
+/* ================================
+   START GAME
+   ================================ */
+
+function start(w){
+
+ world = w;
+
+ n = 0;
+
+ answered = false;
+
+ qs("#mission").classList.add("show");
+
+ startFlute();
+
+ question();
+
+}
+
+
+/* ================================
+   QUESTION
+   ================================ */
+
+function question(){
+
+ let d =
+ data[world][n % 3];
+
+
+ qs("#mt").textContent =
+ "Mission " + (n+1);
+
+
+ qs("#ms").textContent =
+ "Practice: " + world;
+
+
+ const ins =
+ currentInstruction();
+
+
+ qs("#prompt").textContent =
+ lang==="en"
+ ? ins[0]
+ : ins[1];
+
+
+ qs("#speakInstruction").textContent =
+ lang==="en"
+ ? "🔊 Hear Instruction"
+ : "🔊 निर्देश सुनें";
+
+
+ const hiNames = {
+
+  Red:"लाल",
+  Blue:"नीला",
+  Dog:"कुत्ता",
+  Cat:"बिल्ली",
+  Star:"तारा",
+  Heart:"दिल",
+
+  Green:"हरा",
+  Yellow:"पीला",
+
+  Square:"वर्ग",
+  Circle:"गोला",
+
+  Clap:"ताली",
+  Step:"कदम",
+  Drum:"ढोल",
+  Bell:"घंटी",
+
+  Music:"संगीत",
+  Quiet:"शांत",
+
+  "I want apple":
+  "मुझे सेब चाहिए",
+
+  "I want toy":
+  "मुझे खिलौना चाहिए",
+
+  Help:"मदद",
+  Stop:"रुको",
+  More:"और",
+  Finished:"खत्म",
+
+  Happy:"खुश",
+  Sad:"उदास",
+  Angry:"गुस्सा",
+  Calm:"शांत",
+  Scared:"डरा हुआ",
+
+  "Brush teeth":
+  "दाँत साफ करो",
+
+  Eat:"खाना",
+
+  "Wash hands":
+  "हाथ धोओ",
+
+  "Wear shoes":
+  "जूते पहनो",
+
+  Sleep:"सोना",
+
+  "Pack bag":
+  "बैग तैयार करो"
+
+ };
+
+
+ /*
+ Answer is deliberately first option
+ for current prototype.
+ */
+
+ qs("#choices").innerHTML = [
+
+  [d[0],d[1],1],
+
+  [d[2],d[3],0]
+
+ ].map(
+
+  (c,i) =>
+
+  '<button class="choice" data-i="'+i+'">'+
+
+  c[0]+
+
+  '<span>'+c[1]+'</span>'+
+
+  '<small>🔊 Hear name</small>'+
+
+  '</button>'
+
+ ).join("");
+
+
+ qsa(".choice").forEach(
+
+  b => {
+
+   b.querySelector("small").onclick =
+   function(ev){
+
+    ev.stopPropagation();
+
+    const name =
+    b.querySelector("span")
+    .textContent;
+
+    speak(
+     name,
+     hiNames[name] || name
+    );
+
+   };
+
+  }
+
+ );
+
+
+ qs("#feedback").textContent = "";
+
+ qs("#next").style.display =
+ "none";
+
+ qs("#retry").style.display =
+ "none";
+
+
+ qsa(".choice").forEach(
+
+  b => {
+
+   b.onclick =
+   () => answer(+b.dataset.i);
+
+  }
+
+ );
+
+}
+
+
+/* ================================
+   ANSWER
+   ================================ */
+
+function answer(i){
+
+ if(answered) return;
+
+ answered = true;
+
+ st.attempts++;
+
+ st.skills[world] =
+ (st.skills[world] || 0) + 1;
+
+
+ let ok = i === 0;
+
+ let buttons =
+ qsa(".choice");
+
+
+ if(ok){
+
+  st.correct =
+  (st.correct || 0) + 1;
+
+  st.independent++;
+
+  buttons[i]
+  .classList.add("correct");
+
+
+  qs("#feedback").textContent =
+  lang==="en"
+  ? "⭐ Great job! You did it yourself!"
+  : "⭐ बहुत अच्छा! तुमने खुद किया!";
+
+
+  qs("#next").style.display =
+  "inline-block";
+
+
+ }else{
+
+  st.tries++;
+
+  buttons[i]
+  .classList.add("wrong");
+
+
+  qs("#feedback").textContent =
+  lang==="en"
+  ? "Good try! Autsnoboy gives you a hint. Try again!"
+  : "अच्छी कोशिश! Autsnoboy संकेत देगा। फिर कोशिश करो!";
+
+
+  qs("#retry").style.display =
+  "inline-block";
+
+ }
+
+
+ save();
+
+}
+
+
+/* ================================
+   WORLD BUTTONS
+   ================================ */
+
+qs(".worlds")
+?.addEventListener(
+ "click",
+ function(e){
+
+  let b =
+  e.target.closest(".world");
+
+  if(b){
+
+   start(b.dataset.w);
+
+  }
+
+ });
+
+
+/* ================================
+   TABS
+   ================================ */
+
+qsa(".tab").forEach(
+
+ b =>
+
+ b.onclick = function(){
+
+  qsa(".tab").forEach(
+   x => x.classList.remove("active")
+  );
+
+  b.classList.add("active");
+
+
+  ["play","progress","home"]
+  .forEach(
+
+   id => {
+
+    qs("#"+id).style.display =
+    id===b.dataset.tab
+    ? "block"
+    : "none";
+
+   }
+
+  );
+
+
+  render();
+
+ }
+
+);
+
+
+/* ================================
+   NEXT / RETRY
+   ================================ */
+
+qs("#next").onclick =
+function(){
+
+ n++;
+
+ answered = false;
+
+ question();
+
+};
+
+
+qs("#retry").onclick =
+function(){
+
+ answered = false;
+
+ question();
+
+};
+
+
+/* ================================
+   SPEAK INSTRUCTION
+   ================================ */
+
+qs("#speakInstruction").onclick =
+function(){
+
+ const ins =
+ currentInstruction();
+
+ speak(
+  ins[0],
+  ins[1]
+ );
+
+};
+
+
+/* ================================
+   HOME PLAY
+   ================================ */
+
+qsa(".home").forEach(
+
+ b =>
+
+ b.onclick = function(){
+
+  st.home[b.dataset.f]++;
+
+  save();
+
+  qs("#hf").textContent =
+  lang==="en"
+
+  ? "Thank you! Autsnoboy will use this to improve future suggestions."
+
+  : "धन्यवाद! Autsnoboy आगे की गतिविधियाँ बेहतर सुझाएगा।";
+
+ }
+
+);
+
+
+/* ================================
+   LANGUAGE
+   ================================ */
+
+qs("#lang").onclick =
+function(){
+
+ lang =
+ lang==="en"
+ ? "hi"
+ : "en";
+
+
+ qs("#lang").textContent =
+ lang==="en"
+ ? "हिन्दी"
+ : "English";
+
+
+ updateFluteButton();
+
+
+ if(world){
+
+  question();
+
+ }
+
+};
+
+
+/* ================================
+   FLUTE BUTTON
+   ================================ */
+
+qs("#fluteButton").onclick =
+function(e){
+
+ e.stopPropagation();
+
+ toggleFlute();
+
+};
+
+
+/* ================================
+   CHARACTER IMAGE
+   ================================ */
+
+qs("#hero").src =
+"autsnoboy.png";
+
+
+/* INITIAL RENDER */
+
+render();
+
+</script>
+
+</body>
+</html>
