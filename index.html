@@ -1,748 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autsnoboy - Learning Adventure</title>
-
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2563eb"><meta name="description" content="Autsnoboy free bilingual learning activities for children">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Autsnoboy – Learn, Focus & Grow</title>
 <style>
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,#dff6ff,#fff4d6);
-  color:#222;
-  text-align:center;
-}
-
-.header{
-  background:linear-gradient(135deg,#5b4bdb,#7b61ff);
-  color:white;
-  padding:18px 12px;
-  border-radius:0 0 25px 25px;
-}
-
-.logo{
-  width:90px;
-  height:90px;
-  object-fit:contain;
-  border-radius:50%;
-  background:white;
-  padding:5px;
-}
-
-h1{
-  margin:8px 0 3px;
-  font-size:30px;
-}
-
-.subtitle{
-  font-size:15px;
-  opacity:.95;
-}
-
-.controls{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:15px auto;
-  padding:0 10px;
-}
-
-button{
-  border:none;
-  border-radius:14px;
-  padding:12px 18px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  background:white;
-  box-shadow:0 4px 10px rgba(0,0,0,.12);
-}
-
-button:active{
-  transform:scale(.96);
-}
-
-.main{
-  max-width:700px;
-  margin:auto;
-  padding:10px;
-}
-
-.progressBox{
-  background:white;
-  border-radius:18px;
-  padding:12px;
-  margin:10px 0;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
-}
-
-.progressBar{
-  width:100%;
-  height:15px;
-  background:#eee;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:8px;
-}
-
-.progressFill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#00c853,#64dd17);
-  transition:.4s;
-}
-
-.card{
-  background:white;
-  border-radius:25px;
-  padding:25px 18px;
-  margin-top:15px;
-  box-shadow:0 7px 20px rgba(0,0,0,.12);
-}
-
-.mission{
-  color:#6a5acd;
-  font-weight:bold;
-  font-size:17px;
-}
-
-.question{
-  font-size:25px;
-  font-weight:bold;
-  margin:15px 0;
-}
-
-.questionHindi{
-  font-size:21px;
-  color:#555;
-  margin-bottom:18px;
-}
-
-.options{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  max-width:500px;
-  margin:auto;
-}
-
-.option{
-  min-height:80px;
-  font-size:24px;
-  background:#f7f7ff;
-  border:3px solid transparent;
-}
-
-.option:hover{
-  border-color:#7b61ff;
-}
-
-.feedback{
-  min-height:65px;
-  margin-top:20px;
-  font-size:20px;
-  font-weight:bold;
-}
-
-.success{
-  color:#008a3e;
-}
-
-.try{
-  color:#e07b00;
-}
-
-.badges{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
-  margin-top:15px;
-}
-
-.badge{
-  background:#fff8cc;
-  border-radius:15px;
-  padding:9px 12px;
-  font-size:14px;
-  font-weight:bold;
-}
-
-.nextBtn{
-  background:#5b4bdb;
-  color:white;
-  margin-top:12px;
-  display:none;
-}
-
-.restart{
-  background:#ff8a00;
-  color:white;
-  margin-top:15px;
-}
-
-.footer{
-  padding:20px;
-  font-size:13px;
-  color:#666;
-}
-
-.hidden{
-  display:none;
-}
-
-.bigEmoji{
-  font-size:60px;
-  margin:10px;
-}
-
-@media(max-width:500px){
-  h1{font-size:25px;}
-  .question{font-size:21px;}
-  .questionHindi{font-size:18px;}
-  .options{grid-template-columns:1fr 1fr;}
-  button{font-size:14px;padding:10px 13px;}
-}
-</style>
-</head>
-
+:root{--blue:#2563eb;--purple:#7c3aed;--bg:#eef7ff;--ink:#17324d;--card:#fff;--ok:#16a34a;--red:#ef4444;--gold:#f59e0b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:980px;margin:auto;padding:16px}.top{background:linear-gradient(135deg,var(--blue),var(--purple));color:white;border-radius:26px;padding:20px;box-shadow:0 8px 28px #0002}
+.brand{display:flex;align-items:center;gap:14px}.mini{width:68px;height:68px;object-fit:cover;border-radius:18px;border:2px solid #fff}.brand h1{margin:0;font-size:30px}.brand p{margin:4px 0 0}
+.lang{margin-top:15px}.lang button,.btn{border:0;border-radius:14px;padding:11px 17px;font-weight:800;cursor:pointer}.lang button{background:#fff;color:#234}.lang .active{background:#ffd43b}
+.card{background:var(--card);border-radius:24px;padding:22px;margin-top:16px;box-shadow:0 5px 20px #0001}.hero{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:center}.hero img{width:100%;border-radius:22px;max-height:390px;object-fit:cover;object-position:center}.btn{background:var(--blue);color:#fff;font-size:16px;margin:5px}.btn.secondary{background:#64748b}.btn.green{background:#16a34a}.btn.gold{background:#f59e0b}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.module{border:0;border-radius:20px;padding:20px;text-align:left;background:#f8fbff;cursor:pointer;border:2px solid #dbeafe}.module b{font-size:19px}.module span{font-size:38px;float:right}.module small{display:block;color:#64748b;margin-top:7px}
+.hidden{display:none}.center{text-align:center}.q{font-size:22px;font-weight:800;text-align:center}.options{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;margin-top:18px}.opt{min-height:90px;border:3px solid #dbeafe;background:#f8fbff;border-radius:20px;font-size:23px;cursor:pointer}.feedback{text-align:center;min-height:30px;font-weight:800;font-size:18px;margin:14px}.bar{height:11px;background:#e5e7eb;border-radius:20px;overflow:hidden}.fill{height:100%;background:#22c55e;width:0;transition:.3s}.stats{display:flex;gap:10px}.stat{flex:1;text-align:center;background:#f8fafc;padding:14px;border-radius:16px}.stat b{font-size:24px}
+.notice{font-size:13px;color:#64748b}.footer{text-align:center;padding:18px;font-size:12px;color:#64748b}.pill{display:inline-block;background:#eef2ff;border-radius:999px;padding:7px 11px;margin:3px;font-size:13px}.object-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}.object-card{border:2px solid #dbeafe;background:#f8fbff;border-radius:18px;padding:14px;text-align:center;cursor:pointer;min-height:135px}.object-card.learned{border-color:#22c55e;background:#f0fdf4}.object-icon{font-size:45px}.object-name{font-weight:800;margin-top:5px}.object-hi{font-size:13px;color:#64748b}.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.category{border:2px solid #dbeafe;background:#f8fbff;border-radius:16px;padding:13px;cursor:pointer;font-weight:800}.learn-panel{text-align:center}.big-object{font-size:110px;margin:8px}.learned-badge{color:#15803d;font-weight:800}.quiz-opt{display:flex;flex-direction:column;align-items:center;justify-content:center}.mistake{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:10px;margin:7px}.progress-note{background:#eff6ff;border-radius:16px;padding:13px;margin:10px 0}
+@media(max-width:650px){.hero{grid-template-columns:1fr}.hero img{max-height:300px}.grid,.options{grid-template-columns:1fr}.object-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}.brand h1{font-size:25px}}
+</style></head>
 <body>
+<audio id="cheerSound" src="driken5482-applause-cheer-236786.mp3" preload="auto"></audio><audio id="bgMusic" src="bmdkbandara-whispers-of-the-stream-417622.mp3" preload="auto" loop></audio>
+<div class="wrap">
+<header class="top"><div class="brand"><img class="mini" src="assets/autsnoboy.png"><div><h1>Autsnoboy</h1><p id="tag">Learn • Focus • Grow</p></div></div>
+<div class="lang"><button id="en" class="active" onclick="setLang('en')">English</button><button id="hi" onclick="setLang('hi')">हिन्दी</button></div></header>
 
-<div class="header">
+<section class="card" id="home"><div class="hero"><img src="assets/autsnoboy.png" alt="Autsnoboy"><div><h2 id="welcome">Welcome to Autsnoboy</h2><p id="intro">A free, child-friendly learning platform with short activities for focus, attention, visual learning, communication, daily skills and music.</p><button class="btn" onclick="showModules()" id="start">▶ Start Learning</button><button class="btn secondary" onclick="toggleMusic()" id="musicBtn">🎵 Music: Off</button></div></div></section>
 
-<img class="logo"
-src="autsnoboy.png"
-alt="Autsnoboy">
+<section class="card hidden" id="modules"><h2 id="choose">Choose a learning area</h2><div class="grid">
+<button class="module" onclick="startModule('focus')"><span>🎯</span><b>Focus & Attention</b><small>Find, match and stay with a task</small></button>
+<button class="module" onclick="startModule('visual')"><span>👀</span><b>Visual & Sensory</b><small>Colors, shapes, patterns and visual matching</small></button>
+<button class="module" onclick="startModule('communication')"><span>🗣️</span><b>Communication</b><small>Simple words and asking for help</small></button>
+<button class="module" onclick="startModule('music')"><span>🎵</span><b>Music Learning</b><small>Rhythm and sound-based activities</small></button>
+<button class="module" onclick="startModule('feelings')"><span>😊</span><b>Feelings</b><small>Recognize and express emotions</small></button>
+<button class="module" onclick="startModule('daily')"><span>🧼</span><b>Daily Life</b><small>Simple everyday routines</small></button>
+<button class="module" onclick="startModule('social')"><span>🤝</span><b>Social Skills</b><small>Waiting, greeting and taking turns</small></button>
+<button class="module" onclick="showTherapies()"><span>🧩</span><b>Therapies</b><small>Speech learning and household objects</small></button>
+<button class="module" onclick="showProgress()"><span>🏆</span><b>My Progress</b><small>Learning journey and practice items</small></button>
+</div></section>
 
-<h1>🦸 Autsnoboy</h1>
+<section class="card hidden" id="therapy"><h2>🧩 <span id="therapyTitle">Therapies</span></h2><p id="therapyIntro">Learning activities designed to practise communication and everyday object recognition.</p><div class="grid">
+<button class="module" onclick="showSpeech()"><span>🗣️</span><b id="speechTitle">Speech Learning</b><small id="speechDesc">Learn words by seeing, clicking and hearing them.</small></button>
+<button class="module" onclick="showHousehold()"><span>🏠</span><b id="houseTitle">Household Objects</b><small id="houseDesc">Learn objects first. They automatically become available in the quiz.</small></button>
+</div><div class="center"><button class="btn secondary" onclick="showModules()">← Areas</button></div></section>
 
-<div class="subtitle">
-Learning Adventure • Every Step Counts
+<section class="card hidden" id="speech"><h2>🗣️ Speech Learning</h2><p>Choose an everyday word and practise saying it. This is an educational language-learning activity, not a medical therapy assessment.</p><div class="progress-note"><b id="speechLearnedCount">0</b> objects learned. Click an object to hear its name and add it to your quiz.</div><div id="categoryGrid" class="category-grid"></div><div class="center" style="margin-top:15px"><button class="btn" onclick="showHousehold()">🏠 Household Objects</button><button class="btn gold" onclick="startHouseholdQuiz()">🎯 Start Learned-Items Quiz</button><button class="btn secondary" onclick="showTherapies()">← Therapies</button></div></section>
+
+<section class="card hidden" id="household"><h2>🏠 <span id="householdHeading">Household Objects</span></h2><div class="progress-note"><b id="learnedCount">0</b> / 1000 items learned • <span id="quizReady">Quiz grows as the child learns</span></div><div id="houseCategoryGrid" class="category-grid"></div><div id="objectGrid" class="object-grid"></div><div class="center" style="margin-top:15px"><button class="btn gold" onclick="startHouseholdQuiz()">🎯 Quiz Learned Items</button><button class="btn" onclick="showSpeech()">🗣️ Speech Learning</button><button class="btn secondary" onclick="showTherapies()">← Therapies</button></div></section>
+
+<section class="card hidden" id="objectLearn"><div class="learn-panel"><div class="big-object" id="bigObject">🥄</div><h2 id="bigName">Spoon</h2><div id="bigHindi">चम्मच</div><p id="learnStatus"></p><button class="btn green" onclick="speakCurrentObject()">🔊 Hear Name</button><button class="btn" onclick="markLearnedAndNext()">✅ Learn This Item</button><button class="btn secondary" onclick="showHousehold()">← Back to Objects</button></div></section>
+
+<section class="card hidden" id="houseQuiz"><div id="hqMeta" class="notice"></div><div class="bar"><div class="fill" id="hqFill"></div></div><div class="q" id="hqQuestion"></div><div class="options" id="hqOptions"></div><div class="feedback" id="hqFeedback"></div><div class="center"><button class="btn secondary" onclick="showHousehold()">← Household Objects</button></div></section>
+
+<section class="card hidden" id="houseResult"><div class="center"><div style="font-size:65px">🏆</div><h2>Household Objects Quiz</h2><p id="houseResultText"></p><div class="stats"><div class="stat"><b id="hqScore">0</b><br>Score</div><div class="stat"><b id="hqTotal">0</b><br>Learned Items</div><div class="stat"><b id="hqMistakes">0</b><br>Need Practice</div></div><div id="mistakeList" style="text-align:left;margin-top:15px"></div><button class="btn" onclick="startHouseholdQuiz()">🔁 Try Quiz Again</button><button class="btn" onclick="showHousehold()">🏠 Learn More Objects</button></div></section>
+
+<section class="card hidden" id="progress"><h2>🏆 My Progress</h2><div class="progress-note"><b id="pLearned">0</b> / 1000 household objects learned</div><div class="stats"><div class="stat"><b id="pQuiz">0</b><br>Quiz Attempts</div><div class="stat"><b id="pCorrect">0</b><br>Correct Answers</div><div class="stat"><b id="pMistakes">0</b><br>Objects to Practise</div></div><div id="pMistakeList" style="margin-top:15px"></div><div class="center"><button class="btn" onclick="showHousehold()">🏠 Household Objects</button><button class="btn secondary" onclick="showModules()">← Areas</button></div></section>
+
+<section class="card hidden" id="game"><div id="meta" class="notice"></div><div class="bar"><div class="fill" id="fill"></div></div><div class="q" id="q"></div><div class="options" id="opts"></div><div class="feedback" id="fb"></div><div class="center"><button class="btn hidden" id="next" onclick="nextQ()">Next →</button><button class="btn secondary" onclick="showModules()">← Areas</button></div></section>
+<section class="card hidden" id="done"><div class="center"><div style="font-size:65px">🏆</div><h2 id="doneTitle">Great work!</h2><p id="doneText"></p><div class="stats"><div class="stat"><b id="score">0</b><br>Score</div><div class="stat"><b id="stars">0</b><br>⭐</div></div><button class="btn" onclick="showModules()" id="again">Choose another area</button></div></section>
+<footer class="footer">Autsnoboy is an educational activity platform. It does not claim to diagnose, treat or cure autism.</footer>
 </div>
-
-</div>
-
-<div class="controls">
-
-<button onclick="setLanguage('en')">🇬🇧 English</button>
-
-<button onclick="setLanguage('hi')">🇮🇳 हिंदी</button>
-
-<button onclick="toggleMusic()" id="musicBtn">
-🎵 Music ON
-</button>
-
-<button onclick="hearQuestion()">
-🔊 Hear Question
-</button>
-
-</div>
-
-<div class="main">
-
-<div class="progressBox">
-
-<div id="progressText">
-Mission 1 of 7
-</div>
-
-<div class="progressBar">
-<div class="progressFill" id="progressFill"></div>
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="mission" id="missionTitle">
-Mission 1
-</div>
-
-<div class="bigEmoji" id="emoji">
-🔴
-</div>
-
-<div class="question" id="question">
-Find the RED object
-</div>
-
-<div class="questionHindi" id="questionHindi">
-लाल वस्तु खोजो
-</div>
-
-<div class="options" id="options"></div>
-
-<div class="feedback" id="feedback"></div>
-
-<button class="nextBtn" id="nextBtn" onclick="nextMission()">
-Next Mission ➜
-</button>
-
-</div>
-
-<div class="badges" id="badges"></div>
-
-<button class="restart" onclick="restartGame()">
-🔄 Restart Adventure
-</button>
-
-</div>
-
-<div class="footer">
-Autsnoboy is an educational learning game.<br>
-Made with ❤️ by Varun Mamta
-</div>
-
-<!-- BACKGROUND MUSIC -->
-
-<audio
-id="music"
-src="bmdkbandara-whispers-of-the-stream-417622.mp3"
-loop
-preload="auto">
-</audio>
-
-<!-- REAL AUDIENCE APPLAUSE -->
-
-<audio
-id="cheerSound"
-src="driken5482-applause-cheer-236786.mp3"
-preload="auto">
-</audio>
-
 <script>
-
-let language="en";
-
-let currentMission=0;
-
-let completed=false;
-
-let musicPlaying=false;
-
-const music=document.getElementById("music");
-
-const cheerSound=document.getElementById("cheerSound");
-
-const missions=[
-
-{
- emoji:"🔴",
- titleEn:"Focus Mission",
- titleHi:"ध्यान मिशन",
- questionEn:"Find the RED object",
- questionHi:"लाल वस्तु खोजो",
- options:[
-  {text:"🔴",correct:true},
-  {text:"🔵",correct:false},
-  {text:"🟢",correct:false},
-  {text:"🟡",correct:false}
- ]
-},
-
-{
- emoji:"👀",
- titleEn:"Visual Mission",
- titleHi:"देखने का मिशन",
- questionEn:"Find the two SAME objects",
- questionHi:"दो एक जैसे चित्र खोजो",
- options:[
-  {text:"🍎 🍎",correct:true},
-  {text:"🍎 🍌",correct:false},
-  {text:"🚗 🚌",correct:false},
-  {text:"🐱 🐶",correct:false}
- ]
-},
-
-{
- emoji:"🔺",
- titleEn:"Pattern Mission",
- titleHi:"पैटर्न मिशन",
- questionEn:"What comes next?",
- questionHi:"इसके बाद क्या आएगा?",
- options:[
-  {text:"🔺",correct:true},
-  {text:"🟢",correct:false},
-  {text:"⭐",correct:false},
-  {text:"❤️",correct:false}
- ]
-},
-
-{
- emoji:"😊",
- titleEn:"Emotion Mission",
- titleHi:"भावना मिशन",
- questionEn:"Which face is HAPPY?",
- questionHi:"खुश चेहरा कौन सा है?",
- options:[
-  {text:"😊",correct:true},
-  {text:"😢",correct:false},
-  {text:"😡",correct:false},
-  {text:"😴",correct:false}
- ]
-},
-
-{
- emoji:"🗣️",
- titleEn:"Communication Mission",
- titleHi:"बोलने का मिशन",
- questionEn:"What can you say when you need help?",
- questionHi:"मदद चाहिए तो क्या कह सकते हो?",
- options:[
-  {text:"HELP",correct:true},
-  {text:"BYE",correct:false},
-  {text:"SLEEP",correct:false},
-  {text:"STOP",correct:false}
- ]
-},
-
-{
- emoji:"🧼",
- titleEn:"Daily Life Mission",
- titleHi:"दैनिक जीवन मिशन",
- questionEn:"What do we use to wash our hands?",
- questionHi:"हाथ धोने के लिए क्या इस्तेमाल करते हैं?",
- options:[
-  {text:"🧼 SOAP",correct:true},
-  {text:"📕 BOOK",correct:false},
-  {text:"👟 SHOE",correct:false},
-  {text:"🧸 TOY",correct:false}
- ]
-},
-
-{
- emoji:"🤝",
- titleEn:"Friendship Mission",
- titleHi:"दोस्ती मिशन",
- questionEn:"What should we do when it is someone else's turn?",
- questionHi:"जब किसी और की बारी हो तो क्या करना चाहिए?",
- options:[
-  {text:"WAIT",correct:true},
-  {text:"RUN",correct:false},
-  {text:"SHOUT",correct:false},
-  {text:"PUSH",correct:false}
- ]
-}
-
-];
-
-function renderMission(){
-
-let m=missions[currentMission];
-
-document.getElementById("missionTitle").textContent=
-language==="en"
-?m.titleEn
-:m.titleHi;
-
-document.getElementById("emoji").textContent=m.emoji;
-
-document.getElementById("question").textContent=m.questionEn;
-
-document.getElementById("questionHindi").textContent=m.questionHi;
-
-document.getElementById("progressText").textContent=
-"Mission "+(currentMission+1)+" of "+missions.length;
-
-document.getElementById("progressFill").style.width=
-((currentMission)/missions.length*100)+"%";
-
-let options=document.getElementById("options");
-
-options.innerHTML="";
-
-document.getElementById("feedback").innerHTML="";
-
-document.getElementById("nextBtn").style.display="none";
-
-completed=false;
-
-m.options.forEach((option,index)=>{
-
-let btn=document.createElement("button");
-
-btn.className="option";
-
-btn.textContent=option.text;
-
-btn.onclick=function(){
-
-checkAnswer(option.correct);
-
+const data={
+focus:[
+['Find the RED object','लाल वस्तु चुनो',[['🍎','r'],['🍌','y'],['🍃','g'],['🔵','b']],'r'],
+['Which object is the same color as the red apple?','लाल सेब के समान रंग कौन सा है?',[['🍎','r'],['🍌','y'],['🍃','g'],['🔵','b']],'r'],
+['Find the STAR','सितारा चुनो',[['⭐','star'],['❤️','heart'],['🌙','moon'],['☀️','sun']],'star']],
+visual:[
+['Find the SAME pair','एक जैसी जोड़ी चुनो',[['🐶 🐶','same'],['🐱 🐰','diff'],['⭐ ❤️','diff'],['🍎 🍌','diff']],'same'],
+['Which shape is a CIRCLE?','गोल आकार कौन सा है?',[['⚪','circle'],['🔺','triangle'],['🟦','square'],['⭐','star']],'circle'],
+['Which pair matches?','एक जैसी जोड़ी चुनो',[['🍎 🍎','same'],['🍎 🍌','diff'],['🐶 🐱','diff'],['⭐ ❤️','diff']],'same']],
+communication:[
+['What can you say when you need help?','मदद चाहिए तो क्या कह सकते हो?',[['🆘 Help','help'],['🏃 Run','run'],['🙈 Hide','hide'],['❌ No','no']],'help'],
+['What can you say when you want more?','और चाहिए तो क्या कह सकते हो?',[['➕ More','more'],['🛑 Stop','stop'],['👋 Bye','bye'],['😴 Sleep','sleep']],'more']],
+music:[
+['Which one is a music instrument?','इनमें से कौन सा संगीत वाद्य है?',[['🥁 Drum','drum'],['🍎 Apple','apple'],['🚗 Car','car'],['📚 Book','book']],'drum'],
+['Which sound is loud?','कौन सी आवाज़ तेज़ है?',[['📣 Loud','loud'],['🤫 Quiet','quiet'],['😴 Sleep','sleep'],['🌙 Night','night']],'loud']],
+feelings:[
+['How does he feel?','वह कैसा महसूस कर रहा है?',[['😊 Happy','happy'],['😢 Sad','sad'],['😡 Angry','angry'],['😨 Scared','scared']],'happy'],
+['Which face shows SAD?','उदास चेहरा कौन सा है?',[['😊','happy'],['😢','sad'],['😡','angry'],['😎','cool']],'sad']],
+daily:[
+['What do we use to brush our teeth?','दाँत साफ करने के लिए क्या उपयोग करते हैं?',[['🪥 Toothbrush','brush'],['👟 Shoe','shoe'],['🥄 Spoon','spoon'],['🧸 Toy','toy']],'brush'],
+['What do we use to wash our hands?','हाथ धोने के लिए क्या उपयोग करते हैं?',[['🧼 Soap','soap'],['📕 Book','book'],['🧸 Toy','toy'],['👟 Shoe','shoe']],'soap']],
+social:[
+['What can you do when it is your friend’s turn?','दोस्त की बारी हो तो क्या कर सकते हो?',[['⏳ Wait','wait'],['🏃 Run','run'],['❌ Push','push'],['🙈 Hide','hide']],'wait'],
+['What can you say when you meet a friend?','दोस्त से मिलने पर क्या कह सकते हो?',[['👋 Hello','hello'],['😴 Sleep','sleep'],['🛑 Stop','stop'],['🆘 Help','help']],'hello']]
 };
 
-options.appendChild(btn);
-
-});
-
-}
-
-function checkAnswer(correct){
-
-if(completed)return;
-
-let feedback=document.getElementById("feedback");
-
-if(correct){
-
-completed=true;
-
-feedback.className="feedback success";
-
-feedback.innerHTML=
-"🎉 "+
-
-(language==="en"
-?"Amazing! You did it! 👏"
-:"बहुत बढ़िया! आपने कर दिखाया! 👏");
-
-playCheer();
-
-document.querySelectorAll(".option").forEach(b=>{
-b.disabled=true;
-});
-
-document.getElementById("nextBtn").style.display="inline-block";
-
-addBadge();
-
-}
-
-else{
-
-feedback.className="feedback try";
-
-feedback.innerHTML=
-"💪 "+
-
-(language==="en"
-?"You can do it! Try again! 🌟"
-:"आप कर सकते हो! फिर से कोशिश करो! 🌟");
-
-speakWrong();
-
-}
-
-}
-
-function playCheer(){
-
-cheerSound.currentTime=0;
-
-let p=cheerSound.play();
-
-if(p!==undefined){
-
-p.catch(function(){
-
-console.log("Audio waiting for user interaction");
-
-});
-
-}
-
-}
-
-function speakWrong(){
-
-let text=
-
-language==="en"
-?"You can do it. Try again!"
-:"आप कर सकते हो। फिर से कोशिश करो!";
-
-speak(text);
-
-}
-
-function hearQuestion(){
-
-let m=missions[currentMission];
-
-let text=
-
-language==="en"
-?m.questionEn
-:m.questionHi;
-
-speak(text);
-
-}
-
-function speak(text){
-
-if(!("speechSynthesis" in window)){
-
-alert("Voice is not supported on this device.");
-
-return;
-
-}
-
-window.speechSynthesis.cancel();
-
-let utterance=
-new SpeechSynthesisUtterance(text);
-
-utterance.lang=
-language==="en"
-?"en-IN"
-:"hi-IN";
-
-utterance.rate=.85;
-
-utterance.pitch=1;
-
-window.speechSynthesis.speak(utterance);
-
-}
-
-function addBadge(){
-
-let badge=document.createElement("div");
-
-badge.className="badge";
-
-let badges=[
-
-"🎯 Focus Explorer",
-
-"👀 Sharp Eyes",
-
-"🔺 Pattern Star",
-
-"😊 Feelings Explorer",
-
-"🗣️ Communication Star",
-
-"🧼 Daily Hero",
-
-"🤝 Friendship Star"
-
+/* 1000-item master library. The child only adds an item to the quiz after opening/learning it. */
+const baseObjects=[
+['Kitchen','रसोई','🥄',['Spoon','चम्मच']],['Kitchen','रसोई','🍽️',['Plate','प्लेट']],['Kitchen','रसोई','🥛',['Glass','गिलास']],['Kitchen','रसोई','🍴',['Fork','कांटा']],['Kitchen','रसोई','🔪',['Knife','चाकू']],['Kitchen','रसोई','🥣',['Bowl','कटोरा']],['Kitchen','रसोई','☕',['Cup','कप']],['Kitchen','रसोई','🍳',['Pan','कड़ाही']],['Kitchen','रसोई','🫖',['Kettle','केतली']],['Kitchen','रसोई','🧂',['Salt','नमक']],
+['Bedroom','शयनकक्ष','🛏️',['Bed','बिस्तर']],['Bedroom','शयनकक्ष','🪑',['Bedside Table','बेडसाइड टेबल']],['Bedroom','शयनकक्ष','🛋️',['Chair','कुर्सी']],['Bedroom','शयनकक्ष','🪞',['Mirror','आईना']],['Bedroom','शयनकक्ष','🧺',['Laundry Basket','कपड़ों की टोकरी']],['Bedroom','शयनकक्ष','👕',['Shirt','कमीज़']],['Bedroom','शयनकक्ष','👖',['Pants','पैंट']],['Bedroom','शयनकक्ष','🧦',['Socks','मोज़े']],['Bedroom','शयनकक्ष','👟',['Shoes','जूते']],['Bedroom','शयनकक्ष','🧢',['Cap','टोपी']],
+['Bathroom','बाथरूम','🪥',['Toothbrush','टूथब्रश']],['Bathroom','बाथरूम','🧼',['Soap','साबुन']],['Bathroom','बाथरूम','🧴',['Shampoo','शैम्पू']],['Bathroom','बाथरूम','🪮',['Comb','कंघी']],['Bathroom','बाथरूम','🚿',['Shower','शॉवर']],['Bathroom','बाथरूम','🪣',['Bucket','बाल्टी']],['Bathroom','बाथरूम','🧽',['Sponge','स्पंज']],['Bathroom','बाथरूम','🪞',['Bathroom Mirror','बाथरूम का आईना']],['Bathroom','बाथरूम','🧻',['Toilet Paper','टॉयलेट पेपर']],['Bathroom','बाथरूम','🧹',['Bathroom Mop','बाथरूम पोछा']],
+['Living Room','बैठक','📺',['Television','टीवी']],['Living Room','बैठक','🛋️',['Sofa','सोफा']],['Living Room','बैठक','🪑',['Armchair','कुर्सी']],['Living Room','बैठक','🕰️',['Clock','घड़ी']],['Living Room','बैठक','💡',['Lamp','लैंप']],['Living Room','बैठक','🪴',['Plant Pot','गमला']],['Living Room','बैठक','📱',['Phone','फोन']],['Living Room','बैठक','🧸',['Toy','खिलौना']],['Living Room','बैठक','🗑️',['Dustbin','कूड़ेदान']],['Living Room','बैठक','🪟',['Curtain','पर्दा']],
+['Study Room','पढ़ाई','📚',['Book','किताब']],['Study Room','पढ़ाई','✏️',['Pencil','पेंसिल']],['Study Room','पढ़ाई','🖊️',['Pen','पेन']],['Study Room','पढ़ाई','📓',['Notebook','कॉपी']],['Study Room','पढ़ाई','✂️',['Scissors','कैंची']],['Study Room','पढ़ाई','📏',['Ruler','स्केल']],['Study Room','पढ़ाई','🎒',['School Bag','स्कूल बैग']],['Study Room','पढ़ाई','🖍️',['Crayon','क्रेयॉन']],['Study Room','पढ़ाई','📌',['Pin','पिन']],['Study Room','पढ़ाई','🖨️',['Printer','प्रिंटर']],
+['Cleaning','सफाई','🧹',['Broom','झाड़ू']],['Cleaning','सफाई','🪣',['Bucket','बाल्टी']],['Cleaning','सफाई','🧽',['Sponge','स्पंज']],['Cleaning','सफाई','🧴',['Cleaner Bottle','क्लीनर की बोतल']],['Cleaning','सफाई','🧺',['Basket','टोकरी']],['Cleaning','सफाई','🧻',['Tissue','टिश्यू']],['Cleaning','सफाई','🧤',['Cleaning Gloves','सफाई के दस्ताने']],['Cleaning','सफाई','🧼',['Cleaning Soap','सफाई का साबुन']],['Cleaning','सफाई','🧹',['Dustpan','डस्टपैन']],['Cleaning','सफाई','🪠',['Plunger','प्लंजर']],
+['Personal Items','व्यक्तिगत वस्तुएँ','🔑',['Key','चाबी']],['Personal Items','व्यक्तिगत वस्तुएँ','🔒',['Lock','ताला']],['Personal Items','व्यक्तिगत वस्तुएँ','👜',['Handbag','हैंडबैग']],['Personal Items','व्यक्तिगत वस्तुएँ','👝',['Wallet','बटुआ']],['Personal Items','व्यक्तिगत वस्तुएँ','🕶️',['Sunglasses','धूप का चश्मा']],['Personal Items','व्यक्तिगत वस्तुएँ','⌚',['Watch','घड़ी']],['Personal Items','व्यक्तिगत वस्तुएँ','🪥',['Hair Brush','हेयर ब्रश']],['Personal Items','व्यक्तिगत वस्तुएँ','💳',['Card','कार्ड']],['Personal Items','व्यक्तिगत वस्तुएँ','🧴',['Perfume','इत्र']],['Personal Items','व्यक्तिगत वस्तुएँ','☂️',['Umbrella','छाता']],
+['Food & Drinks','खाना और पेय','🍎',['Apple','सेब']],['Food & Drinks','खाना और पेय','🍌',['Banana','केला']],['Food & Drinks','खाना और पेय','🍊',['Orange','संतरा']],['Food & Drinks','खाना और पेय','🥛',['Milk','दूध']],['Food & Drinks','खाना और पेय','🧃',['Juice','जूस']],['Food & Drinks','खाना और पेय','🍞',['Bread','ब्रेड']],['Food & Drinks','खाना और पेय','🍚',['Rice','चावल']],['Food & Drinks','खाना और पेय','🥔',['Potato','आलू']],['Food & Drinks','खाना और पेय','🧀',['Cheese','चीज़']],['Food & Drinks','खाना और पेय','🍪',['Biscuit','बिस्कुट']],
+['Travel','यात्रा','🧳',['Suitcase','सूटकेस']],['Travel','यात्रा','🎒',['Backpack','बैकपैक']],['Travel','यात्रा','🎫',['Ticket','टिकट']],['Travel','यात्रा','🗺️',['Map','नक्शा']],['Travel','यात्रा','🚗',['Car','कार']],['Travel','यात्रा','🚌',['Bus','बस']],['Travel','यात्रा','🚲',['Bicycle','साइकिल']],['Travel','यात्रा','🪪',['ID Card','पहचान पत्र']],['Travel','यात्रा','🧴',['Travel Bottle','यात्रा की बोतल']],['Travel','यात्रा','😷',['Mask','मास्क']],
+['Safety & Home','सुरक्षा और घर','🕯️',['Candle','मोमबत्ती']],['Safety & Home','सुरक्षा और घर','🔦',['Torch','टॉर्च']],['Safety & Home','सुरक्षा और घर','🧯',['Fire Extinguisher','अग्निशामक']],['Safety & Home','सुरक्षा और घर','🚪',['Door','दरवाज़ा']],['Safety & Home','सुरक्षा और घर','🪟',['Window','खिड़की']],['Safety & Home','सुरक्षा और घर','🔔',['Bell','घंटी']],['Safety & Home','सुरक्षा और घर','🔌',['Plug','प्लग']],['Safety & Home','सुरक्षा और घर','🔋',['Battery','बैटरी']],['Safety & Home','सुरक्षा और घर','💡',['Bulb','बल्ब']],['Safety & Home','सुरक्षा और घर','🧰',['Tool Box','औज़ार का डिब्बा']]
 ];
+const variants=['Small','Large','Round','Square','Blue','Red','Green','Kitchen','Bathroom','Travel'];
+let objects=[];let id=1;
+baseObjects.forEach(x=>objects.push({id:id++,cat:x[0],hiCat:x[1],icon:x[2],name:x[3][0],hi:x[3][1]}));
+/* Expand the master library to 1000 entries while keeping recognizable household-item names. */
+let seed=objects.slice();
+while(objects.length<1000){let s=seed[(objects.length-seed.length)%seed.length];let v=variants[Math.floor((objects.length-seed.length)/seed.length)%variants.length];objects.push({id:id++,cat:s.cat,hiCat:s.hiCat,icon:s.icon,name:v+' '+s.name,hi:v+' '+s.hi});}
 
-badge.textContent=badges[currentMission];
+let lang='en',module='focus',score=0,questions=[];let selectedObject=null;let houseCategory='All';
+let learned=JSON.parse(localStorage.getItem('autsnoboy_learned')||'[]');
+let mistakes=JSON.parse(localStorage.getItem('autsnoboy_mistakes')||'[]');
+let quizAttempts=Number(localStorage.getItem('autsnoboy_quiz_attempts')||0),correctAnswers=Number(localStorage.getItem('autsnoboy_correct_answers')||0);
+function saveState(){localStorage.setItem('autsnoboy_learned',JSON.stringify(learned));localStorage.setItem('autsnoboy_mistakes',JSON.stringify(mistakes));localStorage.setItem('autsnoboy_quiz_attempts',quizAttempts);localStorage.setItem('autsnoboy_correct_answers',correctAnswers)}
+function setLang(l){lang=l;document.getElementById('en').classList.toggle('active',l==='en');document.getElementById('hi').classList.toggle('active',l==='hi');document.getElementById('tag').textContent=l==='en'?'Learn • Focus • Grow':'सीखो • ध्यान • आगे बढ़ो';document.getElementById('welcome').textContent=l==='en'?'Welcome to Autsnoboy':'Autsnoboy में आपका स्वागत है';document.getElementById('intro').textContent=l==='en'?'A free, child-friendly learning platform with short activities for focus, attention, visual learning, communication, daily skills, music and speech learning.':'फोकस, ध्यान, visual learning, communication, daily skills, music और speech learning के लिए बच्चों का free learning platform।';document.getElementById('start').textContent=l==='en'?'▶ Start Learning':'▶ सीखना शुरू करें';document.getElementById('choose').textContent=l==='en'?'Choose a learning area':'सीखने का क्षेत्र चुनें';}
+function hideAll(){['home','modules','therapy','speech','household','objectLearn','houseQuiz','houseResult','progress','game','done'].forEach(x=>document.getElementById(x).classList.add('hidden'))}
+function showModules(){hideAll();document.getElementById('modules').classList.remove('hidden')}
+function showTherapies(){hideAll();document.getElementById('therapy').classList.remove('hidden')}
+function showSpeech(){hideAll();document.getElementById('speech').classList.remove('hidden');renderCategories('categoryGrid');updateCounts()}
+function showHousehold(){hideAll();document.getElementById('household').classList.remove('hidden');renderHouseCategories();renderObjects();updateCounts()}
+function showProgress(){hideAll();document.getElementById('progress').classList.remove('hidden');updateProgress()}
+function startModule(m){module=m;score=0;questions=data[m].slice();qIndex=0;hideAll();document.getElementById('game').classList.remove('hidden');render()}
+let qIndex=0;
+function render(){let d=questions[qIndex];let total=questions.length;document.getElementById('meta').textContent=(lang==='en'?'Activity '+(qIndex+1)+' of '+total:'गतिविधि '+(qIndex+1)+' में से '+total);document.getElementById('fill').style.width=((qIndex)/total*100)+'%';document.getElementById('q').textContent=lang==='en'?d[0]:d[1];let o=document.getElementById('opts');o.innerHTML='';document.getElementById('fb').textContent='';document.getElementById('next').classList.add('hidden');speak(lang==='en'?d[0]:d[1]);d[2].forEach(x=>{let b=document.createElement('button');b.className='opt';b.innerHTML=x[0];b.onclick=()=>answer(x[1],b);o.appendChild(b)})}
+function playCheer(){let a=document.getElementById('cheerSound');if(!a)return;a.currentTime=0;a.play().catch(()=>{})}
+function answer(v,b){let d=questions[qIndex];document.querySelectorAll('.opt').forEach(x=>x.disabled=true);if(v===d[3]){score++;b.style.borderColor='#16a34a';document.getElementById('fb').textContent=lang==='en'?'👏 Great job!':'👏 बहुत अच्छा!';playCheer();document.getElementById('next').classList.remove('hidden');}else{b.style.borderColor='#ef4444';document.getElementById('fb').textContent=lang==='en'?'Good try! Let’s look again.':'अच्छी कोशिश! एक बार फिर देखते हैं।';setTimeout(()=>{document.querySelectorAll('.opt').forEach(x=>x.disabled=false);b.style.borderColor='#dbeafe'},700)}}
+function nextQ(){qIndex++;if(qIndex>=questions.length){hideAll();document.getElementById('done').classList.remove('hidden');document.getElementById('score').textContent=score+'/'+questions.length;document.getElementById('stars').textContent=score===questions.length?'3':score>=Math.ceil(questions.length/2)?'2':'1';document.getElementById('doneTitle').textContent=lang==='en'?'Great work!':'बहुत अच्छा!';document.getElementById('doneText').textContent=lang==='en'?'You completed this learning mission. Keep trying and growing!':'आपने यह learning mission पूरा किया। कोशिश करते रहो और आगे बढ़ते रहो!';document.getElementById('again').textContent=lang==='en'?'Choose another area':'दूसरा क्षेत्र चुनें';}else render()}
+let musicOn=false;
+function toggleMusic(){let a=document.getElementById('bgMusic');if(!a)return;if(musicOn){a.pause();musicOn=false;document.getElementById('musicBtn').textContent='🎵 Music: Off'}else{a.volume=.28;a.play().then(()=>{musicOn=true;document.getElementById('musicBtn').textContent='🎵 Music: On'}).catch(()=>{alert('Tap Start Learning first, then turn music on.')})}}
+function cats(){return [...new Set(objects.map(x=>x.cat))]}
+function renderCategories(target){let el=document.getElementById(target);el.innerHTML='';let all=document.createElement('button');all.className='category';all.textContent='🏠 All Objects';all.onclick=()=>{houseCategory='All';showHousehold()};el.appendChild(all);cats().forEach(c=>{let b=document.createElement('button');b.className='category';b.textContent='📁 '+c;b.onclick=()=>{houseCategory=c;showHousehold()};el.appendChild(b)})}
+function renderHouseCategories(){renderCategories('houseCategoryGrid')}
+function renderObjects(){let el=document.getElementById('objectGrid');el.innerHTML='';let arr=houseCategory==='All'?objects:objects.filter(x=>x.cat===houseCategory);arr.forEach(o=>{let b=document.createElement('button');b.className='object-card '+(learned.includes(o.id)?'learned':'');b.innerHTML='<div class="object-icon">'+o.icon+'</div><div class="object-name">'+(lang==='en'?o.name:o.hi)+'</div><div class="object-hi">'+(lang==='en'?o.hi:o.name)+'</div>'+(learned.includes(o.id)?'<div class="learned-badge">✓ Learned</div>':'');b.onclick=()=>openObject(o.id);el.appendChild(b)})}
+function updateCounts(){document.getElementById('learnedCount').textContent=learned.length;document.getElementById('speechLearnedCount').textContent=learned.length;document.getElementById('quizReady').textContent=learned.length?('Quiz has '+learned.length+' learned item'+(learned.length===1?'':'s')):'Open an object to add it to the quiz'}
+function openObject(objectId){selectedObject=objects.find(x=>x.id===objectId);hideAll();document.getElementById('objectLearn').classList.remove('hidden');document.getElementById('bigObject').textContent=selectedObject.icon;document.getElementById('bigName').textContent=lang==='en'?selectedObject.name:selectedObject.hi;document.getElementById('bigHindi').textContent=lang==='en'?selectedObject.hi:selectedObject.name;document.getElementById('learnStatus').innerHTML=learned.includes(selectedObject.id)?'✅ <span class="learned-badge">Learned / सीखा हुआ</span>':'Tap Hear Name, then choose Learn This Item';speakCurrentObject()}
+function speak(text){if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang=lang==='hi'?'hi-IN':'en-IN';u.rate=.82;window.speechSynthesis.speak(u)}
+function speakCurrentObject(){if(!selectedObject)return;speak(lang==='en'?selectedObject.name+'... '+selectedObject.hi:selectedObject.hi+'... '+selectedObject.name)}
+function markLearnedAndNext(){if(!selectedObject)return;if(!learned.includes(selectedObject.id)){learned.push(selectedObject.id);saveState()}updateCounts();document.getElementById('learnStatus').innerHTML='🎉 <span class="learned-badge">Added to quiz!</span> अब यह item quiz में आएगा।';setTimeout(()=>speakCurrentObject(),150);}
+function shuffle(a){return a.sort(()=>Math.random()-.5)}
+let houseQuizItems=[],hqIndex=0,hqScore=0,hqWrongIds=[];
+function startHouseholdQuiz(){if(learned.length<2){alert(lang==='en'?'Please learn at least 2 household objects first. Open objects and click “Learn This Item”.':'पहले कम से कम 2 household objects सीखें। Objects खोलकर “Learn This Item” दबाएँ।');return}houseQuizItems=shuffle(learned.map(id=>objects.find(x=>x.id===id)).filter(Boolean));hqIndex=0;hqScore=0;hqWrongIds=[];quizAttempts++;saveState();hideAll();document.getElementById('houseQuiz').classList.remove('hidden');renderHouseQuiz()}
+function renderHouseQuiz(){let o=houseQuizItems[hqIndex];let total=houseQuizItems.length;document.getElementById('hqMeta').textContent='Question '+(hqIndex+1)+' of '+total+' • Learned items only';document.getElementById('hqFill').style.width=((hqIndex)/total*100)+'%';document.getElementById('hqQuestion').textContent=lang==='en'?'Which one is '+o.name+'?':'इनमें से '+o.hi+' कौन सा है?';document.getElementById('hqFeedback').textContent='';let wrong=shuffle(objects.filter(x=>x.id!==o.id && !houseQuizItems.some(y=>y.id===x.id))).slice(0,3);let opts=shuffle([o,...wrong]);let el=document.getElementById('hqOptions');el.innerHTML='';opts.forEach(x=>{let b=document.createElement('button');b.className='opt quiz-opt';b.innerHTML='<div class="object-icon">'+x.icon+'</div><div>'+x.name+'<br><small>'+x.hi+'</small></div>';b.onclick=()=>houseAnswer(x.id,b,o.id);el.appendChild(b)})}
+function houseAnswer(chosen,b,correctId){document.querySelectorAll('#hqOptions .opt').forEach(x=>x.disabled=true);if(chosen===correctId){hqScore++;correctAnswers++;b.style.borderColor='#16a34a';document.getElementById('hqFeedback').textContent='👏 '+(lang==='en'?'Great job!':'बहुत अच्छा!')+' '+(lang==='en'?'You found it.':'आपने सही पहचाना।');setTimeout(()=>{hqIndex++;if(hqIndex>=houseQuizItems.length)finishHouseQuiz();else renderHouseQuiz()},900)}else{if(!hqWrongIds.includes(correctId))hqWrongIds.push(correctId);if(!mistakes.includes(correctId))mistakes.push(correctId);saveState();b.style.borderColor='#ef4444';document.getElementById('hqFeedback').textContent='💙 '+(lang==='en'?'Good try! Let’s look again.':'अच्छी कोशिश! एक बार फिर देखते हैं।');setTimeout(()=>{document.querySelectorAll('#hqOptions .opt').forEach(x=>x.disabled=false);b.style.borderColor='#dbeafe'},800)}}
+function finishHouseQuiz(){saveState();hideAll();document.getElementById('houseResult').classList.remove('hidden');document.getElementById('hqScore').textContent=hqScore;document.getElementById('hqTotal').textContent=houseQuizItems.length;document.getElementById('hqMistakes').textContent=hqWrongIds.length;let pct=Math.round(hqScore/houseQuizItems.length*100);document.getElementById('houseResultText').textContent=(lang==='en'?'Learning Score: ':'Learning Score: ')+hqScore+'/'+houseQuizItems.length+' ('+pct+'%). This is an educational practice result, not a medical assessment.';let ml=document.getElementById('mistakeList');ml.innerHTML=hqWrongIds.length?'<h3>🔁 Practice Again</h3>':'<h3>⭐ No items marked for practice in this quiz!</h3>';hqWrongIds.forEach(id=>{let x=objects.find(o=>o.id===id);let d=document.createElement('div');d.className='mistake';d.textContent=x.icon+' '+x.name+' / '+x.hi;ml.appendChild(d)})}
+function updateProgress(){document.getElementById('pLearned').textContent=learned.length;document.getElementById('pQuiz').textContent=quizAttempts;document.getElementById('pCorrect').textContent=correctAnswers;document.getElementById('pMistakes').textContent=mistakes.length;let el=document.getElementById('pMistakeList');el.innerHTML=mistakes.length?'<h3>🔁 Objects to practise</h3>':'<p>Great! No practice list yet.</p>';mistakes.slice(0,100).forEach(id=>{let x=objects.find(o=>o.id===id);if(x){let d=document.createElement('div');d.className='mistake';d.textContent=x.icon+' '+x.name+' / '+x.hi;el.appendChild(d)}})}
 
-document.getElementById("badges").appendChild(badge);
-
-}
-
-function nextMission(){
-
-if(currentMission<missions.length-1){
-
-currentMission++;
-
-renderMission();
-
-setTimeout(function(){
-
-hearQuestion();
-
-},500);
-
-}
-
-else{
-
-document.getElementById("progressFill").style.width="100%";
-
-document.getElementById("question").textContent=
-language==="en"
-?"🏆 Adventure Complete!"
-:"🏆 एडवेंचर पूरा हुआ!";
-
-document.getElementById("questionHindi").textContent=
-language==="en"
-?"You tried, learned and grew!"
-:"आपने कोशिश की, सीखा और आगे बढ़े!";
-
-document.getElementById("emoji").textContent="🌟";
-
-document.getElementById("options").innerHTML="";
-
-document.getElementById("feedback").className="feedback success";
-
-document.getElementById("feedback").innerHTML=
-language==="en"
-?"🎉 Fantastic! Every Step Counts! 👏"
-:"🎉 शानदार! हर कदम महत्वपूर्ण है! 👏";
-
-playCheer();
-
-document.getElementById("nextBtn").style.display="none";
-
-}
-
-}
-
-function setLanguage(lang){
-
-language=lang;
-
-renderMission();
-
-}
-
-function toggleMusic(){
-
-if(musicPlaying){
-
-music.pause();
-
-musicPlaying=false;
-
-document.getElementById("musicBtn").textContent=
-"🎵 Music ON";
-
-}
-
-else{
-
-music.volume=.25;
-
-let p=music.play();
-
-if(p!==undefined){
-
-p.then(function(){
-
-musicPlaying=true;
-
-document.getElementById("musicBtn").textContent=
-"🔇 Music OFF";
-
-}).catch(function(){
-
-alert("Please tap the Music button again to start music.");
-
-});
-
-}
-
-}
-
-}
-
-function restartGame(){
-
-currentMission=0;
-
-document.getElementById("badges").innerHTML="";
-
-renderMission();
-
-}
-
-renderMission();
-
-</script>
-
-</body>
-</html>
+renderCategories('categoryGrid');updateCounts();
+</script></body></html>
