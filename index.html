@@ -756,6 +756,10 @@ h1{
 
     <div class="center">
 
+      <button class="actionBtn" onclick="speakHouseholdQuestion()">
+        🔊 Hear Question
+      </button>
+
       <button id="hqNext"
               class="actionBtn hidden"
               onclick="nextHouseholdQuestion()">
@@ -803,7 +807,17 @@ h1{
 <audio id="flute"
        src="bmdkbandara-whispers-of-the-stream-417622.mp3"
        loop
-       preload="auto">
+       preload="auto"></audio>
+
+<script>
+const fluteAudio = document.getElementById("flute");
+fluteAudio.load();
+fluteAudio.addEventListener("error",function(){
+  console.log("Autsnoboy: flute MP3 could not be loaded:", fluteAudio.src);
+});
+</script>
+
+<audio id="flute_backup" style="display:none"></audio>
 </audio>
 
 <audio id="cheer"
@@ -1258,21 +1272,34 @@ const flute=
   document.getElementById("flute");
 
 
+function startMusic(){
+
+  if(!musicOn || !flute) return;
+
+  flute.volume = 0.35;
+
+  if(flute.readyState === 0){
+    try{ flute.load(); }catch(e){}
+  }
+
+  const p = flute.play();
+
+  if(p && typeof p.catch === "function"){
+    p.catch(function(){
+      /* Android/Chrome may block autoplay.
+         The next user interaction will retry. */
+    });
+  }
+}
+
 function toggleMusic(){
 
-  musicOn=!musicOn;
+  musicOn = !musicOn;
 
   if(musicOn){
-
-    flute.volume=.35;
-
-    flute.play()
-      .catch(function(){});
-
+    startMusic();
   }else{
-
     flute.pause();
-
   }
 
   updateMusicButton();
@@ -1280,42 +1307,21 @@ function toggleMusic(){
 }
 
 
-function updateMusicButton(){
+/* Start/retry music after ANY user interaction.
+   Android browsers/WebView require a user gesture
+   before audio playback is allowed. */
 
-  const btn=
-    document.getElementById("musicBtn");
+["click","touchstart"].forEach(function(eventName){
 
-  if(!btn)return;
+  document.addEventListener(eventName,function(){
 
-  btn.innerText=
-    musicOn
-    ? "🎵 Music ON"
-    : "🔇 Music OFF";
-
-}
-
-
-/* Start music after user interaction */
-
-document.addEventListener(
-  "click",
-  function(){
-
-    if(
-      musicOn &&
-      flute.paused
-    ){
-
-      flute.volume=.35;
-
-      flute.play()
-        .catch(function(){});
-
+    if(musicOn && flute && flute.paused){
+      startMusic();
     }
 
-  },
-  {once:true}
-);
+  },{passive:true});
+
+});
 
 
 /* =========================
@@ -1338,31 +1344,39 @@ function stopSpeech(){
 
 function speak(text){
 
-  if(
-    !("speechSynthesis" in window)
-  ){
-
+  if(!("speechSynthesis" in window)){
     return;
-
   }
 
   stopSpeech();
 
-  const speech=
-    new SpeechSynthesisUtterance(text);
+  const langCode=language==="hi" ? "hi-IN" : "en-US";
 
-  speech.lang=
-    language==="hi"
-    ? "hi-IN"
-    : "en-US";
+  function speakNow(){
+    const speech=new SpeechSynthesisUtterance(text);
+    speech.lang=langCode;
+    speech.rate=.85;
+    speech.pitch=1;
 
-  speech.rate=.85;
-  speech.pitch=1;
+    const voices=window.speechSynthesis.getVoices();
+    const prefix=language==="hi" ? "hi" : "en";
+    const matching=voices.find(function(v){
+      return v.lang && v.lang.toLowerCase().indexOf(prefix)===0;
+    });
+    if(matching) speech.voice=matching;
 
-  window.speechSynthesis.speak(
-    speech
-  );
+    window.speechSynthesis.speak(speech);
+  }
 
+  if(window.speechSynthesis.getVoices().length){
+    speakNow();
+  }else{
+    window.speechSynthesis.onvoiceschanged=function(){
+      window.speechSynthesis.onvoiceschanged=null;
+      speakNow();
+    };
+    setTimeout(speakNow,300);
+  }
 }
 
 
@@ -1457,6 +1471,10 @@ function loadMissionQuestion(){
 
     }
   );
+
+  setTimeout(function(){
+    speakQuestion();
+  },180);
 
 }
 
@@ -1867,10 +1885,8 @@ function loadHouseholdQuestion(){
     "hqQuestion"
   ).innerText=
     language==="hi"
-    ? "कौन सी वस्तु है: "+
-      obj[2]+"?"
-    : "Which object is this? "+
-      obj[1]+"?";
+    ? "यह कौन सी वस्तु है? "+obj[0]
+    : "Which object is this? "+obj[0];
 
   const options=
     createHouseholdOptions(
@@ -1894,6 +1910,10 @@ function loadHouseholdQuestion(){
     "hidden"
   );
 
+  setTimeout(function(){
+    speakHouseholdQuestion();
+  },180);
+
   options.forEach(
     function(index){
 
@@ -1908,7 +1928,9 @@ function loadHouseholdQuestion(){
       button.className="option";
 
       button.innerText=
-        item[0]+" "+item[1];
+        language==="hi"
+        ? item[0]+" "+item[2]
+        : item[0]+" "+item[1];
 
       button.onclick=
         function(){
@@ -1925,6 +1947,15 @@ function loadHouseholdQuestion(){
     }
   );
 
+}
+
+
+function speakHouseholdQuestion(){
+  speak(
+    language==="hi"
+    ? "यह कौन सी वस्तु है?"
+    : "Which object is this?"
+  );
 }
 
 
@@ -1978,6 +2009,13 @@ function checkHouseholdAnswer(
       "hqFeedback"
     );
 
+  let mistakes={};
+  try{
+    mistakes=JSON.parse(localStorage.getItem("autsnoboyHouseholdMistakes")) || {};
+  }catch(e){
+    mistakes={};
+  }
+
   if(selected===correct){
 
     householdScore++;
@@ -2004,6 +2042,13 @@ function checkHouseholdAnswer(
     );
 
   }else{
+
+    const key=String(correct);
+    mistakes[key]=(mistakes[key]||0)+1;
+    localStorage.setItem(
+      "autsnoboyHouseholdMistakes",
+      JSON.stringify(mistakes)
+    );
 
     feedback.innerText=
       language==="hi"
@@ -2087,6 +2132,29 @@ function showHouseholdResult(){
     message=
       "🌱 Good try! Let's learn and try again.";
 
+  }
+
+  let mistakes={};
+  try{
+    mistakes=JSON.parse(localStorage.getItem("autsnoboyHouseholdMistakes")) || {};
+  }catch(e){
+    mistakes={};
+  }
+
+  const keys=Object.keys(mistakes).filter(function(k){
+    return Number(mistakes[k])>0;
+  }).sort(function(a,b){
+    return mistakes[b]-mistakes[a];
+  });
+
+  if(keys.length){
+    message += language==="hi" ? "\n\nअभ्यास के लिए:" : "\n\nPractice again:";
+    keys.slice(0,10).forEach(function(k){
+      const item=householdObjects[Number(k)];
+      if(item){
+        message += "\n• "+(language==="hi"?item[2]:item[1])+" — "+mistakes[k];
+      }
+    });
   }
 
   document.getElementById(
