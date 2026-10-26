@@ -1,320 +1,227 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#6d5dfc">
-<title>Autsnoboy - Learn & Play</title>
+<title>Autsnoboy - Learning Game</title>
 
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:system-ui,sans-serif;
- background:#f5f6fb;
- color:#202338
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f6ff;
+color:#222
 }
 .app{
- max-width:860px;
- margin:auto;
- padding:16px
+max-width:850px;
+margin:auto;
+padding:15px
 }
 header{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px
 }
 .brand{
- display:flex;
- gap:12px;
- align-items:center
+display:flex;
+align-items:center;
+gap:12px
 }
 .hero{
- width:60px;
- height:60px;
- border-radius:16px;
- object-fit:cover;
- background:#ddd
+width:60px;
+height:60px;
+object-fit:cover;
+border-radius:15px
 }
-h1{margin:0}
-.sub{
- color:#697087;
- font-size:13px
-}
+h1{margin:0;font-size:25px}
+.sub{color:#666;font-size:13px}
 button{
- font:inherit;
- cursor:pointer
+font:inherit;
+cursor:pointer
 }
-.lang,.tab,.secondary{
- background:white;
- border:1px solid #ddd;
- border-radius:12px;
- padding:11px 14px
-}
-.tabs{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:8px;
- margin:16px 0
-}
-.tab.active{
- background:#eeeaff;
- color:#6354db
+.topbtn{
+border:0;
+background:white;
+border-radius:12px;
+padding:10px;
+box-shadow:0 2px 8px #0001
 }
 .card{
- background:white;
- border-radius:20px;
- padding:18px;
- margin-bottom:14px;
- box-shadow:0 5px 22px #20233812
+background:white;
+border-radius:20px;
+padding:18px;
+margin-top:16px;
+box-shadow:0 5px 20px #0001
 }
 .worlds{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px
 }
 .world{
- text-align:left;
- background:#fff;
- border:2px solid #ececf2;
- border-radius:17px;
- padding:15px;
- min-height:110px
+border:2px solid #eee;
+background:#fff;
+border-radius:18px;
+padding:18px;
+text-align:left;
+min-height:115px
 }
-.world .emoji{font-size:30px}
+.world .emoji{
+font-size:32px
+}
 .world b{
- display:block;
- margin:5px 0
+display:block;
+margin-top:7px
 }
-.mission{display:none}
-.mission.show{display:block}
 .prompt{
- text-align:center;
- font-size:21px;
- font-weight:800;
- margin:18px 0
+font-size:21px;
+font-weight:bold;
+text-align:center;
+margin:20px 0
 }
 .choices{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
 }
 .choice{
- min-height:120px;
- border:2px solid #e4e4ee;
- border-radius:17px;
- background:#fafafe;
- font-size:34px
+background:#fafaff;
+border:2px solid #ddd;
+border-radius:18px;
+padding:18px;
+font-size:42px;
+min-height:130px
 }
 .choice span{
- display:block;
- font-size:16px;
- font-weight:800
-}
-.choice small{
- display:block;
- font-size:15px;
- margin-top:7px
+display:block;
+font-size:18px;
+font-weight:bold;
+margin-top:8px
 }
 .correct{
- background:#e7f8ef!important;
- border-color:#35a96f!important
+background:#e5f8ed;
+border-color:#35a66f
 }
 .wrong{
- background:#fff3e4!important;
- border-color:#e7a65e!important
+background:#fff0e5;
+border-color:#e59b54
 }
 .feedback{
- text-align:center;
- font-weight:800;
- min-height:28px;
- margin:12px
-}
-.actions{
- display:flex;
- gap:9px;
- justify-content:center;
- flex-wrap:wrap
+text-align:center;
+font-size:18px;
+font-weight:bold;
+min-height:30px;
+margin:15px
 }
 .primary{
- background:#6d5dfc;
- color:white;
- border:0;
- border-radius:12px;
- padding:12px 16px;
- font-weight:800
+background:#6657e8;
+color:white;
+border:0;
+border-radius:12px;
+padding:13px 20px
 }
-.stats{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:9px
+.secondary{
+background:white;
+border:1px solid #ddd;
+border-radius:12px;
+padding:12px 18px
 }
-.stat{
- text-align:center;
- background:#f8f8fc;
- border-radius:14px;
- padding:12px
+.actions{
+text-align:center;
+margin-top:10px
 }
-.stat b{
- font-size:22px;
- display:block
-}
-.ach{
- padding:10px 0;
- border-bottom:1px solid #eee
-}
-.notice{
- background:#fff8df;
- border-radius:14px;
- padding:13px;
- font-size:14px
-}
-.progress{
- height:9px;
- background:#ececf3;
- border-radius:20px
-}
-.bar{
- height:100%;
- background:#6d5dfc;
- border-radius:20px
-}
-footer{
- text-align:center;
- color:#697087;
- font-size:12px;
- padding:12px
-}
-@media(max-width:520px){
- .app{padding:10px}
- .worlds{grid-template-columns:1fr 1fr}
- .hero{
-  width:52px;
-  height:52px
- }
+.hidden{display:none}
+@media(max-width:500px){
+.worlds{grid-template-columns:1fr 1fr}
+.choices{grid-template-columns:1fr 1fr}
+.hero{width:50px;height:50px}
 }
 </style>
 </head>
 
 <body>
 
-<main class="app">
+<div class="app">
 
 <header>
 
 <div class="brand">
-<img id="hero" class="hero" alt="Autsnoboy character">
+<img class="hero" src="autsnoboy.png">
 <div>
 <h1>Autsnoboy</h1>
 <div class="sub">Learn • Play • Grow</div>
 </div>
 </div>
 
-<div style="display:flex;gap:8px;align-items:center">
-<button id="fluteButton" class="lang" type="button">
-🎵 Flute: ON
-</button>
-
-<button id="lang" class="lang" type="button">
-हिन्दी
-</button>
+<div>
+<button class="topbtn" id="fluteBtn">🎵 Flute: ON</button>
+<button class="topbtn" id="langBtn">हिन्दी</button>
 </div>
 
 </header>
 
 
-<nav class="tabs">
-
-<button class="tab active" data-tab="play">
-🎮 Play
-</button>
-
-<button class="tab" data-tab="progress">
-🌱 Progress
-</button>
-
-<button class="tab" data-tab="home">
-🏠 Home Play
-</button>
-
-</nav>
-
-
-<section id="play">
-
 <div class="card">
 
-<h2>Choose a Learning World</h2>
+<h2 id="title">Choose a Learning World</h2>
 
 <div class="worlds">
 
-<button class="world" data-w="focus">
-🎯
+<button class="world" data-world="focus">
+<div class="emoji">🎯</div>
 <b>Focus Forest</b>
 <small>Attention & finding</small>
 </button>
 
-<button class="world" data-w="visual">
-🌈
+<button class="world" data-world="visual">
+<div class="emoji">🌈</div>
 <b>Color City</b>
 <small>Colours & matching</small>
 </button>
 
-<button class="world" data-w="music">
-🎵
-<b>Music Planet</b>
-<small>Rhythm & sounds</small>
-</button>
-
-<button class="world" data-w="communication">
-💬
+<button class="world" data-world="communication">
+<div class="emoji">💬</div>
 <b>Word Village</b>
 <small>Communication</small>
 </button>
 
-<button class="world" data-w="emotion">
-😊
+<button class="world" data-world="emotion">
+<div class="emoji">😊</div>
 <b>Emotion Island</b>
 <small>Feelings</small>
 </button>
 
-<button class="world" data-w="daily">
-🧼
-<b>Daily Life</b>
-<small>Everyday routines</small>
-</button>
-
 </div>
 </div>
 
 
-<div id="mission" class="card mission">
+<div class="card hidden" id="game">
 
-<h2 id="mt"></h2>
+<h2 id="mission">Mission 1</h2>
 
-<div class="sub" id="ms"></div>
+<div class="prompt" id="question">
+Choose an option
+</div>
 
-<div id="prompt" class="prompt"></div>
-
-<button
-id="speakInstruction"
-class="secondary"
-style="display:block;margin:0 auto 14px">
+<div style="text-align:center">
+<button class="secondary" id="speakBtn">
 🔊 Hear Instruction
 </button>
+</div>
 
-<div id="choices" class="choices"></div>
+<div class="choices" id="choices"></div>
 
-<div id="feedback" class="feedback"></div>
+<div class="feedback" id="feedback"></div>
 
 <div class="actions">
 
-<button id="next" class="primary" style="display:none">
+<button class="primary hidden" id="nextBtn">
 Next Mission ⭐
 </button>
 
-<button id="retry" class="secondary" style="display:none">
+<button class="secondary hidden" id="retryBtn">
 Try Again 🔄
 </button>
 
@@ -322,1001 +229,569 @@ Try Again 🔄
 
 </div>
 
-</section>
-
-
-<section id="progress" style="display:none">
 
 <div class="card">
-
-<h2>🌱 Today's Learning Journey</h2>
-
-<div class="stats">
-
-<div class="stat">
-<b id="a">0</b>
-Attempts
-</div>
-
-<div class="stat">
-<b id="t">0</b>
-Try-agains
-</div>
-
-<div class="stat">
-<b id="i">0</b>
-Independent
+<b>Every Step Counts ❤️</b>
+<p style="color:#666">
+No grades. No failure. Just learning, trying and growing.
+</p>
 </div>
 
 </div>
-
-</div>
-
-
-<div class="card">
-
-<h3>🏆 Achievements</h3>
-
-<div id="ach"></div>
-
-</div>
-
-
-<div class="card">
-
-<h3>📈 Skill Growth</h3>
-
-<div id="skills"></div>
-
-</div>
-
-<div class="notice">
-Learning indicators only — no grades, rankings, diagnosis or medical scores.
-</div>
-
-</section>
-
-
-<section id="home" style="display:none">
-
-<div class="card">
-
-<h2>🏠 Play Together</h2>
-
-<p><b>Today's 5-minute family mission</b></p>
-
-<div class="notice">
-Find 3 red objects around the room. Let the child point,
-name, gesture, or ask for help. Celebrate the attempt.
-</div>
-
-<p><b>How did it go?</b></p>
-
-<div class="actions">
-
-<button class="primary home" data-f="enjoyed">
-🟢 We enjoyed it
-</button>
-
-<button class="secondary home" data-f="help">
-🟡 We needed some help
-</button>
-
-<button class="secondary home" data-f="later">
-🔵 Try again later
-</button>
-
-</div>
-
-<div id="hf" class="feedback"></div>
-
-</div>
-
-</section>
-
-
-<footer>
-Owned & Developed by Varun Mamta • Every Step Counts ❤️
-</footer>
-
-</main>
 
 
 <script>
 
-/* ================================
-   AUTSNOBOY FLUTE BACKGROUND
-   ================================ */
+/* =====================================================
+   AUTSNOBOY BACKGROUND FLUTE
+   No external audio file required
+   ===================================================== */
 
-let fluteAudio = null;
-let flutePlaying = false;
+let audioContext=null;
+let masterGain=null;
+let fluteTimer=null;
+let fluteOn=false;
+let noteIndex=0;
+
+const notes=[
+261.63,
+293.66,
+329.63,
+392.00,
+329.63,
+293.66,
+261.63,
+220.00
+];
 
 
-/* Create audio */
+function setupFlute(){
 
-function createFluteAudio(){
+if(audioContext)return;
 
- if(fluteAudio) return;
+const AudioCtx=
+window.AudioContext||
+window.webkitAudioContext;
 
- fluteAudio = new Audio("flute_background.wav");
+if(!AudioCtx)return;
 
- fluteAudio.loop = true;
+audioContext=new AudioCtx();
 
- fluteAudio.preload = "auto";
+masterGain=
+audioContext.createGain();
 
- fluteAudio.volume = 0.22;
+masterGain.gain.value=0.035;
+
+masterGain.connect(
+audioContext.destination
+);
 
 }
 
 
-/* Start flute */
+function playNote(){
+
+if(!audioContext)return;
+
+const osc=
+audioContext.createOscillator();
+
+const gain=
+audioContext.createGain();
+
+osc.type="sine";
+
+osc.frequency.value=
+notes[noteIndex];
+
+noteIndex=
+(noteIndex+1)%notes.length;
+
+const now=
+audioContext.currentTime;
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.linearRampToValueAtTime(
+0.5,
+now+0.08
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.8
+);
+
+osc.connect(gain);
+
+gain.connect(masterGain);
+
+osc.start(now);
+
+osc.stop(now+0.85);
+
+}
+
 
 async function startFlute(){
 
- try{
+try{
 
-  createFluteAudio();
+setupFlute();
 
-  await fluteAudio.play();
+if(!audioContext)return;
 
-  flutePlaying = true;
+if(audioContext.state==="suspended"){
+await audioContext.resume();
+}
 
-  updateFluteButton();
+if(fluteOn)return;
 
- }catch(error){
+fluteOn=true;
 
-  console.log(
-   "Flute waiting for user interaction",
-   error
-  );
+playNote();
 
- }
+fluteTimer=
+setInterval(
+playNote,
+900
+);
+
+document.getElementById(
+"fluteBtn"
+).textContent="🎵 Flute: ON";
+
+}catch(e){
+
+console.log(e);
 
 }
 
+}
 
-/* Stop flute */
 
 function stopFlute(){
 
- if(fluteAudio){
+if(fluteTimer){
+clearInterval(fluteTimer);
+fluteTimer=null;
+}
 
-  fluteAudio.pause();
+fluteOn=false;
 
-  fluteAudio.currentTime = 0;
-
- }
-
- flutePlaying = false;
-
- updateFluteButton();
+document.getElementById(
+"fluteBtn"
+).textContent="🔇 Flute: OFF";
 
 }
 
-
-/* Update button */
-
-function updateFluteButton(){
-
- const button =
- document.querySelector("#fluteButton");
-
- if(!button) return;
-
- if(flutePlaying){
-
-  button.textContent =
-  lang==="hi"
-  ? "🎵 बाँसुरी: चालू"
-  : "🎵 Flute: ON";
-
- }else{
-
-  button.textContent =
-  lang==="hi"
-  ? "🔇 बाँसुरी: बंद"
-  : "🔇 Flute: OFF";
-
- }
-
-}
-
-
-/* Toggle */
 
 function toggleFlute(){
 
- if(flutePlaying){
-
-  stopFlute();
-
- }else{
-
-  startFlute();
-
- }
+if(fluteOn){
+stopFlute();
+}else{
+startFlute();
+}
 
 }
 
 
-/*
-First touch/click starts flute.
-This solves Android Chrome autoplay restriction.
-*/
+/* FIRST TOUCH STARTS MUSIC */
+
+function firstTouch(){
+
+startFlute();
+
+document.removeEventListener(
+"touchstart",
+firstTouch
+);
+
+document.removeEventListener(
+"pointerdown",
+firstTouch
+);
+
+}
+
 
 document.addEventListener(
- "pointerdown",
- function firstTap(){
+"touchstart",
+firstTouch,
+{once:true,passive:true}
+);
 
-  startFlute();
-
- },
- {once:true}
+document.addEventListener(
+"pointerdown",
+firstTouch,
+{once:true}
 );
 
 
-/* Also start after keyboard interaction */
+/* FLUTE BUTTON */
 
-document.addEventListener(
- "keydown",
- function firstKey(){
+document.getElementById(
+"fluteBtn"
+).onclick=function(e){
 
-  startFlute();
+e.stopPropagation();
 
- },
- {once:true}
-);
+toggleFlute();
 
-
-/* Resume after returning to browser */
-
-document.addEventListener(
- "visibilitychange",
- async function(){
-
-  if(
-   !document.hidden &&
-   fluteAudio &&
-   flutePlaying
-  ){
-
-   try{
-
-    await fluteAudio.play();
-
-   }catch(e){
-
-    console.log("Waiting for interaction");
-
-   }
-
-  }
-
- });
+};
 
 
-/* ================================
+/* =====================================================
    GAME
-   ================================ */
+   ===================================================== */
 
-const qs =
- s => document.querySelector(s);
-
-const qsa =
- s => document.querySelectorAll(s);
-
-
-const data = {
+const games={
 
 focus:[
- ["🔴","Red","🔵","Blue"],
- ["🐶","Dog","🐱","Cat"],
- ["⭐","Star","❤️","Heart"]
+[
+"Find the RED object",
+"लाल वस्तु चुनो",
+["🔴","Red"],
+["🔵","Blue"]
+],
+[
+"Find the STAR",
+"तारा चुनो",
+["⭐","Star"],
+["❤️","Heart"]
+],
+[
+"Find the DOG",
+"कुत्ता चुनो",
+["🐶","Dog"],
+["🐱","Cat"]
+]
 ],
 
 visual:[
- ["🔴","Red","🟢","Green"],
- ["🔵","Blue","🟡","Yellow"],
- ["⬛","Square","⚪","Circle"]
+[
+"Choose RED",
+"लाल चुनो",
+["🔴","Red"],
+["🟢","Green"]
 ],
-
-music:[
- ["👏","Clap","👣","Step"],
- ["🥁","Drum","🔔","Bell"],
- ["🎵","Music","🔇","Quiet"]
+[
+"Choose BLUE",
+"नीला चुनो",
+["🔵","Blue"],
+["🟡","Yellow"]
+],
+[
+"Choose CIRCLE",
+"गोला चुनो",
+["⚪","Circle"],
+["⬛","Square"]
+]
 ],
 
 communication:[
- ["🍎","I want apple","🧸","I want toy"],
- ["🙋","Help","🛑","Stop"],
- ["➕","More","✅","Finished"]
+[
+"Choose HELP",
+"मदद चुनो",
+["🙋","Help"],
+["🛑","Stop"]
+],
+[
+"Choose MORE",
+"और चुनो",
+["➕","More"],
+["✅","Finished"]
+],
+[
+"Choose I WANT APPLE",
+"मुझे सेब चाहिए चुनो",
+["🍎","I want apple"],
+["🧸","I want toy"]
+]
 ],
 
 emotion:[
- ["😊","Happy","😢","Sad"],
- ["😡","Angry","😌","Calm"],
- ["😨","Scared","😊","Happy"]
+[
+"Choose HAPPY",
+"खुश चुनो",
+["😊","Happy"],
+["😢","Sad"]
 ],
-
-daily:[
- ["🪥","Brush teeth","🍽️","Eat"],
- ["🧼","Wash hands","👟","Wear shoes"],
- ["🛏️","Sleep","🎒","Pack bag"]
+[
+"Choose ANGRY",
+"गुस्सा चुनो",
+["😡","Angry"],
+["😌","Calm"]
+],
+[
+"Choose SCARED",
+"डरा हुआ चुनो",
+["😨","Scared"],
+["😊","Happy"]
+]
 ]
 
 };
 
 
-let st = JSON.parse(
- localStorage.getItem("auts_state") ||
- '{"attempts":0,"tries":0,"independent":0,"skills":{},"home":{"enjoyed":0,"help":0,"later":0}}'
+let language="en";
+let currentWorld="";
+let questionNo=0;
+let answered=false;
+
+
+function speak(text,hi){
+
+if(!window.speechSynthesis)return;
+
+speechSynthesis.cancel();
+
+const u=
+new SpeechSynthesisUtterance(
+language==="en"?text:hi
+);
+
+u.lang=
+language==="en"
+?"en-IN"
+:"hi-IN";
+
+u.rate=0.8;
+
+speechSynthesis.speak(u);
+
+}
+
+
+function loadQuestion(){
+
+const q=
+games[currentWorld][
+questionNo%games[currentWorld].length
+];
+
+document.getElementById(
+"mission"
+).textContent=
+"Mission "+(questionNo+1);
+
+document.getElementById(
+"question"
+).textContent=
+language==="en"?q[0]:q[1];
+
+const choices=
+document.getElementById("choices");
+
+choices.innerHTML="";
+
+
+[q[2],q[3]].forEach(
+(item,index)=>{
+
+const b=
+document.createElement("button");
+
+b.className="choice";
+
+b.innerHTML=
+item[0]+
+"<span>"+item[1]+"</span>";
+
+b.onclick=function(){
+
+checkAnswer(
+b,
+index,
+item[1]
+);
+
+};
+
+choices.appendChild(b);
+
+}
 );
 
 
-let world = null;
+document.getElementById(
+"feedback"
+).textContent="";
 
-let n = 0;
+document.getElementById(
+"nextBtn"
+).classList.add("hidden");
 
-let answered = false;
+document.getElementById(
+"retryBtn"
+).classList.add("hidden");
 
-let lang = "en";
-
-
-function save(){
-
- localStorage.setItem(
-  "auts_state",
-  JSON.stringify(st)
- );
-
- render();
+answered=false;
 
 }
 
 
-function render(){
+function startGame(world){
 
- qs("#a").textContent =
- st.attempts;
+currentWorld=world;
 
- qs("#t").textContent =
- st.tries;
+questionNo=0;
 
- qs("#i").textContent =
- st.independent;
+document.getElementById(
+"game"
+).classList.remove("hidden");
 
+startFlute();
 
- let achievements = [];
-
-
- if(st.attempts){
-
-  achievements.push(
-   "🌱 First Try — You started learning!"
-  );
-
- }
-
-
- if(st.tries >= 2){
-
-  achievements.push(
-   "💪 Try-Again Champion — You kept trying!"
-  );
-
- }
-
-
- if(st.independent >= 3){
-
-  achievements.push(
-   "⭐ Independent Star — You did missions yourself!"
-  );
-
- }
-
-
- if(
-  st.home.enjoyed +
-  st.home.help +
-  st.home.later
- ){
-
-  achievements.push(
-   "🏠 Family Player — You played together!"
-  );
-
- }
-
-
- qs("#ach").innerHTML =
- achievements.map(
-  x => '<div class="ach">'+x+'</div>'
- ).join("")
- ||
- '<div class="sub">Play a mission to unlock an achievement.</div>';
-
-
- const names = {
-
-  focus:"🎯 Focus",
-
-  visual:"👀 Visual",
-
-  music:"🎵 Music",
-
-  communication:"💬 Communication",
-
-  emotion:"😊 Emotions",
-
-  daily:"🧼 Daily Skills"
-
- };
-
-
- qs("#skills").innerHTML =
- Object.keys(names).map(
-
-  k =>
-
-  '<div style="margin:12px 0">'+
-
-  '<b>'+names[k]+'</b>'+
-
-  '<small style="float:right">'+
-  (st.skills[k]||0)+
-  ' activities</small>'+
-
-  '<div class="progress">'+
-
-  '<div class="bar" style="width:'+
-  Math.min(
-   100,
-   (st.skills[k]||0)*20
-  )+
-  '%"></div>'+
-
-  '</div>'+
-
-  '</div>'
-
- ).join("");
+loadQuestion();
 
 }
 
 
-/* ================================
-   VOICE
-   ================================ */
+function checkAnswer(button,index,name){
 
-function speak(text,hindiText){
+if(answered)return;
 
- if(!("speechSynthesis" in window)){
+answered=true;
 
-  alert(
-   "Voice is not supported on this device/browser."
-  );
+if(index===0){
 
-  return;
+button.classList.add("correct");
 
- }
+document.getElementById(
+"feedback"
+).textContent=
+language==="en"
+?"⭐ Great job! You did it!"
+:"⭐ बहुत अच्छा! तुमने कर लिया!";
 
- speechSynthesis.cancel();
+document.getElementById(
+"nextBtn"
+).classList.remove("hidden");
 
- const u =
- new SpeechSynthesisUtterance(
-  lang==="en"
-  ? text
-  : hindiText
- );
+}else{
 
- u.lang =
- lang==="en"
- ? "en-IN"
- : "hi-IN";
+button.classList.add("wrong");
 
- u.rate = 0.82;
+document.getElementById(
+"feedback"
+).textContent=
+language==="en"
+?"Good try! Try again. You can do it!"
+:"अच्छी कोशिश! फिर कोशिश करो। तुम कर सकते हो!";
 
- u.pitch = 1;
+document.getElementById(
+"retryBtn"
+).classList.remove("hidden");
 
- speechSynthesis.speak(u);
+}
 
 }
 
 
-/* ================================
-   INSTRUCTIONS
-   ================================ */
+document.querySelectorAll(
+".world"
+).forEach(
+button=>{
 
-function currentInstruction(){
+button.onclick=function(){
 
- const p = {
+startGame(
+button.dataset.world
+);
 
-  focus:[
-   "Find the first object",
-   "पहली वस्तु चुनो"
-  ],
-
-  visual:[
-   "Find the matching colour or shape",
-   "समान रंग या आकार चुनो"
-  ],
-
-  music:[
-   "Choose the sound",
-   "आवाज़ चुनो"
-  ],
-
-  communication:[
-   "Choose what you want",
-   "जो चाहिए उसे चुनो"
-  ],
-
-  emotion:[
-   "Choose the feeling",
-   "भावना चुनो"
-  ],
-
-  daily:[
-   "Choose the daily skill",
-   "दैनिक काम चुनो"
-  ]
-
- };
-
- return p[world] ||
- [
-  "Choose an option",
-  "एक विकल्प चुनो"
- ];
+};
 
 }
-
-
-/* ================================
-   START GAME
-   ================================ */
-
-function start(w){
-
- world = w;
-
- n = 0;
-
- answered = false;
-
- qs("#mission").classList.add("show");
-
- startFlute();
-
- question();
-
-}
-
-
-/* ================================
-   QUESTION
-   ================================ */
-
-function question(){
-
- let d =
- data[world][n % 3];
-
-
- qs("#mt").textContent =
- "Mission " + (n+1);
-
-
- qs("#ms").textContent =
- "Practice: " + world;
-
-
- const ins =
- currentInstruction();
-
-
- qs("#prompt").textContent =
- lang==="en"
- ? ins[0]
- : ins[1];
-
-
- qs("#speakInstruction").textContent =
- lang==="en"
- ? "🔊 Hear Instruction"
- : "🔊 निर्देश सुनें";
-
-
- const hiNames = {
-
-  Red:"लाल",
-  Blue:"नीला",
-  Dog:"कुत्ता",
-  Cat:"बिल्ली",
-  Star:"तारा",
-  Heart:"दिल",
-
-  Green:"हरा",
-  Yellow:"पीला",
-
-  Square:"वर्ग",
-  Circle:"गोला",
-
-  Clap:"ताली",
-  Step:"कदम",
-  Drum:"ढोल",
-  Bell:"घंटी",
-
-  Music:"संगीत",
-  Quiet:"शांत",
-
-  "I want apple":
-  "मुझे सेब चाहिए",
-
-  "I want toy":
-  "मुझे खिलौना चाहिए",
-
-  Help:"मदद",
-  Stop:"रुको",
-  More:"और",
-  Finished:"खत्म",
-
-  Happy:"खुश",
-  Sad:"उदास",
-  Angry:"गुस्सा",
-  Calm:"शांत",
-  Scared:"डरा हुआ",
-
-  "Brush teeth":
-  "दाँत साफ करो",
-
-  Eat:"खाना",
-
-  "Wash hands":
-  "हाथ धोओ",
-
-  "Wear shoes":
-  "जूते पहनो",
-
-  Sleep:"सोना",
-
-  "Pack bag":
-  "बैग तैयार करो"
-
- };
-
-
- /*
- Answer is deliberately first option
- for current prototype.
- */
-
- qs("#choices").innerHTML = [
-
-  [d[0],d[1],1],
-
-  [d[2],d[3],0]
-
- ].map(
-
-  (c,i) =>
-
-  '<button class="choice" data-i="'+i+'">'+
-
-  c[0]+
-
-  '<span>'+c[1]+'</span>'+
-
-  '<small>🔊 Hear name</small>'+
-
-  '</button>'
-
- ).join("");
-
-
- qsa(".choice").forEach(
-
-  b => {
-
-   b.querySelector("small").onclick =
-   function(ev){
-
-    ev.stopPropagation();
-
-    const name =
-    b.querySelector("span")
-    .textContent;
-
-    speak(
-     name,
-     hiNames[name] || name
-    );
-
-   };
-
-  }
-
- );
-
-
- qs("#feedback").textContent = "";
-
- qs("#next").style.display =
- "none";
-
- qs("#retry").style.display =
- "none";
-
-
- qsa(".choice").forEach(
-
-  b => {
-
-   b.onclick =
-   () => answer(+b.dataset.i);
-
-  }
-
- );
-
-}
-
-
-/* ================================
-   ANSWER
-   ================================ */
-
-function answer(i){
-
- if(answered) return;
-
- answered = true;
-
- st.attempts++;
-
- st.skills[world] =
- (st.skills[world] || 0) + 1;
-
-
- let ok = i === 0;
-
- let buttons =
- qsa(".choice");
-
-
- if(ok){
-
-  st.correct =
-  (st.correct || 0) + 1;
-
-  st.independent++;
-
-  buttons[i]
-  .classList.add("correct");
-
-
-  qs("#feedback").textContent =
-  lang==="en"
-  ? "⭐ Great job! You did it yourself!"
-  : "⭐ बहुत अच्छा! तुमने खुद किया!";
-
-
-  qs("#next").style.display =
-  "inline-block";
-
-
- }else{
-
-  st.tries++;
-
-  buttons[i]
-  .classList.add("wrong");
-
-
-  qs("#feedback").textContent =
-  lang==="en"
-  ? "Good try! Autsnoboy gives you a hint. Try again!"
-  : "अच्छी कोशिश! Autsnoboy संकेत देगा। फिर कोशिश करो!";
-
-
-  qs("#retry").style.display =
-  "inline-block";
-
- }
-
-
- save();
-
-}
-
-
-/* ================================
-   WORLD BUTTONS
-   ================================ */
-
-qs(".worlds")
-?.addEventListener(
- "click",
- function(e){
-
-  let b =
-  e.target.closest(".world");
-
-  if(b){
-
-   start(b.dataset.w);
-
-  }
-
- });
-
-
-/* ================================
-   TABS
-   ================================ */
-
-qsa(".tab").forEach(
-
- b =>
-
- b.onclick = function(){
-
-  qsa(".tab").forEach(
-   x => x.classList.remove("active")
-  );
-
-  b.classList.add("active");
-
-
-  ["play","progress","home"]
-  .forEach(
-
-   id => {
-
-    qs("#"+id).style.display =
-    id===b.dataset.tab
-    ? "block"
-    : "none";
-
-   }
-
-  );
-
-
-  render();
-
- }
-
 );
 
 
-/* ================================
-   NEXT / RETRY
-   ================================ */
+/* NEXT */
 
-qs("#next").onclick =
+document.getElementById(
+"nextBtn"
+).onclick=function(){
+
+questionNo++;
+
+loadQuestion();
+
+};
+
+
+/* RETRY */
+
+document.getElementById(
+"retryBtn"
+).onclick=function(){
+
+loadQuestion();
+
+};
+
+
+/* SPEAKER */
+
+document.getElementById(
+"speakBtn"
+).onclick=function(){
+
+const q=
+games[currentWorld][
+questionNo%games[currentWorld].length
+];
+
+speak(q[0],q[1]);
+
+};
+
+
+/* LANGUAGE */
+
+document.getElementById(
+"langBtn"
+).onclick=function(){
+
+language=
+language==="en"
+?"hi"
+:"en";
+
+document.getElementById(
+"langBtn"
+).textContent=
+language==="en"
+?"हिन्दी"
+:"English";
+
+if(currentWorld){
+loadQuestion();
+}
+
+};
+
+
+/* RESUME AUDIO */
+
+document.addEventListener(
+"visibilitychange",
 function(){
 
- n++;
+if(
+!document.hidden &&
+fluteOn &&
+audioContext
+){
 
- answered = false;
+audioContext.resume();
 
- question();
+}
 
-};
-
-
-qs("#retry").onclick =
-function(){
-
- answered = false;
-
- question();
-
-};
-
-
-/* ================================
-   SPEAK INSTRUCTION
-   ================================ */
-
-qs("#speakInstruction").onclick =
-function(){
-
- const ins =
- currentInstruction();
-
- speak(
-  ins[0],
-  ins[1]
- );
-
-};
-
-
-/* ================================
-   HOME PLAY
-   ================================ */
-
-qsa(".home").forEach(
-
- b =>
-
- b.onclick = function(){
-
-  st.home[b.dataset.f]++;
-
-  save();
-
-  qs("#hf").textContent =
-  lang==="en"
-
-  ? "Thank you! Autsnoboy will use this to improve future suggestions."
-
-  : "धन्यवाद! Autsnoboy आगे की गतिविधियाँ बेहतर सुझाएगा।";
-
- }
-
-);
-
-
-/* ================================
-   LANGUAGE
-   ================================ */
-
-qs("#lang").onclick =
-function(){
-
- lang =
- lang==="en"
- ? "hi"
- : "en";
-
-
- qs("#lang").textContent =
- lang==="en"
- ? "हिन्दी"
- : "English";
-
-
- updateFluteButton();
-
-
- if(world){
-
-  question();
-
- }
-
-};
-
-
-/* ================================
-   FLUTE BUTTON
-   ================================ */
-
-qs("#fluteButton").onclick =
-function(e){
-
- e.stopPropagation();
-
- toggleFlute();
-
-};
-
-
-/* ================================
-   CHARACTER IMAGE
-   ================================ */
-
-qs("#hero").src =
-"autsnoboy.png";
-
-
-/* INITIAL RENDER */
-
-render();
+});
 
 </script>
 
