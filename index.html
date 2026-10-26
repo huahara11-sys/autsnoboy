@@ -1,62 +1,74 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autsnoboy Voice Test</title>
-</head>
 
-<body style="text-align:center;padding:40px;font-family:Arial">
+<title>Autsnoboy – Learning Adventure</title>
 
-<h2>🦸 Autsnoboy Voice Test</h2>
-
-<button onclick="sayEnglish()"
-style="font-size:20px;padding:15px;margin:10px;">
-🇬🇧 WELL DONE
-</button>
-
-<br>
-
-<button onclick="sayHindi()"
-style="font-size:20px;padding:15px;margin:10px;">
-🇮🇳 शाबाश
-</button>
-
-<br>
-
-<button onclick="sayTryAgain()"
-style="font-size:20px;padding:15px;margin:10px;">
-🔄 TRY AGAIN
-</button>
-
-<script>
-
-function speak(text, lang){
-
-    window.speechSynthesis.cancel();
-
-    let voice = new SpeechSynthesisUtterance(text);
-
-    voice.lang = lang;
-    voice.rate = 0.85;
-    voice.pitch = 1;
-    voice.volume = 1;
-
-    window.speechSynthesis.speak(voice);
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#e8f7ff,#fff8e8);
+    text-align:center;
+    color:#243447;
 }
 
-function sayEnglish(){
-    speak("Well done!", "en-IN");
+header{
+    padding:15px;
+    background:#ffffff;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 
-function sayHindi(){
-    speak("शाबाश!", "hi-IN");
+.logo{
+    width:90px;
+    height:90px;
+    object-fit:contain;
 }
 
-function sayTryAgain(){
-    speak("Try again. You can do it!", "en-IN");
+h1{
+    margin:5px 0;
+    font-size:28px;
 }
 
-</script>
+.subtitle{
+    font-size:15px;
+    color:#666;
+}
 
-</body>
-</html>
+.controls{
+    margin:15px auto;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:0;
+    border-radius:14px;
+    padding:13px 18px;
+    font-size:17px;
+    cursor:pointer;
+    background:white;
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+
+button:active{
+    transform:scale(.96);
+}
+
+.game{
+    max-width:700px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:22px;
+    padding:22px;
+    margin-top:15px;
+```
