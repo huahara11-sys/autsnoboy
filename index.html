@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#6c63ff">
+<meta name="theme-color" content="#6257e8">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Autsnoboy - Learning Adventure</title>
 
@@ -12,169 +12,160 @@
 *{box-sizing:border-box}
 
 body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:linear-gradient(135deg,#eef4ff,#fff8e7);
-    color:#222;
-    text-align:center;
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(135deg,#eef4ff,#fff8e7);
+color:#222;
+text-align:center;
 }
 
 .header{
-    background:linear-gradient(135deg,#6257e8,#8b7cff);
-    color:white;
-    padding:18px 12px;
-    border-radius:0 0 25px 25px;
+background:linear-gradient(135deg,#6257e8,#8b7cff);
+color:white;
+padding:18px 12px;
+border-radius:0 0 25px 25px;
 }
 
 .logo{
-    width:110px;
-    height:110px;
-    object-fit:contain;
-    border-radius:25px;
-    background:white;
-    padding:5px;
+width:110px;
+height:110px;
+object-fit:contain;
+border-radius:25px;
+background:white;
+padding:5px;
 }
 
 h1{
-    margin:8px 0 4px;
-    font-size:32px;
+margin:8px 0 4px;
+font-size:32px;
 }
 
 .owner{
-    font-size:14px;
-    opacity:.9;
+font-size:14px;
+opacity:.9;
 }
 
 .container{
-    max-width:700px;
-    margin:auto;
-    padding:18px;
+max-width:700px;
+margin:auto;
+padding:18px;
 }
 
 .controls{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:15px;
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:15px;
 }
 
 button{
-    border:none;
-    border-radius:15px;
-    padding:13px 18px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    background:#6257e8;
-    color:white;
-    box-shadow:0 4px 10px rgba(0,0,0,.12);
+border:none;
+border-radius:15px;
+padding:13px 18px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+background:#6257e8;
+color:white;
+box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
 
 button:active{
-    transform:scale(.96);
+transform:scale(.96);
 }
 
-.lang{
-    background:#222;
-}
-
-.music{
-    background:#159957;
-}
+.lang{background:#222}
+.music{background:#159957}
 
 .card{
-    background:white;
-    border-radius:25px;
-    padding:25px 18px;
-    margin-top:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,.12);
+background:white;
+border-radius:25px;
+padding:25px 18px;
+margin-top:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.12);
 }
 
 .mission-title{
-    font-size:25px;
-    font-weight:bold;
-    margin-bottom:10px;
+font-size:25px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 .instruction{
-    font-size:20px;
-    margin-bottom:18px;
-    line-height:1.4;
+font-size:20px;
+margin-bottom:18px;
+line-height:1.4;
 }
 
 .choices{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
 }
 
 .choice{
-    min-height:100px;
-    font-size:23px;
-    background:#f5f5ff;
-    color:#222;
-    border:3px solid transparent;
+min-height:100px;
+font-size:23px;
+background:#f5f5ff;
+color:#222;
+border:3px solid transparent;
 }
 
 .choice:hover{
-    border-color:#6257e8;
+border-color:#6257e8;
 }
 
 .feedback{
-    min-height:45px;
-    margin-top:18px;
-    font-size:21px;
-    font-weight:bold;
+min-height:45px;
+margin-top:18px;
+font-size:21px;
+font-weight:bold;
 }
 
 .progress{
-    margin-top:15px;
-    font-size:15px;
-    color:#666;
+margin-top:15px;
+font-size:15px;
+color:#666;
 }
 
 .badges{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:18px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:8px;
+margin-top:18px;
 }
 
 .badge{
-    background:#fff4c4;
-    border-radius:20px;
-    padding:8px 12px;
-    font-size:14px;
+background:#fff4c4;
+border-radius:20px;
+padding:8px 12px;
+font-size:14px;
 }
 
 .next{
-    background:#159957;
-    margin-top:10px;
-    display:none;
+background:#159957;
+margin-top:10px;
+display:none;
 }
 
 .restart{
-    background:#e85d75;
-    margin-top:10px;
-}
-
-.hidden{
-    display:none;
+background:#e85d75;
+margin-top:10px;
 }
 
 .footer{
-    padding:25px;
-    color:#777;
-    font-size:13px;
+padding:25px;
+color:#777;
+font-size:13px;
 }
 
 @media(max-width:500px){
-    h1{font-size:27px}
-    .instruction{font-size:18px}
-    .choice{font-size:20px;min-height:90px}
-    button{font-size:15px}
+h1{font-size:27px}
+.instruction{font-size:18px}
+.choice{font-size:20px;min-height:90px}
+button{font-size:15px}
 }
 </style>
 
@@ -184,350 +175,222 @@ button:active{
 
 <div class="header">
 
-```
 <img src="autsnoboy.png" class="logo" alt="Autsnoboy">
 
 <h1>🦸 Autsnoboy</h1>
 
 <div class="owner">
-    Learning Adventure • Owned & Developed by Varun Mamta
+Learning Adventure • Owned & Developed by Varun Mamta
 </div>
-```
 
 </div>
 
 <div class="container">
 
-```
 <div class="controls">
 
-    <button class="lang" onclick="toggleLanguage()">
-        🇬🇧 English / 🇮🇳 हिंदी
-    </button>
+<button class="lang" onclick="toggleLanguage()">
+🇬🇧 English / 🇮🇳 हिंदी
+</button>
 
-    <button class="music" onclick="toggleMusic()" id="musicBtn">
-        🎵 Music ON
-    </button>
+<button class="music" onclick="toggleMusic()" id="musicBtn">
+🎵 Music ON
+</button>
 
 </div>
 
 <div class="card">
 
-    <div class="mission-title" id="missionTitle">
-        Mission 1
-    </div>
+<div class="mission-title" id="missionTitle">
+Mission 1
+</div>
 
-    <div class="instruction" id="instruction">
-        Find the RED object
-    </div>
+<div class="instruction" id="instruction">
+Find the RED object 🔴
+</div>
 
-    <div class="choices" id="choices"></div>
+<div class="choices" id="choices"></div>
 
-    <div class="feedback" id="feedback"></div>
+<div class="feedback" id="feedback"></div>
 
-    <div class="progress" id="progress">
-        Mission 1 of 7
-    </div>
+<div class="progress" id="progress">
+Mission 1 of 7
+</div>
 
-    <button class="next" id="nextBtn" onclick="nextMission()">
-        ➡️ Next Mission
-    </button>
+<button class="next" id="nextBtn" onclick="nextMission()">
+➡️ Next Mission
+</button>
 
-    <button class="restart" onclick="restartGame()">
-        🔄 Start Again
-    </button>
+<button class="restart" onclick="restartGame()">
+🔄 Start Again
+</button>
 
 </div>
 
 <div class="badges" id="badges"></div>
-```
 
 </div>
 
 <div class="footer">
-    A fun learning experience for children 🌟
+A fun learning experience for children 🌟
 </div>
+
+<!-- REAL APPLAUSE + AUDIENCE CHEER -->
+
+<audio
+id="cheerSound"
+src="cheer.mp3"
+preload="auto"> </audio>
 
 <script>
 
+let hindi=false;
+let currentMission=0;
+let musicOn=true;
+let answered=false;
+
+
 /* =========================
-   LANGUAGE
+   MISSIONS
 ========================= */
 
-let hindi = false;
-let currentMission = 0;
-let musicOn = true;
-let answered = false;
-
-const missions = [
+const missions=[
 
 {
-    enTitle:"Mission 1 — Focus Explorer",
-    hiTitle:"मिशन 1 — ध्यान खोजकर्ता",
+enTitle:"Mission 1 — Focus Explorer",
+hiTitle:"मिशन 1 — ध्यान खोजकर्ता",
 
-    enInstruction:"Find the RED object 🔴",
-    hiInstruction:"लाल वस्तु 🔴 ढूंढो",
+enInstruction:"Find the RED object 🔴",
+hiInstruction:"लाल वस्तु 🔴 ढूंढो",
 
-    choices:[
-        {emoji:"🔵",en:"Blue",hi:"नीला",correct:false},
-        {emoji:"🔴",en:"Red",hi:"लाल",correct:true},
-        {emoji:"🟢",en:"Green",hi:"हरा",correct:false},
-        {emoji:"🟡",en:"Yellow",hi:"पीला",correct:false}
-    ]
+choices:[
+{emoji:"🔵",en:"Blue",hi:"नीला",correct:false},
+{emoji:"🔴",en:"Red",hi:"लाल",correct:true},
+{emoji:"🟢",en:"Green",hi:"हरा",correct:false},
+{emoji:"🟡",en:"Yellow",hi:"पीला",correct:false}
+]
 },
 
 {
-    enTitle:"Mission 2 — Sharp Eyes",
-    hiTitle:"मिशन 2 — तेज़ नज़र",
+enTitle:"Mission 2 — Sharp Eyes",
+hiTitle:"मिशन 2 — तेज़ नज़र",
 
-    enInstruction:"Find the SAME pair 👀",
-    hiInstruction:"एक जैसी जोड़ी 👀 ढूंढो",
+enInstruction:"Find the SAME pair 👀",
+hiInstruction:"एक जैसी जोड़ी 👀 ढूंढो",
 
-    choices:[
-        {emoji:"🍎🍌",en:"Different",hi:"अलग",correct:false},
-        {emoji:"🐶🐱",en:"Different",hi:"अलग",correct:false},
-        {emoji:"⭐⭐",en:"Same",hi:"एक जैसी",correct:true},
-        {emoji:"🚗🚌",en:"Different",hi:"अलग",correct:false}
-    ]
+choices:[
+{emoji:"🍎🍌",en:"Different",hi:"अलग",correct:false},
+{emoji:"🐶🐱",en:"Different",hi:"अलग",correct:false},
+{emoji:"⭐⭐",en:"Same",hi:"एक जैसी",correct:true},
+{emoji:"🚗🚌",en:"Different",hi:"अलग",correct:false}
+]
 },
 
 {
-    enTitle:"Mission 3 — Pattern Star",
-    hiTitle:"मिशन 3 — पैटर्न स्टार",
+enTitle:"Mission 3 — Pattern Star",
+hiTitle:"मिशन 3 — पैटर्न स्टार",
 
-    enInstruction:"What comes next? 🔴 🔵 🔴 🔵 ?",
-    hiInstruction:"इसके बाद क्या आएगा? 🔴 🔵 🔴 🔵 ?",
+enInstruction:"What comes next? 🔴 🔵 🔴 🔵 ?",
+hiInstruction:"इसके बाद क्या आएगा? 🔴 🔵 🔴 🔵 ?",
 
-    choices:[
-        {emoji:"🔴",en:"Red",hi:"लाल",correct:false},
-        {emoji:"🟢",en:"Green",hi:"हरा",correct:false},
-        {emoji:"🔵",en:"Blue",hi:"नीला",correct:true},
-        {emoji:"🟡",en:"Yellow",hi:"पीला",correct:false}
-    ]
+choices:[
+{emoji:"🔴",en:"Red",hi:"लाल",correct:false},
+{emoji:"🟢",en:"Green",hi:"हरा",correct:false},
+{emoji:"🔵",en:"Blue",hi:"नीला",correct:true},
+{emoji:"🟡",en:"Yellow",hi:"पीला",correct:false}
+]
 },
 
 {
-    enTitle:"Mission 4 — Feelings Explorer",
-    hiTitle:"मिशन 4 — भावनाओं का खोजकर्ता",
+enTitle:"Mission 4 — Feelings Explorer",
+hiTitle:"मिशन 4 — भावनाओं का खोजकर्ता",
 
-    enInstruction:"Autsnoboy got a gift! How does he feel? 😊",
-    hiInstruction:"Autsnoboy को gift मिला! वह कैसा महसूस करेगा? 😊",
+enInstruction:"Autsnoboy got a gift! How does he feel? 😊",
+hiInstruction:"Autsnoboy को gift मिला! वह कैसा महसूस करेगा? 😊",
 
-    choices:[
-        {emoji:"😢",en:"Sad",hi:"उदास",correct:false},
-        {emoji:"😡",en:"Angry",hi:"गुस्सा",correct:false},
-        {emoji:"😊",en:"Happy",hi:"खुश",correct:true},
-        {emoji:"😴",en:"Sleepy",hi:"नींद",correct:false}
-    ]
+choices:[
+{emoji:"😢",en:"Sad",hi:"उदास",correct:false},
+{emoji:"😡",en:"Angry",hi:"गुस्सा",correct:false},
+{emoji:"😊",en:"Happy",hi:"खुश",correct:true},
+{emoji:"😴",en:"Sleepy",hi:"नींद",correct:false}
+]
 },
 
 {
-    enTitle:"Mission 5 — Little Communicator",
-    hiTitle:"मिशन 5 — छोटा कम्युनिकेटर",
+enTitle:"Mission 5 — Little Communicator",
+hiTitle:"मिशन 5 — छोटा कम्युनिकेटर",
 
-    enInstruction:"What can you say when you need help? 🗣️",
-    hiInstruction:"जब आपको मदद चाहिए तो क्या कह सकते हैं? 🗣️",
+enInstruction:"What can you say when you need help? 🗣️",
+hiInstruction:"जब आपको मदद चाहिए तो क्या कह सकते हैं? 🗣️",
 
-    choices:[
-        {emoji:"🙋",en:"Help me",hi:"मेरी मदद करो",correct:true},
-        {emoji:"😴",en:"Sleep",hi:"सोना",correct:false},
-        {emoji:"🏃",en:"Run",hi:"दौड़ना",correct:false},
-        {emoji:"🎵",en:"Music",hi:"संगीत",correct:false}
-    ]
+choices:[
+{emoji:"🙋",en:"Help me",hi:"मेरी मदद करो",correct:true},
+{emoji:"😴",en:"Sleep",hi:"सोना",correct:false},
+{emoji:"🏃",en:"Run",hi:"दौड़ना",correct:false},
+{emoji:"🎵",en:"Music",hi:"संगीत",correct:false}
+]
 },
 
 {
-    enTitle:"Mission 6 — Daily Hero",
-    hiTitle:"मिशन 6 — डेली हीरो",
+enTitle:"Mission 6 — Daily Hero",
+hiTitle:"मिशन 6 — डेली हीरो",
 
-    enInstruction:"What do we do before eating? 🧼",
-    hiInstruction:"खाना खाने से पहले क्या करते हैं? 🧼",
+enInstruction:"What do we do before eating? 🧼",
+hiInstruction:"खाना खाने से पहले क्या करते हैं? 🧼",
 
-    choices:[
-        {emoji:"🛌",en:"Sleep",hi:"सोते हैं",correct:false},
-        {emoji:"🧼",en:"Wash hands",hi:"हाथ धोते हैं",correct:true},
-        {emoji:"📺",en:"Watch TV",hi:"टीवी देखते हैं",correct:false},
-        {emoji:"🏃",en:"Run",hi:"दौड़ते हैं",correct:false}
-    ]
+choices:[
+{emoji:"🛌",en:"Sleep",hi:"सोते हैं",correct:false},
+{emoji:"🧼",en:"Wash hands",hi:"हाथ धोते हैं",correct:true},
+{emoji:"📺",en:"Watch TV",hi:"टीवी देखते हैं",correct:false},
+{emoji:"🏃",en:"Run",hi:"दौड़ते हैं",correct:false}
+]
 },
 
 {
-    enTitle:"Mission 7 — Friendship Hero",
-    hiTitle:"मिशन 7 — फ्रेंडशिप हीरो",
+enTitle:"Mission 7 — Friendship Hero",
+hiTitle:"मिशन 7 — फ्रेंडशिप हीरो",
 
-    enInstruction:"Your friend is playing. What should you do? 🤝",
-    hiInstruction:"आपका दोस्त खेल रहा है। आपको क्या करना चाहिए? 🤝",
+enInstruction:"Your friend is playing. What should you do? 🤝",
+hiInstruction:"आपका दोस्त खेल रहा है। आपको क्या करना चाहिए? 🤝",
 
-    choices:[
-        {emoji:"😡",en:"Push",hi:"धक्का देना",correct:false},
-        {emoji:"🤝",en:"Take turns",hi:"बारी-बारी से खेलना",correct:true},
-        {emoji:"😭",en:"Cry",hi:"रोना",correct:false},
-        {emoji:"🚶",en:"Go away",hi:"दूर जाना",correct:false}
-    ]
+choices:[
+{emoji:"😡",en:"Push",hi:"धक्का देना",correct:false},
+{emoji:"🤝",en:"Take turns",hi:"बारी-बारी से खेलना",correct:true},
+{emoji:"😭",en:"Cry",hi:"रोना",correct:false},
+{emoji:"🚶",en:"Go away",hi:"दूर जाना",correct:false}
+]
 }
 
 ];
 
 
 /* =========================
-   AUDIO
+   CHEER SOUND
 ========================= */
 
-let audioContext = null;
+function playCheer(){
 
-function getAudioContext(){
+const sound=document.getElementById("cheerSound");
 
-    if(!audioContext){
+if(!sound) return;
 
-        const AudioContext =
-            window.AudioContext ||
-            window.webkitAudioContext;
+sound.pause();
 
-        if(!AudioContext) return null;
+sound.currentTime=0;
 
-        audioContext = new AudioContext();
-    }
+sound.volume=1.0;
 
-    if(audioContext.state === "suspended"){
-        audioContext.resume();
-    }
+const promise=sound.play();
 
-    return audioContext;
+if(promise!==undefined){
+
+promise.catch(function(error){
+
+console.log("Cheer audio could not play:",error);
+
+});
+
 }
-
-
-/* =========================
-   REALISTIC CLAPPING
-========================= */
-
-function clapSound(){
-
-    if(!musicOn) return;
-
-    const ctx = getAudioContext();
-
-    if(!ctx) return;
-
-    const now = ctx.currentTime;
-
-
-    /* MANY SHORT CLAPS */
-
-    for(let i=0;i<35;i++){
-
-        const time =
-            now +
-            (Math.random()*1.8);
-
-        const bufferSize =
-            ctx.sampleRate * 0.08;
-
-        const buffer =
-            ctx.createBuffer(
-                1,
-                bufferSize,
-                ctx.sampleRate
-            );
-
-        const data =
-            buffer.getChannelData(0);
-
-        for(let j=0;j<bufferSize;j++){
-
-            data[j] =
-                (Math.random()*2-1) *
-                Math.exp(-j/(ctx.sampleRate*0.018));
-        }
-
-        const source =
-            ctx.createBufferSource();
-
-        const filter =
-            ctx.createBiquadFilter();
-
-        const gain =
-            ctx.createGain();
-
-        source.buffer = buffer;
-
-        filter.type = "bandpass";
-        filter.frequency.value =
-            1200 + Math.random()*1800;
-
-        filter.Q.value = 0.8;
-
-        gain.gain.setValueAtTime(
-            0.001,
-            time
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.22 + Math.random()*0.12,
-            time+0.005
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            time+0.08
-        );
-
-        source.connect(filter);
-        filter.connect(gain);
-        gain.connect(ctx.destination);
-
-        source.start(time);
-        source.stop(time+0.09);
-    }
-
-
-    /* CROWD CHEER */
-
-    for(let i=0;i<12;i++){
-
-        const time =
-            now +
-            0.15 +
-            Math.random()*1.3;
-
-        const osc =
-            ctx.createOscillator();
-
-        const gain =
-            ctx.createGain();
-
-        osc.type = "sawtooth";
-
-        osc.frequency.setValueAtTime(
-            250 + Math.random()*350,
-            time
-        );
-
-        osc.frequency.exponentialRampToValueAtTime(
-            600 + Math.random()*500,
-            time+0.45
-        );
-
-        gain.gain.setValueAtTime(
-            0.001,
-            time
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.045,
-            time+0.08
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            time+0.5
-        );
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start(time);
-        osc.stop(time+0.52);
-    }
 
 }
 
@@ -538,20 +401,21 @@ function clapSound(){
 
 function speak(text,language){
 
-    if(!("speechSynthesis" in window))
-        return;
+if(!("speechSynthesis" in window))
+return;
 
-    window.speechSynthesis.cancel();
+window.speechSynthesis.cancel();
 
-    const voice =
-        new SpeechSynthesisUtterance(text);
+const voice=
+new SpeechSynthesisUtterance(text);
 
-    voice.lang = language;
-    voice.rate = 0.85;
-    voice.pitch = 1.05;
-    voice.volume = 1;
+voice.lang=language;
+voice.rate=0.85;
+voice.pitch=1.05;
+voice.volume=1;
 
-    window.speechSynthesis.speak(voice);
+window.speechSynthesis.speak(voice);
+
 }
 
 
@@ -561,45 +425,51 @@ function speak(text,language){
 
 function celebrate(){
 
-    clapSound();
+/* REAL APPLAUSE + CHEER */
 
-    if(hindi){
+playCheer();
 
-        speak(
-            "शाबाश! बहुत अच्छा!",
-            "hi-IN"
-        );
+if(hindi){
 
-    }else{
+speak(
+"शाबाश! बहुत अच्छा!",
+"hi-IN"
+);
 
-        speak(
-            "Well done! Great job!",
-            "en-IN"
-        );
-    }
+}else{
+
+speak(
+"Well done! Great job!",
+"en-IN"
+);
+
+}
+
 }
 
 
 /* =========================
-   WRONG ANSWER
+   TRY AGAIN
 ========================= */
 
 function tryAgain(){
 
-    if(hindi){
+if(hindi){
 
-        speak(
-            "फिर कोशिश करो। तुम कर सकते हो!",
-            "hi-IN"
-        );
+speak(
+"फिर कोशिश करो। तुम कर सकते हो!",
+"hi-IN"
+);
 
-    }else{
+}else{
 
-        speak(
-            "Try again. You can do it!",
-            "en-IN"
-        );
-    }
+speak(
+"Try again. You can do it!",
+"en-IN"
+);
+
+}
+
 }
 
 
@@ -609,72 +479,69 @@ function tryAgain(){
 
 function loadMission(){
 
-    answered = false;
+answered=false;
 
-    const mission =
-        missions[currentMission];
+const mission=
+missions[currentMission];
 
-    document.getElementById("missionTitle")
-        .innerText =
-        hindi
-        ? mission.hiTitle
-        : mission.enTitle;
+document.getElementById("missionTitle")
+.innerText=
+hindi
+?mission.hiTitle
+:mission.enTitle;
 
-    document.getElementById("instruction")
-        .innerText =
-        hindi
-        ? mission.hiInstruction
-        : mission.enInstruction;
+document.getElementById("instruction")
+.innerText=
+hindi
+?mission.hiInstruction
+:mission.enInstruction;
 
-    document.getElementById("progress")
-        .innerText =
-        hindi
-        ? "मिशन " +
-          (currentMission+1) +
-          " / " +
-          missions.length
-        :
-        "Mission " +
-        (currentMission+1) +
-        " of " +
-        missions.length;
+document.getElementById("progress")
+.innerText=
+hindi
+?
+"मिशन "+
+(currentMission+1)+
+" / "+
+missions.length
+:
+"Mission "+
+(currentMission+1)+
+" of "+
+missions.length;
 
-    document.getElementById("feedback")
-        .innerText = "";
+document.getElementById("feedback")
+.innerText="";
 
-    document.getElementById("nextBtn")
-        .style.display = "none";
+document.getElementById("nextBtn")
+.style.display="none";
 
-    const choices =
-        document.getElementById("choices");
+const choices=
+document.getElementById("choices");
 
-    choices.innerHTML = "";
+choices.innerHTML="";
 
-    mission.choices.forEach(function(choice){
+mission.choices.forEach(function(choice){
 
-        const btn =
-            document.createElement("button");
+const btn=
+document.createElement("button");
 
-        btn.className = "choice";
+btn.className="choice";
 
-        btn.innerHTML =
-            choice.emoji +
-            "<br>" +
-            (
-                hindi
-                ? choice.hi
-                : choice.en
-            );
+btn.innerHTML=
+choice.emoji+
+"<br>"+
+(hindi?choice.hi:choice.en);
 
-        btn.onclick =
-            function(){
+btn.onclick=function(){
 
-                checkAnswer(choice,btn);
-            };
+checkAnswer(choice,btn);
 
-        choices.appendChild(btn);
+};
 
-    });
+choices.appendChild(btn);
+
+});
 
 }
 
@@ -685,71 +552,74 @@ function loadMission(){
 
 function checkAnswer(choice,button){
 
-    if(answered)
-        return;
+if(answered)
+return;
 
-    if(choice.correct){
+if(choice.correct){
 
-        answered = true;
+answered=true;
 
-        button.style.borderColor =
-            "#159957";
+button.style.borderColor="#159957";
 
-        document.getElementById("feedback")
-            .innerText =
-            hindi
-            ? "⭐ बहुत अच्छा! शाबाश!"
-            : "⭐ Well done! Great job!";
+document.getElementById("feedback")
+.innerText=
+hindi
+?
+"⭐ बहुत अच्छा! शाबाश!"
+:
+"⭐ Well done! Great job!";
 
-        celebrate();
+/* PLAY REAL MP3 */
 
-        document.getElementById("nextBtn")
-            .style.display = "inline-block";
+celebrate();
 
-        showBadge();
+document.getElementById("nextBtn")
+.style.display="inline-block";
 
-    }else{
+showBadge();
 
-        button.style.borderColor =
-            "#e85d75";
+}else{
 
-        document.getElementById("feedback")
-            .innerText =
-            hindi
-            ? "💙 फिर कोशिश करो। तुम कर सकते हो!"
-            : "💙 Try again. You can do it!";
+button.style.borderColor="#e85d75";
 
-        tryAgain();
+document.getElementById("feedback")
+.innerText=
+hindi
+?
+"💙 फिर कोशिश करो। तुम कर सकते हो!"
+:
+"💙 Try again. You can do it!";
 
-        setTimeout(function(){
+tryAgain();
 
-            button.style.borderColor =
-                "transparent";
+setTimeout(function(){
 
-        },800);
-    }
+button.style.borderColor="transparent";
+
+},800);
+
+}
 
 }
 
 
 /* =========================
-   NEXT MISSION
+   NEXT
 ========================= */
 
 function nextMission(){
 
-    if(currentMission <
-       missions.length-1){
+if(currentMission<missions.length-1){
 
-        currentMission++;
+currentMission++;
 
-        loadMission();
+loadMission();
 
-    }else{
+}else{
 
-        finishGame();
+finishGame();
 
-    }
+}
 
 }
 
@@ -760,35 +630,37 @@ function nextMission(){
 
 function showBadge(){
 
-    const badgeList = [
-        "🌱 I Tried",
-        "🔍 Focus Explorer",
-        "👀 Sharp Eyes",
-        "🎵 Rhythm Star",
-        "🗣️ Little Communicator",
-        "😊 Feelings Explorer",
-        "🤝 Friendship Hero",
-        "⭐ Try-Again Champion"
-    ];
+const badgeList=[
 
-    const badge =
-        badgeList[
-            Math.min(
-                currentMission+1,
-                badgeList.length-1
-            )
-        ];
+"🌱 I Tried",
+"🔍 Focus Explorer",
+"👀 Sharp Eyes",
+"🎵 Rhythm Star",
+"🗣️ Little Communicator",
+"😊 Feelings Explorer",
+"🤝 Friendship Hero",
+"⭐ Try-Again Champion"
 
-    const div =
-        document.createElement("div");
+];
 
-    div.className = "badge";
+const badge=
+badgeList[
+Math.min(
+currentMission+1,
+badgeList.length-1
+)
+];
 
-    div.innerText = badge;
+const div=
+document.createElement("div");
 
-    document
-        .getElementById("badges")
-        .appendChild(div);
+div.className="badge";
+
+div.innerText=badge;
+
+document
+.getElementById("badges")
+.appendChild(div);
 
 }
 
@@ -799,113 +671,124 @@ function showBadge(){
 
 function finishGame(){
 
-    document.getElementById("missionTitle")
-        .innerText =
-        hindi
-        ? "🎉 मिशन पूरा!"
-        : "🎉 Adventure Complete!";
+document.getElementById("missionTitle")
+.innerText=
+hindi
+?
+"🎉 मिशन पूरा!"
+:
+"🎉 Adventure Complete!";
 
-    document.getElementById("instruction")
-        .innerText =
-        hindi
-        ? "तुमने बहुत अच्छा किया! ⭐"
-        : "You did a wonderful job! ⭐";
+document.getElementById("instruction")
+.innerText=
+hindi
+?
+"तुमने बहुत अच्छा किया! ⭐"
+:
+"You did a wonderful job! ⭐";
 
-    document.getElementById("choices")
-        .innerHTML =
-        "<div style='font-size:70px'>🏆🌟🦸</div>";
+document.getElementById("choices")
+.innerHTML=
+"<div style='font-size:70px'>🏆🌟🦸</div>";
 
-    document.getElementById("feedback")
-        .innerText =
-        hindi
-        ? "हर कोशिश मायने रखती है!"
-        : "Every step counts!";
+document.getElementById("feedback")
+.innerText=
+hindi
+?
+"हर कोशिश मायने रखती है!"
+:
+"Every step counts!";
 
-    clapSound();
+/* FINAL CHEER */
 
-    if(hindi){
+playCheer();
 
-        speak(
-            "शाबाश! मिशन पूरा हो गया!",
-            "hi-IN"
-        );
+if(hindi){
 
-    }else{
+speak(
+"शाबाश! मिशन पूरा हो गया!",
+"hi-IN"
+);
 
-        speak(
-            "Amazing! You completed the adventure!",
-            "en-IN"
-        );
-    }
+}else{
 
-    document.getElementById("nextBtn")
-        .style.display = "none";
+speak(
+"Amazing! You completed the adventure!",
+"en-IN"
+);
+
+}
+
+document.getElementById("nextBtn")
+.style.display="none";
 
 }
 
 
 /* =========================
-   LANGUAGE TOGGLE
+   LANGUAGE
 ========================= */
 
 function toggleLanguage(){
 
-    hindi = !hindi;
+hindi=!hindi;
 
-    loadMission();
+loadMission();
 
 }
 
 
 /* =========================
-   MUSIC
+   BACKGROUND MUSIC
 ========================= */
 
-const backgroundMusic =
-    new Audio(
-        "bmdkbandara-whispers-of-the-stream-417622.mp3"
-    );
+const backgroundMusic=
+new Audio(
+"bmdkbandara-whispers-of-the-stream-417622.mp3"
+);
 
-backgroundMusic.loop = true;
-backgroundMusic.volume = 0.22;
+backgroundMusic.loop=true;
+backgroundMusic.volume=0.22;
 
 
 function startMusic(){
 
-    if(!musicOn)
-        return;
+if(!musicOn)
+return;
 
-    backgroundMusic.play()
-        .catch(function(){
+backgroundMusic
+.play()
+.catch(function(){
 
-            /* Browser may require
-               user interaction first */
-        });
+console.log(
+"Background music needs user interaction."
+);
+
+});
+
 }
 
 
 function toggleMusic(){
 
-    musicOn = !musicOn;
+musicOn=!musicOn;
 
-    const btn =
-        document.getElementById("musicBtn");
+const btn=
+document.getElementById("musicBtn");
 
-    if(musicOn){
+if(musicOn){
 
-        btn.innerText =
-            "🎵 Music ON";
+btn.innerText="🎵 Music ON";
 
-        startMusic();
+startMusic();
 
-    }else{
+}else{
 
-        btn.innerText =
-            "🔇 Music OFF";
+btn.innerText="🔇 Music OFF";
 
-        backgroundMusic.pause();
+backgroundMusic.pause();
 
-    }
+}
 
 }
 
@@ -916,40 +799,20 @@ function toggleMusic(){
 
 function restartGame(){
 
-    currentMission = 0;
+currentMission=0;
 
-    document.getElementById("badges")
-        .innerHTML = "";
+document.getElementById("badges")
+.innerHTML="";
 
-    loadMission();
+loadMission();
 
-    startMusic();
+startMusic();
 
 }
 
 
 /* =========================
-   START AUDIO AFTER
-   USER TOUCH
-========================= */
-
-document.addEventListener(
-    "click",
-    function(){
-
-        getAudioContext();
-
-        if(musicOn){
-            startMusic();
-        }
-
-    },
-    {once:true}
-);
-
-
-/* =========================
-   START GAME
+   INITIAL LOAD
 ========================= */
 
 loadMission();
