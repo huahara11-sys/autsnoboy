@@ -388,6 +388,53 @@ h1{
   50%{transform:translateX(7px)}
   75%{transform:translateX(-4px)}
 }
+/* FULL-SCREEN HOLOGRAM MOMENT */
+.holoOverlay{
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at center,#063b63ee,#031322f5 65%,#01070df8);
+  backdrop-filter:blur(5px);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+.holoOverlay.show{opacity:1;pointer-events:auto;}
+.holoStage{
+  width:min(92vw,700px);
+  min-height:min(78vh,760px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  border:2px solid #56efff;
+  border-radius:40px;
+  background:linear-gradient(180deg,#062b49dd,#071a2ee8);
+  box-shadow:0 0 35px #28eaff99,0 0 90px #28eaff44,inset 0 0 30px #55efff22;
+}
+.holoOverlay img{
+  width:min(68vw,430px);
+  height:min(52vh,430px);
+  object-fit:contain;
+  filter:drop-shadow(0 0 25px #55efff) drop-shadow(0 0 60px #28eaff88);
+  animation:holoFloat 1.4s ease-in-out infinite alternate;
+}
+.holoOverlay .holoBigFace{font-size:58px;margin:-5px 0 10px;}
+.holoOverlay .holoBigMsg{font-size:clamp(25px,4vw,42px);font-weight:900;line-height:1.25;color:#fff;text-shadow:0 0 14px #55efff;max-width:650px;}
+.holoOverlay.correct .holoStage{border-color:#8dffb0;box-shadow:0 0 40px #62ff9a99,0 0 100px #62ff9a44;}
+.holoOverlay.wrong .holoStage{border-color:#8bdcff;}
+.holoOverlay.learning .holoStage{border-color:#ffe66d;box-shadow:0 0 40px #ffe66d88,0 0 100px #55efff33;}
+@keyframes holoFloat{from{transform:translateY(0) scale(1)}to{transform:translateY(-12px) scale(1.035)}}
+.holoOverlay.correct .holoBigFace{animation:holoPop .7s ease 2;}
+.holoOverlay.wrong .holoBigFace{animation:holoShake .55s ease 2;}
+@keyframes holoPop{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+@keyframes holoShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-12px)}50%{transform:translateX(12px)}75%{transform:translateX(-7px)}}
+
 @media(max-width:600px){
   .holoGuide{
     width:100px;
@@ -1132,6 +1179,15 @@ Adventure शुरू करते हैं!
 
 
 
+<!-- FULL-SCREEN HOLOGRAM EVENT -->
+<div id="holoOverlay" class="holoOverlay" aria-live="polite">
+  <div class="holoStage">
+    <img src="autsnoboy.png" alt="Autsnoboy Hologram">
+    <div id="holoBigFace" class="holoBigFace">✨</div>
+    <div id="holoBigMsg" class="holoBigMsg">I'm with you! Keep learning!</div>
+  </div>
+</div>
+
 <!-- HOLOGRAM GUIDE -->
 <div id="holoGuide" class="holoGuide">
   <img src="autsnoboy.png" alt="Autsnoboy Hologram">
@@ -1159,6 +1215,14 @@ fluteAudio.addEventListener("error",function(){
        src="driken5482-applause-cheer-236786.mp3"
        preload="auto">
 </audio>
+
+<!-- Autsnoboy event voices: Correct HI/EN, Wrong HI/EN, Learning HI/EN -->
+<audio id="voiceCorrectHi" src="correct_hi.mp3" preload="auto"></audio>
+<audio id="voiceCorrectEn" src="correct_en.mp3" preload="auto"></audio>
+<audio id="voiceWrongHi" src="wrong_hi.mp3" preload="auto"></audio>
+<audio id="voiceWrongEn" src="wrong_en.mp3" preload="auto"></audio>
+<audio id="voiceLearningHi" src="learning_hi.mp3" preload="auto"></audio>
+<audio id="voiceLearningEn" src="learning_en.mp3" preload="auto"></audio>
 
 </div>
 
@@ -1540,40 +1604,74 @@ function updateMusicButton(){
   }
 });
 
-function showHologram(type){
+function showHologram(type, fullscreen=false){
   const guide = document.getElementById("holoGuide");
   const face = document.getElementById("holoFace");
   const msg = document.getElementById("holoMsg");
-  if(!guide || !face || !msg) return;
+  if(guide && face && msg){
+    guide.classList.remove("celebrate", "encourage");
+    if(type === "correct"){
+      face.innerText = "👏✨";
+      msg.innerText = language === "hi" ? "बहुत अच्छा! तुम्हारी power बढ़ रही है!" : "Amazing! Your power is growing!";
+      guide.classList.add("celebrate");
+    }else if(type === "wrong"){
+      face.innerText = "💙🙂";
+      msg.innerText = language === "hi" ? "कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!" : "That's okay! You can do it. Try again!";
+      guide.classList.add("encourage");
+    }else if(type === "story"){
+      face.innerText = "📖✨";
+      msg.innerText = language === "hi" ? "मेरी कहानी सुनो!" : "Listen to my story!";
+    }else{
+      face.innerText = "🙂";
+      msg.innerText = language === "hi" ? "मैं तुम्हारे साथ हूँ! सीखते रहो!" : "I'm with you! Keep learning!";
+    }
+  }
+  if(fullscreen) showFullscreenHologram(type);
+}
 
-  guide.classList.remove("celebrate", "encourage");
+function getEventVoiceId(type){
+  if(type === "correct") return language === "hi" ? "voiceCorrectHi" : "voiceCorrectEn";
+  if(type === "wrong") return language === "hi" ? "voiceWrongHi" : "voiceWrongEn";
+  return language === "hi" ? "voiceLearningHi" : "voiceLearningEn";
+}
 
+function playEventVoice(type){
+  const id=getEventVoiceId(type);
+  const audio=document.getElementById(id);
+  if(!audio) return Promise.resolve();
+  try{ audio.pause(); audio.currentTime=0; }catch(e){}
+  audio.volume=1;
+  const p=audio.play();
+  if(p && p.catch) return p.catch(function(){});
+  return Promise.resolve();
+}
+
+function showFullscreenHologram(type){
+  const overlay=document.getElementById("holoOverlay");
+  const face=document.getElementById("holoBigFace");
+  const msg=document.getElementById("holoBigMsg");
+  if(!overlay || !face || !msg) return;
+
+  overlay.className="holoOverlay show "+type;
   if(type === "correct"){
-    face.innerText = "👏✨";
-    msg.innerText = language === "hi"
-      ? "बहुत अच्छा! तुम्हारी power बढ़ रही है!"
-      : "Amazing! Your power is growing!";
-    guide.classList.add("celebrate");
+    face.innerText="👏✨🎉";
+    msg.innerText=language === "hi" ? "बहुत अच्छा! तुम्हारी power बढ़ रही है!" : "Amazing! Your power is growing!";
   }else if(type === "wrong"){
-    face.innerText = "💙🙂";
-    msg.innerText = language === "hi"
-      ? "कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
-      : "That's okay! You can do it. Try again!";
-    guide.classList.add("encourage");
-  }else if(type === "story"){
-    face.innerText = "📖✨";
-    msg.innerText = language === "hi" ? "मेरी कहानी सुनो!" : "Listen to my story!";
+    face.innerText="💙🙂";
+    msg.innerText=language === "hi" ? "कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!" : "That's okay! You can do it. Try again!";
   }else{
-    face.innerText = "🙂";
-    msg.innerText = language === "hi"
-      ? "मैं तुम्हारे साथ हूँ! सीखते रहो!"
-      : "I'm here to help you! Keep learning!";
+    face.innerText="🚀✨💙";
+    msg.innerText=language === "hi" ? "मैं तुम्हारे साथ हूँ! सीखते रहो!" : "I'm with you! Keep learning!";
   }
 
-  setTimeout(function(){
-    guide.classList.remove("celebrate", "encourage");
-  }, 1700);
+  playEventVoice(type);
+
+  clearTimeout(window._holoTimer);
+  window._holoTimer=setTimeout(function(){
+    overlay.classList.remove("show","correct","wrong","learning");
+  }, type === "correct" ? 4200 : 3800);
 }
+
 
 /* =========================
    INITIALIZE
@@ -1856,7 +1954,7 @@ function sayWord(en,hi){
 
 function startMission(index){
 
-  showHologram("guide");
+  showHologram("learning", true);
   currentMission=index;
   currentQuestion=0;
   missionScore=0;
@@ -1970,7 +2068,7 @@ function checkMissionAnswer(
       : "🎉 Great job! Correct!";
 
     playCheer();
-    showHologram("correct");
+    showHologram("correct", true);
 
     document.getElementById(
       "nextBtn"
@@ -1983,7 +2081,7 @@ function checkMissionAnswer(
       ? "💙 कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
       : "💙 That's okay! You can do it. Try again!";
 
-    showHologram("wrong");
+    showHologram("wrong", true);
 
     buttons.forEach(
       function(btn){
@@ -1991,11 +2089,6 @@ function checkMissionAnswer(
       }
     );
 
-    speak(
-      language==="hi"
-      ? "फिर कोशिश करें"
-      : "Try again"
-    );
 
   }
 
@@ -2016,6 +2109,7 @@ function nextQuestion(){
 
   }else{
 
+    showHologram("learning", true);
     loadMissionQuestion();
 
   }
@@ -2167,6 +2261,7 @@ function saveLearnedObjects(items){
 function openHousehold(){
 
   hideAll();
+  showHologram("learning", true);
 
   document.getElementById(
     "household"
