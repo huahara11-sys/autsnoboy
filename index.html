@@ -2,141 +2,191 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Autsnoboy - Learning Game</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:#f4f6ff;
-color:#222
+background:linear-gradient(180deg,#eef5ff,#fff8ef);
+color:#222;
 }
+
 .app{
 max-width:850px;
 margin:auto;
-padding:15px
+padding:15px;
 }
+
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-gap:10px
+gap:10px;
 }
+
 .brand{
 display:flex;
 align-items:center;
-gap:12px
+gap:12px;
 }
+
 .hero{
 width:60px;
 height:60px;
+border-radius:16px;
 object-fit:cover;
-border-radius:15px
 }
-h1{margin:0;font-size:25px}
-.sub{color:#666;font-size:13px}
+
+h1{
+margin:0;
+font-size:25px;
+}
+
+.sub{
+font-size:13px;
+color:#666;
+margin-top:3px;
+}
+
 button{
 font:inherit;
-cursor:pointer
+cursor:pointer;
 }
+
 .topbtn{
 border:0;
 background:white;
-border-radius:12px;
-padding:10px;
-box-shadow:0 2px 8px #0001
+border-radius:13px;
+padding:10px 12px;
+box-shadow:0 3px 10px #0002;
 }
+
 .card{
 background:white;
-border-radius:20px;
-padding:18px;
-margin-top:16px;
-box-shadow:0 5px 20px #0001
+border-radius:22px;
+padding:20px;
+margin-top:17px;
+box-shadow:0 6px 25px #0001;
 }
+
 .worlds{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px
+grid-template-columns:1fr 1fr;
+gap:13px;
 }
+
 .world{
-border:2px solid #eee;
-background:#fff;
+background:white;
+border:2px solid #e5e5e5;
 border-radius:18px;
 padding:18px;
 text-align:left;
-min-height:115px
+min-height:120px;
 }
-.world .emoji{
-font-size:32px
+
+.world:hover{
+border-color:#777;
 }
+
+.emoji{
+font-size:34px;
+}
+
 .world b{
 display:block;
-margin-top:7px
+margin-top:7px;
+font-size:17px;
 }
+
+.world small{
+color:#777;
+}
+
+.hidden{
+display:none;
+}
+
 .prompt{
-font-size:21px;
+font-size:22px;
 font-weight:bold;
 text-align:center;
-margin:20px 0
+margin:22px 0;
 }
+
 .choices{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:12px
+gap:13px;
 }
+
 .choice{
 background:#fafaff;
 border:2px solid #ddd;
-border-radius:18px;
+border-radius:20px;
 padding:18px;
-font-size:42px;
-min-height:130px
+font-size:48px;
+min-height:145px;
 }
+
 .choice span{
 display:block;
 font-size:18px;
 font-weight:bold;
-margin-top:8px
+margin-top:10px;
 }
+
 .correct{
-background:#e5f8ed;
-border-color:#35a66f
+background:#e5f8ed!important;
+border-color:#39a66f!important;
 }
+
 .wrong{
-background:#fff0e5;
-border-color:#e59b54
+background:#fff0e5!important;
+border-color:#e49a50!important;
 }
+
 .feedback{
 text-align:center;
 font-size:18px;
 font-weight:bold;
-min-height:30px;
-margin:15px
+min-height:32px;
+margin:16px;
 }
+
 .primary{
 background:#6657e8;
 color:white;
 border:0;
-border-radius:12px;
-padding:13px 20px
+border-radius:13px;
+padding:13px 20px;
 }
+
 .secondary{
 background:white;
-border:1px solid #ddd;
-border-radius:12px;
-padding:12px 18px
+border:1px solid #ccc;
+border-radius:13px;
+padding:12px 18px;
 }
+
 .actions{
 text-align:center;
-margin-top:10px
+margin-top:10px;
 }
-.hidden{display:none}
-@media(max-width:500px){
-.worlds{grid-template-columns:1fr 1fr}
-.choices{grid-template-columns:1fr 1fr}
-.hero{width:50px;height:50px}
+
+@media(max-width:520px){
+.worlds,
+.choices{
+grid-template-columns:1fr 1fr;
+}
+
+.hero{
+width:52px;
+height:52px;
+}
 }
 </style>
 </head>
@@ -148,81 +198,162 @@ margin-top:10px
 <header>
 
 <div class="brand">
-<img class="hero" src="autsnoboy.png">
-<div>
-<h1>Autsnoboy</h1>
-<div class="sub">Learn • Play • Grow</div>
-</div>
-</div>
+
+<img
+class="hero"
+src="autsnoboy.png"
+alt="Autsnoboy">
 
 <div>
-<button class="topbtn" id="fluteBtn">🎵 Flute: ON</button>
-<button class="topbtn" id="langBtn">हिन्दी</button>
+
+<h1>Autsnoboy</h1>
+
+<div class="sub">
+Learn • Play • Grow
 </div>
+
+</div>
+
+</div>
+
+<button
+class="topbtn"
+id="musicButton">
+🎵 Flute ON
+</button>
 
 </header>
 
 
 <div class="card">
 
-<h2 id="title">Choose a Learning World</h2>
+<h2>Choose a Learning World</h2>
 
 <div class="worlds">
 
-<button class="world" data-world="focus">
+<button
+class="world"
+onclick="startGame('focus')">
+
 <div class="emoji">🎯</div>
+
 <b>Focus Forest</b>
-<small>Attention & finding</small>
+
+<small>
+Attention & Finding
+</small>
+
 </button>
 
-<button class="world" data-world="visual">
+
+<button
+class="world"
+onclick="startGame('visual')">
+
 <div class="emoji">🌈</div>
+
 <b>Color City</b>
-<small>Colours & matching</small>
+
+<small>
+Colours & Matching
+</small>
+
 </button>
 
-<button class="world" data-world="communication">
+
+<button
+class="world"
+onclick="startGame('communication')">
+
 <div class="emoji">💬</div>
+
 <b>Word Village</b>
-<small>Communication</small>
+
+<small>
+Communication
+</small>
+
 </button>
 
-<button class="world" data-world="emotion">
+
+<button
+class="world"
+onclick="startGame('emotion')">
+
 <div class="emoji">😊</div>
+
 <b>Emotion Island</b>
-<small>Feelings</small>
+
+<small>
+Feelings
+</small>
+
 </button>
 
 </div>
+
 </div>
 
 
-<div class="card hidden" id="game">
+<div
+class="card hidden"
+id="game">
 
-<h2 id="mission">Mission 1</h2>
+<h3 id="mission">
+Mission 1
+</h3>
 
-<div class="prompt" id="question">
+<div
+class="prompt"
+id="question">
 Choose an option
 </div>
 
+
 <div style="text-align:center">
-<button class="secondary" id="speakBtn">
+
+<button
+class="secondary"
+onclick="speakInstruction()">
+
 🔊 Hear Instruction
+
 </button>
+
 </div>
 
-<div class="choices" id="choices"></div>
 
-<div class="feedback" id="feedback"></div>
+<div
+class="choices"
+id="choices">
+</div>
+
+
+<div
+class="feedback"
+id="feedback">
+</div>
+
 
 <div class="actions">
 
-<button class="primary hidden" id="nextBtn">
+<button
+class="primary hidden"
+id="nextButton"
+onclick="nextQuestion()">
+
 Next Mission ⭐
+
 </button>
 
-<button class="secondary hidden" id="retryBtn">
+
+<button
+class="secondary hidden"
+id="retryButton"
+onclick="retryQuestion()">
+
 Try Again 🔄
+
 </button>
 
 </div>
@@ -231,10 +362,16 @@ Try Again 🔄
 
 
 <div class="card">
+
 <b>Every Step Counts ❤️</b>
+
 <p style="color:#666">
-No grades. No failure. Just learning, trying and growing.
+
+No grades. No failure.
+Just learning, trying and growing.
+
 </p>
+
 </div>
 
 </div>
@@ -242,45 +379,82 @@ No grades. No failure. Just learning, trying and growing.
 
 <script>
 
-/* =====================================================
-   AUTSNOBOY BACKGROUND FLUTE
-   No external audio file required
-   ===================================================== */
+/* ==================================================
+   AUTSNOBOY CALMING FLUTE MUSIC
+   ================================================== */
 
-let audioContext=null;
-let masterGain=null;
-let fluteTimer=null;
-let fluteOn=false;
-let noteIndex=0;
+let audioContext = null;
+let masterGain = null;
+let musicTimer = null;
+let musicPlaying = false;
 
-const notes=[
+let melodyIndex = 0;
+
+
+/*
+   A soft pentatonic flute melody.
+   These are musical frequencies, not beeps.
+*/
+
+const melody = [
+
+293.66,   // D4
+329.63,   // E4
+392.00,   // G4
+440.00,   // A4
+493.88,   // B4
+
+440.00,
+392.00,
+329.63,
+
+293.66,
+329.63,
+392.00,
+440.00,
+
+392.00,
+329.63,
+293.66,
+
 261.63,
 293.66,
 329.63,
 392.00,
+
 329.63,
-293.66,
-261.63,
-220.00
+293.66
+
 ];
 
 
-function setupFlute(){
+/*
+   Create audio system
+*/
 
-if(audioContext)return;
+function createAudio(){
 
-const AudioCtx=
-window.AudioContext||
+if(audioContext)
+return;
+
+const AudioClass =
+window.AudioContext ||
 window.webkitAudioContext;
 
-if(!AudioCtx)return;
+if(!AudioClass)
+return;
 
-audioContext=new AudioCtx();
+audioContext =
+new AudioClass();
 
-masterGain=
+
+masterGain =
 audioContext.createGain();
 
-masterGain.gain.value=0.035;
+
+masterGain.gain.value =
+0.055;
+
 
 masterGain.connect(
 audioContext.destination
@@ -289,509 +463,740 @@ audioContext.destination
 }
 
 
-function playNote(){
+/*
+   Create one flute note
+*/
 
-if(!audioContext)return;
+function playFluteNote(){
 
-const osc=
+if(!audioContext)
+return;
+
+
+/* Main flute oscillator */
+
+const oscillator =
 audioContext.createOscillator();
 
-const gain=
+
+/* Soft harmonic oscillator */
+
+const harmonic =
+audioContext.createOscillator();
+
+
+/* Breath / flute body */
+
+const gain =
 audioContext.createGain();
 
-osc.type="sine";
 
-osc.frequency.value=
-notes[noteIndex];
+const harmonicGain =
+audioContext.createGain();
 
-noteIndex=
-(noteIndex+1)%notes.length;
 
-const now=
-audioContext.currentTime;
+oscillator.type =
+"sine";
+
+
+harmonic.type =
+"sine";
+
+
+const frequency =
+melody[melodyIndex];
+
+
+melodyIndex++;
+
+if(
+melodyIndex >= melody.length
+){
+melodyIndex=0;
+}
+
+
+/*
+   Very small natural vibrato
+*/
+
+const vibrato =
+audioContext.createOscillator();
+
+const vibratoGain =
+audioContext.createGain();
+
+vibrato.frequency.value =
+5.2;
+
+vibratoGain.gain.value =
+2.0;
+
+vibrato.connect(
+vibratoGain
+);
+
+vibratoGain.connect(
+oscillator.frequency
+);
+
+oscillator.frequency.value =
+frequency;
+
+harmonic.frequency.value =
+frequency * 2;
+
+
+/*
+   Soft volume
+*/
 
 gain.gain.setValueAtTime(
 0.0001,
-now
+audioContext.currentTime
 );
 
 gain.gain.linearRampToValueAtTime(
-0.5,
-now+0.08
+0.32,
+audioContext.currentTime + 0.35
 );
 
 gain.gain.exponentialRampToValueAtTime(
 0.0001,
-now+0.8
+audioContext.currentTime + 2.8
 );
 
-osc.connect(gain);
 
-gain.connect(masterGain);
+/*
+   Harmonic volume
+*/
 
-osc.start(now);
+harmonicGain.gain.setValueAtTime(
+0.0001,
+audioContext.currentTime
+);
 
-osc.stop(now+0.85);
+harmonicGain.gain.linearRampToValueAtTime(
+0.07,
+audioContext.currentTime + 0.35
+);
+
+harmonicGain.gain.exponentialRampToValueAtTime(
+0.0001,
+audioContext.currentTime + 2.8
+);
+
+
+oscillator.connect(gain);
+
+gain.connect(
+masterGain
+);
+
+
+harmonic.connect(
+harmonicGain
+);
+
+harmonicGain.connect(
+masterGain
+);
+
+
+oscillator.start();
+
+harmonic.start();
+
+vibrato.start();
+
+
+oscillator.stop(
+audioContext.currentTime + 3
+);
+
+harmonic.stop(
+audioContext.currentTime + 3
+);
+
+vibrato.stop(
+audioContext.currentTime + 3
+);
 
 }
 
 
-async function startFlute(){
+/*
+   Start calming flute
+*/
+
+async function startMusic(){
 
 try{
 
-setupFlute();
+createAudio();
 
-if(!audioContext)return;
+if(!audioContext)
+return;
 
-if(audioContext.state==="suspended"){
+if(
+audioContext.state === "suspended"
+){
+
 await audioContext.resume();
+
 }
 
-if(fluteOn)return;
 
-fluteOn=true;
+if(musicPlaying)
+return;
 
-playNote();
 
-fluteTimer=
+musicPlaying=true;
+
+
+/*
+   First note immediately
+*/
+
+playFluteNote();
+
+
+/*
+   Slow musical spacing.
+   This prevents dot/beep effect.
+*/
+
+musicTimer =
 setInterval(
-playNote,
-900
+playFluteNote,
+3000
 );
+
 
 document.getElementById(
-"fluteBtn"
-).textContent="🎵 Flute: ON";
+"musicButton"
+).textContent =
+"🎵 Flute ON";
 
-}catch(e){
+}
+catch(error){
 
-console.log(e);
+console.log(error);
 
 }
 
 }
 
 
-function stopFlute(){
+/*
+   Stop music
+*/
 
-if(fluteTimer){
-clearInterval(fluteTimer);
-fluteTimer=null;
+function stopMusic(){
+
+if(musicTimer){
+
+clearInterval(
+musicTimer
+);
+
+musicTimer=null;
+
 }
 
-fluteOn=false;
+musicPlaying=false;
 
 document.getElementById(
-"fluteBtn"
-).textContent="🔇 Flute: OFF";
+"musicButton"
+).textContent =
+"🔇 Flute OFF";
 
 }
 
 
-function toggleFlute(){
-
-if(fluteOn){
-stopFlute();
-}else{
-startFlute();
-}
-
-}
-
-
-/* FIRST TOUCH STARTS MUSIC */
-
-function firstTouch(){
-
-startFlute();
-
-document.removeEventListener(
-"touchstart",
-firstTouch
-);
-
-document.removeEventListener(
-"pointerdown",
-firstTouch
-);
-
-}
-
-
-document.addEventListener(
-"touchstart",
-firstTouch,
-{once:true,passive:true}
-);
-
-document.addEventListener(
-"pointerdown",
-firstTouch,
-{once:true}
-);
-
-
-/* FLUTE BUTTON */
+/*
+   Music button
+*/
 
 document.getElementById(
-"fluteBtn"
-).onclick=function(e){
+"musicButton"
+).onclick =
+function(event){
 
-e.stopPropagation();
+event.stopPropagation();
 
-toggleFlute();
+if(musicPlaying){
+
+stopMusic();
+
+}
+else{
+
+startMusic();
+
+}
 
 };
 
 
-/* =====================================================
-   GAME
-   ===================================================== */
+/*
+   Mobile browsers require
+   user interaction for audio.
+*/
 
-const games={
+document.addEventListener(
+"pointerdown",
+function(){
+
+startMusic();
+
+},
+{
+once:true
+}
+);
+
+
+/*
+   Also support touch
+*/
+
+document.addEventListener(
+"touchstart",
+function(){
+
+startMusic();
+
+},
+{
+once:true,
+passive:true
+}
+);
+
+
+/* ==================================================
+   GAME DATA
+   ================================================== */
+
+const games = {
 
 focus:[
+
 [
 "Find the RED object",
-"लाल वस्तु चुनो",
-["🔴","Red"],
-["🔵","Blue"]
+"🔴",
+"Red",
+"🔵",
+"Blue"
 ],
+
 [
 "Find the STAR",
-"तारा चुनो",
-["⭐","Star"],
-["❤️","Heart"]
+"⭐",
+"Star",
+"❤️",
+"Heart"
 ],
+
 [
 "Find the DOG",
-"कुत्ता चुनो",
-["🐶","Dog"],
-["🐱","Cat"]
+"🐶",
+"Dog",
+"🐱",
+"Cat"
 ]
+
 ],
+
 
 visual:[
+
 [
 "Choose RED",
-"लाल चुनो",
-["🔴","Red"],
-["🟢","Green"]
+"🔴",
+"Red",
+"🟢",
+"Green"
 ],
+
 [
 "Choose BLUE",
-"नीला चुनो",
-["🔵","Blue"],
-["🟡","Yellow"]
+"🔵",
+"Blue",
+"🟡",
+"Yellow"
 ],
+
 [
 "Choose CIRCLE",
-"गोला चुनो",
-["⚪","Circle"],
-["⬛","Square"]
+"⚪",
+"Circle",
+"⬛",
+"Square"
 ]
+
 ],
+
 
 communication:[
+
 [
 "Choose HELP",
-"मदद चुनो",
-["🙋","Help"],
-["🛑","Stop"]
-],
-[
-"Choose MORE",
-"और चुनो",
-["➕","More"],
-["✅","Finished"]
-],
-[
-"Choose I WANT APPLE",
-"मुझे सेब चाहिए चुनो",
-["🍎","I want apple"],
-["🧸","I want toy"]
-]
+"🙋",
+"Help",
+"🛑",
+"Stop"
 ],
 
+[
+"Choose MORE",
+"➕",
+"More",
+"✅",
+"Finished"
+],
+
+[
+"Choose APPLE",
+"🍎",
+"Apple",
+"🧸",
+"Toy"
+]
+
+],
+
+
 emotion:[
+
 [
 "Choose HAPPY",
-"खुश चुनो",
-["😊","Happy"],
-["😢","Sad"]
+"😊",
+"Happy",
+"😢",
+"Sad"
 ],
+
 [
 "Choose ANGRY",
-"गुस्सा चुनो",
-["😡","Angry"],
-["😌","Calm"]
+"😡",
+"Angry",
+"😌",
+"Calm"
 ],
+
 [
 "Choose SCARED",
-"डरा हुआ चुनो",
-["😨","Scared"],
-["😊","Happy"]
+"😨",
+"Scared",
+"😊",
+"Happy"
 ]
+
 ]
 
 };
 
 
-let language="en";
-let currentWorld="";
-let questionNo=0;
-let answered=false;
+let currentWorld = "";
+let currentQuestion = 0;
+let answered = false;
 
 
-function speak(text,hi){
+/*
+   Start game
+*/
 
-if(!window.speechSynthesis)return;
+function startGame(world){
 
-speechSynthesis.cancel();
+currentWorld =
+world;
 
-const u=
-new SpeechSynthesisUtterance(
-language==="en"?text:hi
+currentQuestion =
+0;
+
+
+/*
+   User has interacted,
+   so start music.
+*/
+
+startMusic();
+
+
+document.getElementById(
+"game"
+).classList.remove(
+"hidden"
 );
 
-u.lang=
-language==="en"
-?"en-IN"
-:"hi-IN";
 
-u.rate=0.8;
-
-speechSynthesis.speak(u);
+loadQuestion();
 
 }
 
+
+/*
+   Load question
+*/
 
 function loadQuestion(){
 
-const q=
-games[currentWorld][
-questionNo%games[currentWorld].length
+const question =
+games[currentWorld]
+[
+currentQuestion %
+games[currentWorld].length
 ];
+
 
 document.getElementById(
 "mission"
-).textContent=
-"Mission "+(questionNo+1);
+).textContent =
+"Mission " +
+(currentQuestion + 1);
+
 
 document.getElementById(
 "question"
-).textContent=
-language==="en"?q[0]:q[1];
+).textContent =
+question[0];
 
-const choices=
-document.getElementById("choices");
+
+document.getElementById(
+"feedback"
+).textContent =
+"";
+
+
+document.getElementById(
+"nextButton"
+).classList.add(
+"hidden"
+);
+
+
+document.getElementById(
+"retryButton"
+).classList.add(
+"hidden"
+);
+
+
+answered=false;
+
+
+const choices =
+document.getElementById(
+"choices"
+);
+
 
 choices.innerHTML="";
 
 
-[q[2],q[3]].forEach(
-(item,index)=>{
+/*
+   Correct answer first
+*/
 
-const b=
-document.createElement("button");
+createChoice(
+question[1],
+question[2],
+true
+);
 
-b.className="choice";
 
-b.innerHTML=
-item[0]+
-"<span>"+item[1]+"</span>";
+createChoice(
+question[3],
+question[4],
+false
+);
 
-b.onclick=function(){
+}
+
+
+/*
+   Create choice button
+*/
+
+function createChoice(
+emoji,
+name,
+correct
+){
+
+const button =
+document.createElement(
+"button"
+);
+
+
+button.className =
+"choice";
+
+
+button.innerHTML =
+emoji +
+"<span>" +
+name +
+"</span>";
+
+
+button.onclick =
+function(){
 
 checkAnswer(
-b,
-index,
-item[1]
+button,
+correct
 );
 
 };
 
-choices.appendChild(b);
 
-}
+document.getElementById(
+"choices"
+).appendChild(
+button
 );
 
-
-document.getElementById(
-"feedback"
-).textContent="";
-
-document.getElementById(
-"nextBtn"
-).classList.add("hidden");
-
-document.getElementById(
-"retryBtn"
-).classList.add("hidden");
-
-answered=false;
-
 }
 
 
-function startGame(world){
+/*
+   Check answer
+*/
 
-currentWorld=world;
+function checkAnswer(
+button,
+correct
+){
 
-questionNo=0;
+if(answered)
+return;
 
-document.getElementById(
-"game"
-).classList.remove("hidden");
-
-startFlute();
-
-loadQuestion();
-
-}
-
-
-function checkAnswer(button,index,name){
-
-if(answered)return;
 
 answered=true;
 
-if(index===0){
 
-button.classList.add("correct");
+if(correct){
 
-document.getElementById(
-"feedback"
-).textContent=
-language==="en"
-?"⭐ Great job! You did it!"
-:"⭐ बहुत अच्छा! तुमने कर लिया!";
-
-document.getElementById(
-"nextBtn"
-).classList.remove("hidden");
-
-}else{
-
-button.classList.add("wrong");
-
-document.getElementById(
-"feedback"
-).textContent=
-language==="en"
-?"Good try! Try again. You can do it!"
-:"अच्छी कोशिश! फिर कोशिश करो। तुम कर सकते हो!";
-
-document.getElementById(
-"retryBtn"
-).classList.remove("hidden");
-
-}
-
-}
-
-
-document.querySelectorAll(
-".world"
-).forEach(
-button=>{
-
-button.onclick=function(){
-
-startGame(
-button.dataset.world
-);
-
-};
-
-}
+button.classList.add(
+"correct"
 );
 
 
-/* NEXT */
+document.getElementById(
+"feedback"
+).textContent =
+"⭐ Great job! You did it!";
+
 
 document.getElementById(
-"nextBtn"
-).onclick=function(){
+"nextButton"
+).classList.remove(
+"hidden"
+);
 
-questionNo++;
+}
+else{
 
-loadQuestion();
+button.classList.add(
+"wrong"
+);
 
-};
-
-
-/* RETRY */
 
 document.getElementById(
-"retryBtn"
-).onclick=function(){
+"feedback"
+).textContent =
+"Good try! Try again. You can do it!";
 
-loadQuestion();
-
-};
-
-
-/* SPEAKER */
 
 document.getElementById(
-"speakBtn"
-).onclick=function(){
+"retryButton"
+).classList.remove(
+"hidden"
+);
 
-const q=
-games[currentWorld][
-questionNo%games[currentWorld].length
-];
-
-speak(q[0],q[1]);
-
-};
-
-
-/* LANGUAGE */
-
-document.getElementById(
-"langBtn"
-).onclick=function(){
-
-language=
-language==="en"
-?"hi"
-:"en";
-
-document.getElementById(
-"langBtn"
-).textContent=
-language==="en"
-?"हिन्दी"
-:"English";
-
-if(currentWorld){
-loadQuestion();
 }
 
-};
+}
 
 
-/* RESUME AUDIO */
+/*
+   Next question
+*/
 
-document.addEventListener(
-"visibilitychange",
-function(){
+function nextQuestion(){
+
+currentQuestion++;
+
+loadQuestion();
+
+}
+
+
+/*
+   Retry
+*/
+
+function retryQuestion(){
+
+loadQuestion();
+
+}
+
+
+/*
+   Speak instruction
+*/
+
+function speakInstruction(){
+
+if(!currentWorld)
+return;
+
+
+const question =
+games[currentWorld]
+[
+currentQuestion %
+games[currentWorld].length
+][0];
+
 
 if(
-!document.hidden &&
-fluteOn &&
-audioContext
+window.speechSynthesis
 ){
 
-audioContext.resume();
+speechSynthesis.cancel();
+
+
+const speech =
+new SpeechSynthesisUtterance(
+question
+);
+
+
+speech.lang =
+"en-IN";
+
+
+speech.rate =
+0.78;
+
+
+speech.pitch =
+1;
+
+
+speechSynthesis.speak(
+speech
+);
 
 }
 
-});
+}
 
 </script>
 
