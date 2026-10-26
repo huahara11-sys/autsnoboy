@@ -3,190 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autsnoboy - Learning Game</title>
+<meta name="theme-color" content="#6d5dfc">
+
+<title>Autsnoboy - Learning Adventure</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(180deg,#eef5ff,#fff8ef);
-color:#222;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#eef7ff,#f8f1ff);
+    color:#243047;
 }
 
 .app{
-max-width:850px;
-margin:auto;
-padding:15px;
+    max-width:760px;
+    margin:auto;
+    padding:18px;
 }
 
 header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-}
-
-.brand{
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.hero{
-width:60px;
-height:60px;
-border-radius:16px;
-object-fit:cover;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 h1{
-margin:0;
-font-size:25px;
+    margin:0;
+    font-size:30px;
 }
 
 .sub{
-font-size:13px;
-color:#666;
-margin-top:3px;
-}
-
-button{
-font:inherit;
-cursor:pointer;
-}
-
-.topbtn{
-border:0;
-background:white;
-border-radius:13px;
-padding:10px 12px;
-box-shadow:0 3px 10px #0002;
+    margin:4px 0;
+    color:#657086;
 }
 
 .card{
-background:white;
-border-radius:22px;
-padding:20px;
-margin-top:17px;
-box-shadow:0 6px 25px #0001;
+    background:white;
+    border-radius:22px;
+    padding:20px;
+    margin-top:16px;
+    box-shadow:0 5px 22px rgba(40,50,90,.09);
 }
 
-.worlds{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:13px;
+.controls{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
-.world{
-background:white;
-border:2px solid #e5e5e5;
-border-radius:18px;
-padding:18px;
-text-align:left;
-min-height:120px;
-}
-
-.world:hover{
-border-color:#777;
-}
-
-.emoji{
-font-size:34px;
-}
-
-.world b{
-display:block;
-margin-top:7px;
-font-size:17px;
-}
-
-.world small{
-color:#777;
-}
-
-.hidden{
-display:none;
-}
-
-.prompt{
-font-size:22px;
-font-weight:bold;
-text-align:center;
-margin:22px 0;
-}
-
-.choices{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:13px;
-}
-
-.choice{
-background:#fafaff;
-border:2px solid #ddd;
-border-radius:20px;
-padding:18px;
-font-size:48px;
-min-height:145px;
-}
-
-.choice span{
-display:block;
-font-size:18px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.correct{
-background:#e5f8ed!important;
-border-color:#39a66f!important;
-}
-
-.wrong{
-background:#fff0e5!important;
-border-color:#e49a50!important;
-}
-
-.feedback{
-text-align:center;
-font-size:18px;
-font-weight:bold;
-min-height:32px;
-margin:16px;
+.btn{
+    border:0;
+    border-radius:13px;
+    padding:12px 16px;
+    font-size:16px;
+    cursor:pointer;
+    background:#eee;
 }
 
 .primary{
-background:#6657e8;
-color:white;
-border:0;
-border-radius:13px;
-padding:13px 20px;
+    background:#6d5dfc;
+    color:white;
 }
 
-.secondary{
-background:white;
-border:1px solid #ccc;
-border-radius:13px;
-padding:12px 18px;
+.mission-title{
+    text-align:center;
 }
 
-.actions{
-text-align:center;
-margin-top:10px;
-}
-
-@media(max-width:520px){
-.worlds,
 .choices{
-grid-template-columns:1fr 1fr;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:18px;
 }
 
-.hero{
-width:52px;
-height:52px;
+.choice{
+    min-height:100px;
+    border:2px solid #e7e9ef;
+    border-radius:18px;
+    background:#fafbff;
+    font-size:38px;
+    cursor:pointer;
 }
+
+.choice:active{
+    transform:scale(.97);
+}
+
+.message{
+    text-align:center;
+    min-height:32px;
+    margin:18px 0 4px;
+    font-size:19px;
+    font-weight:700;
+}
+
+.progress{
+    height:10px;
+    background:#ececf4;
+    border-radius:99px;
+    overflow:hidden;
+}
+
+.bar{
+    height:100%;
+    width:0;
+    background:#6d5dfc;
+    transition:width .3s;
+}
+
+.badges{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.badge{
+    background:#f3efff;
+    padding:8px 11px;
+    border-radius:12px;
+    font-size:14px;
+}
+
+.small{
+    font-size:13px;
+    color:#70798b;
+}
+
+@media(max-width:420px){
+    .choice{
+        min-height:82px;
+        font-size:32px;
+    }
 }
 </style>
 </head>
@@ -197,162 +150,77 @@ height:52px;
 
 <header>
 
-<div class="brand">
-
-<img
-class="hero"
-src="autsnoboy.png"
-alt="Autsnoboy">
-
 <div>
-
-<h1>Autsnoboy</h1>
-
-<div class="sub">
-Learn • Play • Grow
+<h1>🦸 Autsnoboy</h1>
+<div class="sub" id="subtitle">Learning Adventure</div>
 </div>
 
-</div>
+<div class="controls">
 
-</div>
+<button class="btn" id="langBtn">
+हिन्दी
+</button>
 
-<button
-class="topbtn"
-id="musicButton">
+<button class="btn primary" id="musicBtn">
 🎵 Flute ON
 </button>
+
+</div>
 
 </header>
 
 
 <div class="card">
 
-<h2>Choose a Learning World</h2>
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
 
-<div class="worlds">
-
-<button
-class="world"
-onclick="startGame('focus')">
-
-<div class="emoji">🎯</div>
-
-<b>Focus Forest</b>
-
-<small>
-Attention & Finding
-</small>
-
-</button>
-
-
-<button
-class="world"
-onclick="startGame('visual')">
-
-<div class="emoji">🌈</div>
-
-<b>Color City</b>
-
-<small>
-Colours & Matching
-</small>
-
-</button>
-
-
-<button
-class="world"
-onclick="startGame('communication')">
-
-<div class="emoji">💬</div>
-
-<b>Word Village</b>
-
-<small>
-Communication
-</small>
-
-</button>
-
-
-<button
-class="world"
-onclick="startGame('emotion')">
-
-<div class="emoji">😊</div>
-
-<b>Emotion Island</b>
-
-<small>
-Feelings
-</small>
-
-</button>
-
+<div class="small" id="missionCount">
+Mission 1 of 7
 </div>
 
 </div>
 
 
-<div
-class="card hidden"
-id="game">
+<div class="card">
 
-<h3 id="mission">
-Mission 1
-</h3>
+<div class="mission-title">
 
-<div
-class="prompt"
-id="question">
-Choose an option
+<h2 id="title">
+🔴 Find RED
+</h2>
+
+<p id="instruction">
+Which one is RED?
+</p>
+
 </div>
+
+
+<div class="choices" id="choices"></div>
+
+
+<div class="message" id="message" aria-live="polite"></div>
 
 
 <div style="text-align:center">
 
 <button
-class="secondary"
-onclick="speakInstruction()">
+class="btn primary"
+id="nextBtn"
+style="display:none">
 
-🔊 Hear Instruction
-
-</button>
-
-</div>
-
-
-<div
-class="choices"
-id="choices">
-</div>
-
-
-<div
-class="feedback"
-id="feedback">
-</div>
-
-
-<div class="actions">
-
-<button
-class="primary hidden"
-id="nextButton"
-onclick="nextQuestion()">
-
-Next Mission ⭐
+Next Mission ➜
 
 </button>
 
 
 <button
-class="secondary hidden"
-id="retryButton"
-onclick="retryQuestion()">
+class="btn"
+id="restartBtn">
 
-Try Again 🔄
+↻ Restart
 
 </button>
 
@@ -363,840 +231,475 @@ Try Again 🔄
 
 <div class="card">
 
-<b>Every Step Counts ❤️</b>
+<strong id="rewardTitle">
+Every Step Counts 🌱
+</strong>
 
-<p style="color:#666">
+<p class="small" id="rewardText">
 
-No grades. No failure.
-Just learning, trying and growing.
+Try again, use a hint, or do it yourself —
+every step is progress.
 
 </p>
 
+<div class="badges" id="badges"></div>
+
 </div>
+
+
+<!-- MUSIC FILE WILL BE UPLOADED LATER -->
+
+<audio
+id="backgroundFlute"
+src="audio/calming-flute.mp3"
+preload="auto"
+loop>
+</audio>
+
 
 </div>
 
 
 <script>
 
-/* ==================================================
-   AUTSNOBOY CALMING FLUTE MUSIC
-   ================================================== */
+const missions = [
 
-let audioContext = null;
-let masterGain = null;
-let musicTimer = null;
-let musicPlaying = false;
+{
+en:["🔴 Find RED","Which one is RED?"],
+hi:["🔴 लाल ढूँढो","लाल कौन सा है?"],
 
-let melodyIndex = 0;
+choices:["🔵","🔴","🟢","🟡"],
+
+answer:1,
+
+badge:"Sharp Eyes 👀"
+},
 
 
-/*
-   A soft pentatonic flute melody.
-   These are musical frequencies, not beeps.
-*/
+{
+en:["👯 Find SAME","Which pair is the SAME?"],
+hi:["👯 समान ढूँढो","कौन सी जोड़ी समान है?"],
 
-const melody = [
+choices:["🐶 🐱","🍎 🍎","🚗 🚌","⭐ ❤️"],
 
-293.66,   // D4
-329.63,   // E4
-392.00,   // G4
-440.00,   // A4
-493.88,   // B4
+answer:1,
 
-440.00,
-392.00,
-329.63,
+badge:"Visual Explorer 🌟"
+},
 
-293.66,
-329.63,
-392.00,
-440.00,
 
-392.00,
-329.63,
-293.66,
+{
+en:["🧩 Complete Pattern","What comes next?"],
+hi:["🧩 पैटर्न पूरा करो","अगला क्या आएगा?"],
 
-261.63,
-293.66,
-329.63,
-392.00,
+choices:["🔴","🔵","🔴","🟢"],
 
-329.63,
-293.66
+answer:2,
+
+badge:"Pattern Star 🧩"
+},
+
+
+{
+en:["😊 Find HAPPY","Which face is HAPPY?"],
+hi:["😊 खुश चेहरा ढूँढो","कौन सा चेहरा खुश है?"],
+
+choices:["😢","😡","😊","😨"],
+
+answer:2,
+
+badge:"Feelings Explorer 😊"
+},
+
+
+{
+en:["🗣️ Ask for HELP","What can you say?"],
+hi:["🗣️ मदद माँगो","आप क्या कह सकते हैं?"],
+
+choices:["🙏 Help me","🚫 Go away","😴 Sleep","🍎 Apple"],
+
+answer:0,
+
+badge:"Little Communicator 🗣️"
+},
+
+
+{
+en:["🎵 Rhythm Choice","Which sound is musical?"],
+hi:["🎵 संगीत चुनो","कौन सा संगीत है?"],
+
+choices:["🎶","🚗","🍎","🧱"],
+
+answer:0,
+
+badge:"Rhythm Star 🎵"
+},
+
+
+{
+en:["🧼 Daily Life","What should we do before eating?"],
+hi:["🧼 रोज़ की ज़िंदगी","खाने से पहले क्या करना चाहिए?"],
+
+choices:["🧼 Wash hands","🛌 Sleep","📺 TV","👟 Shoes"],
+
+answer:0,
+
+badge:"Daily Hero 🧼"
+}
 
 ];
 
 
-/*
-   Create audio system
-*/
+let lang="en";
 
-function createAudio(){
+let index=0;
 
-if(audioContext)
-return;
+let earned=[];
 
-const AudioClass =
-window.AudioContext ||
-window.webkitAudioContext;
 
-if(!AudioClass)
-return;
+const flute =
+document.getElementById("backgroundFlute");
 
-audioContext =
-new AudioClass();
 
+const musicBtn =
+document.getElementById("musicBtn");
 
-masterGain =
-audioContext.createGain();
 
+flute.loop=true;
 
-masterGain.gain.value =
-0.055;
+flute.volume=.22;
 
 
-masterGain.connect(
-audioContext.destination
-);
-
-}
-
-
-/*
-   Create one flute note
-*/
-
-function playFluteNote(){
-
-if(!audioContext)
-return;
-
-
-/* Main flute oscillator */
-
-const oscillator =
-audioContext.createOscillator();
-
-
-/* Soft harmonic oscillator */
-
-const harmonic =
-audioContext.createOscillator();
-
-
-/* Breath / flute body */
-
-const gain =
-audioContext.createGain();
-
-
-const harmonicGain =
-audioContext.createGain();
-
-
-oscillator.type =
-"sine";
-
-
-harmonic.type =
-"sine";
-
-
-const frequency =
-melody[melodyIndex];
-
-
-melodyIndex++;
-
-if(
-melodyIndex >= melody.length
-){
-melodyIndex=0;
-}
-
-
-/*
-   Very small natural vibrato
-*/
-
-const vibrato =
-audioContext.createOscillator();
-
-const vibratoGain =
-audioContext.createGain();
-
-vibrato.frequency.value =
-5.2;
-
-vibratoGain.gain.value =
-2.0;
-
-vibrato.connect(
-vibratoGain
-);
-
-vibratoGain.connect(
-oscillator.frequency
-);
-
-oscillator.frequency.value =
-frequency;
-
-harmonic.frequency.value =
-frequency * 2;
-
-
-/*
-   Soft volume
-*/
-
-gain.gain.setValueAtTime(
-0.0001,
-audioContext.currentTime
-);
-
-gain.gain.linearRampToValueAtTime(
-0.32,
-audioContext.currentTime + 0.35
-);
-
-gain.gain.exponentialRampToValueAtTime(
-0.0001,
-audioContext.currentTime + 2.8
-);
-
-
-/*
-   Harmonic volume
-*/
-
-harmonicGain.gain.setValueAtTime(
-0.0001,
-audioContext.currentTime
-);
-
-harmonicGain.gain.linearRampToValueAtTime(
-0.07,
-audioContext.currentTime + 0.35
-);
-
-harmonicGain.gain.exponentialRampToValueAtTime(
-0.0001,
-audioContext.currentTime + 2.8
-);
-
-
-oscillator.connect(gain);
-
-gain.connect(
-masterGain
-);
-
-
-harmonic.connect(
-harmonicGain
-);
-
-harmonicGain.connect(
-masterGain
-);
-
-
-oscillator.start();
-
-harmonic.start();
-
-vibrato.start();
-
-
-oscillator.stop(
-audioContext.currentTime + 3
-);
-
-harmonic.stop(
-audioContext.currentTime + 3
-);
-
-vibrato.stop(
-audioContext.currentTime + 3
-);
-
-}
-
-
-/*
-   Start calming flute
-*/
 
 async function startMusic(){
 
 try{
 
-createAudio();
+await flute.play();
 
-if(!audioContext)
-return;
-
-if(
-audioContext.state === "suspended"
-){
-
-await audioContext.resume();
+musicBtn.textContent="🎵 Flute ON";
 
 }
 
+catch(e){
 
-if(musicPlaying)
-return;
-
-
-musicPlaying=true;
-
-
-/*
-   First note immediately
-*/
-
-playFluteNote();
-
-
-/*
-   Slow musical spacing.
-   This prevents dot/beep effect.
-*/
-
-musicTimer =
-setInterval(
-playFluteNote,
-3000
-);
-
-
-document.getElementById(
-"musicButton"
-).textContent =
-"🎵 Flute ON";
-
-}
-catch(error){
-
-console.log(error);
+musicBtn.textContent="🎵 Tap to play";
 
 }
 
 }
 
 
-/*
-   Stop music
-*/
-
-function stopMusic(){
-
-if(musicTimer){
-
-clearInterval(
-musicTimer
-);
-
-musicTimer=null;
-
-}
-
-musicPlaying=false;
-
-document.getElementById(
-"musicButton"
-).textContent =
-"🔇 Flute OFF";
-
-}
-
-
-/*
-   Music button
-*/
-
-document.getElementById(
-"musicButton"
-).onclick =
-function(event){
-
-event.stopPropagation();
-
-if(musicPlaying){
-
-stopMusic();
-
-}
-else{
-
-startMusic();
-
-}
-
-};
-
-
-/*
-   Mobile browsers require
-   user interaction for audio.
-*/
 
 document.addEventListener(
 "pointerdown",
-function(){
-
-startMusic();
-
-},
-{
-once:true
-}
+()=>startMusic(),
+{once:true}
 );
 
 
-/*
-   Also support touch
-*/
 
-document.addEventListener(
-"touchstart",
-function(){
+musicBtn.addEventListener(
+"click",
+async function(e){
 
-startMusic();
+e.stopPropagation();
 
-},
-{
-once:true,
-passive:true
-}
-);
+if(flute.paused){
 
-
-/* ==================================================
-   GAME DATA
-   ================================================== */
-
-const games = {
-
-focus:[
-
-[
-"Find the RED object",
-"🔴",
-"Red",
-"🔵",
-"Blue"
-],
-
-[
-"Find the STAR",
-"⭐",
-"Star",
-"❤️",
-"Heart"
-],
-
-[
-"Find the DOG",
-"🐶",
-"Dog",
-"🐱",
-"Cat"
-]
-
-],
-
-
-visual:[
-
-[
-"Choose RED",
-"🔴",
-"Red",
-"🟢",
-"Green"
-],
-
-[
-"Choose BLUE",
-"🔵",
-"Blue",
-"🟡",
-"Yellow"
-],
-
-[
-"Choose CIRCLE",
-"⚪",
-"Circle",
-"⬛",
-"Square"
-]
-
-],
-
-
-communication:[
-
-[
-"Choose HELP",
-"🙋",
-"Help",
-"🛑",
-"Stop"
-],
-
-[
-"Choose MORE",
-"➕",
-"More",
-"✅",
-"Finished"
-],
-
-[
-"Choose APPLE",
-"🍎",
-"Apple",
-"🧸",
-"Toy"
-]
-
-],
-
-
-emotion:[
-
-[
-"Choose HAPPY",
-"😊",
-"Happy",
-"😢",
-"Sad"
-],
-
-[
-"Choose ANGRY",
-"😡",
-"Angry",
-"😌",
-"Calm"
-],
-
-[
-"Choose SCARED",
-"😨",
-"Scared",
-"😊",
-"Happy"
-]
-
-]
-
-};
-
-
-let currentWorld = "";
-let currentQuestion = 0;
-let answered = false;
-
-
-/*
-   Start game
-*/
-
-function startGame(world){
-
-currentWorld =
-world;
-
-currentQuestion =
-0;
-
-
-/*
-   User has interacted,
-   so start music.
-*/
-
-startMusic();
-
-
-document.getElementById(
-"game"
-).classList.remove(
-"hidden"
-);
-
-
-loadQuestion();
+await startMusic();
 
 }
 
-
-/*
-   Load question
-*/
-
-function loadQuestion(){
-
-const question =
-games[currentWorld]
-[
-currentQuestion %
-games[currentWorld].length
-];
-
-
-document.getElementById(
-"mission"
-).textContent =
-"Mission " +
-(currentQuestion + 1);
-
-
-document.getElementById(
-"question"
-).textContent =
-question[0];
-
-
-document.getElementById(
-"feedback"
-).textContent =
-"";
-
-
-document.getElementById(
-"nextButton"
-).classList.add(
-"hidden"
-);
-
-
-document.getElementById(
-"retryButton"
-).classList.add(
-"hidden"
-);
-
-
-answered=false;
-
-
-const choices =
-document.getElementById(
-"choices"
-);
-
-
-choices.innerHTML="";
-
-
-/*
-   Correct answer first
-*/
-
-createChoice(
-question[1],
-question[2],
-true
-);
-
-
-createChoice(
-question[3],
-question[4],
-false
-);
-
-}
-
-
-/*
-   Create choice button
-*/
-
-function createChoice(
-emoji,
-name,
-correct
-){
-
-const button =
-document.createElement(
-"button"
-);
-
-
-button.className =
-"choice";
-
-
-button.innerHTML =
-emoji +
-"<span>" +
-name +
-"</span>";
-
-
-button.onclick =
-function(){
-
-checkAnswer(
-button,
-correct
-);
-
-};
-
-
-document.getElementById(
-"choices"
-).appendChild(
-button
-);
-
-}
-
-
-/*
-   Check answer
-*/
-
-function checkAnswer(
-button,
-correct
-){
-
-if(answered)
-return;
-
-
-answered=true;
-
-
-if(correct){
-
-button.classList.add(
-"correct"
-);
-
-
-document.getElementById(
-"feedback"
-).textContent =
-"⭐ Great job! You did it!";
-
-
-document.getElementById(
-"nextButton"
-).classList.remove(
-"hidden"
-);
-
-}
 else{
 
-button.classList.add(
-"wrong"
+flute.pause();
+
+musicBtn.textContent="🔇 Flute OFF";
+
+}
+
+});
+
+
+
+function render(){
+
+const m=missions[index];
+
+const t=m[lang];
+
+
+document.getElementById("title")
+.textContent=t[0];
+
+
+document.getElementById("instruction")
+.textContent=t[1];
+
+
+document.getElementById("missionCount")
+.textContent=
+
+(lang==="en"?"Mission ":"मिशन ")
+
++(index+1)
+
++(lang==="en"?" of ":" में से ")
+
++missions.length;
+
+
+document.getElementById("bar")
+.style.width=
+
+((index)/missions.length*100)+"%";
+
+
+document.getElementById("message")
+.textContent="";
+
+
+document.getElementById("nextBtn")
+.style.display="none";
+
+
+const box=
+document.getElementById("choices");
+
+box.innerHTML="";
+
+
+m.choices.forEach(
+
+function(c,i){
+
+const b=
+document.createElement("button");
+
+b.className="choice";
+
+b.type="button";
+
+b.textContent=c;
+
+
+b.addEventListener(
+"click",
+function(){
+
+answer(i);
+
+}
 );
 
 
-document.getElementById(
-"feedback"
-).textContent =
-"Good try! Try again. You can do it!";
-
-
-document.getElementById(
-"retryButton"
-).classList.remove(
-"hidden"
-);
+box.appendChild(b);
 
 }
 
-}
-
-
-/*
-   Next question
-*/
-
-function nextQuestion(){
-
-currentQuestion++;
-
-loadQuestion();
-
-}
-
-
-/*
-   Retry
-*/
-
-function retryQuestion(){
-
-loadQuestion();
-
-}
-
-
-/*
-   Speak instruction
-*/
-
-function speakInstruction(){
-
-if(!currentWorld)
-return;
-
-
-const question =
-games[currentWorld]
-[
-currentQuestion %
-games[currentWorld].length
-][0];
-
-
-if(
-window.speechSynthesis
-){
-
-speechSynthesis.cancel();
-
-
-const speech =
-new SpeechSynthesisUtterance(
-question
-);
-
-
-speech.lang =
-"en-IN";
-
-
-speech.rate =
-0.78;
-
-
-speech.pitch =
-1;
-
-
-speechSynthesis.speak(
-speech
 );
 
 }
 
+
+
+function answer(i){
+
+const m=missions[index];
+
+const msg=
+document.getElementById("message");
+
+
+if(i===m.answer){
+
+msg.textContent=
+
+lang==="en"
+
+?"⭐ Great job!"
+
+:"⭐ बहुत अच्छा!";
+
+
+if(!earned.includes(m.badge)){
+
+earned.push(m.badge);
+
+drawBadges();
+
 }
+
+
+document.getElementById("nextBtn")
+.style.display="inline-block";
+
+}
+
+else{
+
+msg.textContent=
+
+lang==="en"
+
+?"💛 Try again. You can do it!"
+
+:"💛 फिर कोशिश करो। तुम कर सकते हो!";
+
+}
+
+}
+
+
+
+document.getElementById("nextBtn")
+.addEventListener(
+"click",
+function(){
+
+if(index<missions.length-1){
+
+index++;
+
+render();
+
+}
+
+else{
+
+document.getElementById("title")
+.textContent=
+
+lang==="en"
+
+?"🎉 Adventure Complete!"
+
+:"🎉 एडवेंचर पूरा!";
+
+
+document.getElementById("instruction")
+.textContent=
+
+lang==="en"
+
+?"You kept trying — every step counts!"
+
+:"आपने कोशिश जारी रखी — हर कदम महत्वपूर्ण है!";
+
+
+document.getElementById("choices")
+.innerHTML="";
+
+
+document.getElementById("message")
+.textContent="🌱 ⭐ 🦸";
+
+
+document.getElementById("nextBtn")
+.style.display="none";
+
+
+document.getElementById("bar")
+.style.width="100%";
+
+}
+
+});
+
+
+
+document.getElementById("restartBtn")
+.addEventListener(
+"click",
+function(){
+
+index=0;
+
+earned=[];
+
+drawBadges();
+
+render();
+
+});
+
+
+
+document.getElementById("langBtn")
+.addEventListener(
+"click",
+function(){
+
+lang=lang==="en"?"hi":"en";
+
+
+document.getElementById("langBtn")
+.textContent=
+
+lang==="en"
+
+?"हिन्दी"
+
+:"English";
+
+
+document.getElementById("subtitle")
+.textContent=
+
+lang==="en"
+
+?"Learning Adventure"
+
+:"सीखने का एडवेंचर";
+
+
+document.getElementById("rewardTitle")
+.textContent=
+
+lang==="en"
+
+?"Every Step Counts 🌱"
+
+:"हर कदम महत्वपूर्ण है 🌱";
+
+
+document.getElementById("rewardText")
+.textContent=
+
+lang==="en"
+
+?"Try again, use a hint, or do it yourself — every step is progress."
+
+:"फिर कोशिश करना, मदद लेना या खुद करना — हर कदम प्रगति है।";
+
+
+render();
+
+});
+
+
+
+function drawBadges(){
+
+document.getElementById("badges")
+.innerHTML=
+
+earned.map(
+function(x){
+
+return `<span class="badge">${x}</span>`;
+
+}
+).join("");
+
+}
+
+
+
+render();
+
+drawBadges();
 
 </script>
 
