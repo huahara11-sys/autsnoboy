@@ -2,144 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#6d5dfc">
 
 <title>Autsnoboy - Learning Adventure</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#eef7ff,#f8f1ff);
-    color:#243047;
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#eef7ff,#f8f1ff);
+color:#243047;
 }
 
 .app{
-    max-width:760px;
-    margin:auto;
-    padding:18px;
+max-width:760px;
+margin:auto;
+padding:18px;
 }
 
 header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    flex-wrap:wrap;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
 }
 
 h1{
-    margin:0;
-    font-size:30px;
+margin:0;
+font-size:30px;
 }
 
 .sub{
-    margin:4px 0;
-    color:#657086;
+margin:4px 0;
+color:#657086;
 }
 
 .card{
-    background:white;
-    border-radius:22px;
-    padding:20px;
-    margin-top:16px;
-    box-shadow:0 5px 22px rgba(40,50,90,.09);
+background:white;
+border-radius:22px;
+padding:20px;
+margin-top:16px;
+box-shadow:0 5px 22px rgba(40,50,90,.09);
 }
 
 .controls{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
 }
 
 .btn{
-    border:0;
-    border-radius:13px;
-    padding:12px 16px;
-    font-size:16px;
-    cursor:pointer;
-    background:#eee;
+border:0;
+border-radius:13px;
+padding:12px 16px;
+font-size:16px;
+cursor:pointer;
+background:#eee;
 }
 
 .primary{
-    background:#6d5dfc;
-    color:white;
+background:#6d5dfc;
+color:white;
 }
 
 .mission-title{
-    text-align:center;
+text-align:center;
 }
 
 .choices{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin-top:18px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-top:18px;
 }
 
 .choice{
-    min-height:100px;
-    border:2px solid #e7e9ef;
-    border-radius:18px;
-    background:#fafbff;
-    font-size:38px;
-    cursor:pointer;
+min-height:100px;
+border:2px solid #e7e9ef;
+border-radius:18px;
+background:#fafbff;
+font-size:38px;
+cursor:pointer;
 }
 
 .choice:active{
-    transform:scale(.97);
+transform:scale(.97);
 }
 
 .message{
-    text-align:center;
-    min-height:32px;
-    margin:18px 0 4px;
-    font-size:19px;
-    font-weight:700;
+text-align:center;
+min-height:32px;
+margin:18px 0 4px;
+font-size:19px;
+font-weight:700;
 }
 
 .progress{
-    height:10px;
-    background:#ececf4;
-    border-radius:99px;
-    overflow:hidden;
+height:10px;
+background:#ececf4;
+border-radius:99px;
+overflow:hidden;
 }
 
 .bar{
-    height:100%;
-    width:0;
-    background:#6d5dfc;
-    transition:width .3s;
+height:100%;
+width:0;
+background:#6d5dfc;
+transition:width .3s;
 }
 
 .badges{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
 }
 
 .badge{
-    background:#f3efff;
-    padding:8px 11px;
-    border-radius:12px;
-    font-size:14px;
+background:#f3efff;
+padding:8px 11px;
+border-radius:12px;
+font-size:14px;
 }
 
 .small{
-    font-size:13px;
-    color:#70798b;
+font-size:13px;
+color:#70798b;
 }
 
 @media(max-width:420px){
-    .choice{
-        min-height:82px;
-        font-size:32px;
-    }
+.choice{
+min-height:82px;
+font-size:32px;
+}
 }
 </style>
 </head>
@@ -157,9 +155,7 @@ h1{
 
 <div class="controls">
 
-<button class="btn" id="langBtn">
-हिन्दी
-</button>
+<button class="btn" id="langBtn">हिन्दी</button>
 
 <button class="btn primary" id="musicBtn">
 🎵 Flute ON
@@ -187,9 +183,7 @@ Mission 1 of 7
 
 <div class="mission-title">
 
-<h2 id="title">
-🔴 Find RED
-</h2>
+<h2 id="title">🔴 Find RED</h2>
 
 <p id="instruction">
 Which one is RED?
@@ -197,12 +191,9 @@ Which one is RED?
 
 </div>
 
-
 <div class="choices" id="choices"></div>
 
-
-<div class="message" id="message" aria-live="polite"></div>
-
+<div class="message" id="message"></div>
 
 <div style="text-align:center">
 
@@ -210,18 +201,13 @@ Which one is RED?
 class="btn primary"
 id="nextBtn"
 style="display:none">
-
 Next Mission ➜
-
 </button>
-
 
 <button
 class="btn"
 id="restartBtn">
-
 ↻ Restart
-
 </button>
 
 </div>
@@ -236,10 +222,7 @@ Every Step Counts 🌱
 </strong>
 
 <p class="small" id="rewardText">
-
-Try again, use a hint, or do it yourself —
-every step is progress.
-
+Try again, use a hint, or do it yourself — every step is progress.
 </p>
 
 <div class="badges" id="badges"></div>
@@ -247,11 +230,10 @@ every step is progress.
 </div>
 
 
-<!-- MUSIC FILE WILL BE UPLOADED LATER -->
-
+<!-- YOUR FLUTE MUSIC -->
 <audio
 id="backgroundFlute"
-src="audio/calming-flute.mp3"
+src="bmdkbandara-whispers-of-the-stream-417622.mp3"
 preload="auto"
 loop>
 </audio>
@@ -262,88 +244,61 @@ loop>
 
 <script>
 
-const missions = [
+const missions=[
 
 {
 en:["🔴 Find RED","Which one is RED?"],
 hi:["🔴 लाल ढूँढो","लाल कौन सा है?"],
-
 choices:["🔵","🔴","🟢","🟡"],
-
 answer:1,
-
 badge:"Sharp Eyes 👀"
 },
-
 
 {
 en:["👯 Find SAME","Which pair is the SAME?"],
 hi:["👯 समान ढूँढो","कौन सी जोड़ी समान है?"],
-
 choices:["🐶 🐱","🍎 🍎","🚗 🚌","⭐ ❤️"],
-
 answer:1,
-
 badge:"Visual Explorer 🌟"
 },
-
 
 {
 en:["🧩 Complete Pattern","What comes next?"],
 hi:["🧩 पैटर्न पूरा करो","अगला क्या आएगा?"],
-
 choices:["🔴","🔵","🔴","🟢"],
-
 answer:2,
-
 badge:"Pattern Star 🧩"
 },
-
 
 {
 en:["😊 Find HAPPY","Which face is HAPPY?"],
 hi:["😊 खुश चेहरा ढूँढो","कौन सा चेहरा खुश है?"],
-
 choices:["😢","😡","😊","😨"],
-
 answer:2,
-
 badge:"Feelings Explorer 😊"
 },
-
 
 {
 en:["🗣️ Ask for HELP","What can you say?"],
 hi:["🗣️ मदद माँगो","आप क्या कह सकते हैं?"],
-
 choices:["🙏 Help me","🚫 Go away","😴 Sleep","🍎 Apple"],
-
 answer:0,
-
 badge:"Little Communicator 🗣️"
 },
-
 
 {
 en:["🎵 Rhythm Choice","Which sound is musical?"],
 hi:["🎵 संगीत चुनो","कौन सा संगीत है?"],
-
 choices:["🎶","🚗","🍎","🧱"],
-
 answer:0,
-
 badge:"Rhythm Star 🎵"
 },
-
 
 {
 en:["🧼 Daily Life","What should we do before eating?"],
 hi:["🧼 रोज़ की ज़िंदगी","खाने से पहले क्या करना चाहिए?"],
-
 choices:["🧼 Wash hands","🛌 Sleep","📺 TV","👟 Shoes"],
-
 answer:0,
-
 badge:"Daily Hero 🧼"
 }
 
@@ -351,24 +306,14 @@ badge:"Daily Hero 🧼"
 
 
 let lang="en";
-
 let index=0;
-
 let earned=[];
 
-
-const flute =
-document.getElementById("backgroundFlute");
-
-
-const musicBtn =
-document.getElementById("musicBtn");
-
+const flute=document.getElementById("backgroundFlute");
+const musicBtn=document.getElementById("musicBtn");
 
 flute.loop=true;
-
-flute.volume=.22;
-
+flute.volume=0.25;
 
 
 async function startMusic(){
@@ -381,22 +326,26 @@ musicBtn.textContent="🎵 Flute ON";
 
 }
 
-catch(e){
+catch(error){
 
 musicBtn.textContent="🎵 Tap to play";
 
-}
+console.log("Music error:",error);
 
 }
 
+}
 
 
 document.addEventListener(
 "pointerdown",
-()=>startMusic(),
+function(){
+
+startMusic();
+
+},
 {once:true}
 );
-
 
 
 musicBtn.addEventListener(
@@ -422,60 +371,39 @@ musicBtn.textContent="🔇 Flute OFF";
 });
 
 
-
 function render(){
 
 const m=missions[index];
-
 const t=m[lang];
 
+document.getElementById("title").textContent=t[0];
 
-document.getElementById("title")
-.textContent=t[0];
+document.getElementById("instruction").textContent=t[1];
 
-
-document.getElementById("instruction")
-.textContent=t[1];
-
-
-document.getElementById("missionCount")
-.textContent=
+document.getElementById("missionCount").textContent=
 
 (lang==="en"?"Mission ":"मिशन ")
++
+(index+1)
++
+(lang==="en"?" of ":" में से ")
++
+missions.length;
 
-+(index+1)
-
-+(lang==="en"?" of ":" में से ")
-
-+missions.length;
-
-
-document.getElementById("bar")
-.style.width=
-
+document.getElementById("bar").style.width=
 ((index)/missions.length*100)+"%";
 
+document.getElementById("message").textContent="";
 
-document.getElementById("message")
-.textContent="";
+document.getElementById("nextBtn").style.display="none";
 
-
-document.getElementById("nextBtn")
-.style.display="none";
-
-
-const box=
-document.getElementById("choices");
+const box=document.getElementById("choices");
 
 box.innerHTML="";
 
+m.choices.forEach(function(c,i){
 
-m.choices.forEach(
-
-function(c,i){
-
-const b=
-document.createElement("button");
+const b=document.createElement("button");
 
 b.className="choice";
 
@@ -483,45 +411,31 @@ b.type="button";
 
 b.textContent=c;
 
-
-b.addEventListener(
-"click",
-function(){
+b.addEventListener("click",function(){
 
 answer(i);
 
-}
-);
-
+});
 
 box.appendChild(b);
 
-}
-
-);
+});
 
 }
-
 
 
 function answer(i){
 
 const m=missions[index];
 
-const msg=
-document.getElementById("message");
-
+const msg=document.getElementById("message");
 
 if(i===m.answer){
 
 msg.textContent=
-
 lang==="en"
-
 ?"⭐ Great job!"
-
 :"⭐ बहुत अच्छा!";
-
 
 if(!earned.includes(m.badge)){
 
@@ -531,20 +445,15 @@ drawBadges();
 
 }
 
-
-document.getElementById("nextBtn")
-.style.display="inline-block";
+document.getElementById("nextBtn").style.display="inline-block";
 
 }
 
 else{
 
 msg.textContent=
-
 lang==="en"
-
 ?"💛 Try again. You can do it!"
-
 :"💛 फिर कोशिश करो। तुम कर सकते हो!";
 
 }
@@ -552,11 +461,8 @@ lang==="en"
 }
 
 
-
 document.getElementById("nextBtn")
-.addEventListener(
-"click",
-function(){
+.addEventListener("click",function(){
 
 if(index<missions.length-1){
 
@@ -568,51 +474,31 @@ render();
 
 else{
 
-document.getElementById("title")
-.textContent=
-
+document.getElementById("title").textContent=
 lang==="en"
-
 ?"🎉 Adventure Complete!"
-
 :"🎉 एडवेंचर पूरा!";
 
-
-document.getElementById("instruction")
-.textContent=
-
+document.getElementById("instruction").textContent=
 lang==="en"
-
 ?"You kept trying — every step counts!"
-
 :"आपने कोशिश जारी रखी — हर कदम महत्वपूर्ण है!";
 
+document.getElementById("choices").innerHTML="";
 
-document.getElementById("choices")
-.innerHTML="";
+document.getElementById("message").textContent="🌱 ⭐ 🦸";
 
+document.getElementById("nextBtn").style.display="none";
 
-document.getElementById("message")
-.textContent="🌱 ⭐ 🦸";
-
-
-document.getElementById("nextBtn")
-.style.display="none";
-
-
-document.getElementById("bar")
-.style.width="100%";
+document.getElementById("bar").style.width="100%";
 
 }
 
 });
 
 
-
 document.getElementById("restartBtn")
-.addEventListener(
-"click",
-function(){
+.addEventListener("click",function(){
 
 index=0;
 
@@ -625,80 +511,48 @@ render();
 });
 
 
-
 document.getElementById("langBtn")
-.addEventListener(
-"click",
-function(){
+.addEventListener("click",function(){
 
 lang=lang==="en"?"hi":"en";
 
+document.getElementById("langBtn").textContent=
+lang==="en"?"हिन्दी":"English";
 
-document.getElementById("langBtn")
-.textContent=
-
+document.getElementById("subtitle").textContent=
 lang==="en"
-
-?"हिन्दी"
-
-:"English";
-
-
-document.getElementById("subtitle")
-.textContent=
-
-lang==="en"
-
 ?"Learning Adventure"
-
 :"सीखने का एडवेंचर";
 
-
-document.getElementById("rewardTitle")
-.textContent=
-
+document.getElementById("rewardTitle").textContent=
 lang==="en"
-
 ?"Every Step Counts 🌱"
-
 :"हर कदम महत्वपूर्ण है 🌱";
 
-
-document.getElementById("rewardText")
-.textContent=
-
+document.getElementById("rewardText").textContent=
 lang==="en"
-
 ?"Try again, use a hint, or do it yourself — every step is progress."
-
 :"फिर कोशिश करना, मदद लेना या खुद करना — हर कदम प्रगति है।";
-
 
 render();
 
 });
 
 
-
 function drawBadges(){
 
-document.getElementById("badges")
-.innerHTML=
+document.getElementById("badges").innerHTML=
 
-earned.map(
-function(x){
+earned.map(function(x){
 
 return `<span class="badge">${x}</span>`;
 
-}
-).join("");
+}).join("");
 
 }
-
 
 
 render();
-
 drawBadges();
 
 </script>
