@@ -1,55 +1,849 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autsnoboy Music Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6c63ff">
+
+<title>Autsnoboy - Learning Adventure</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#eef7ff,#fff8e8);
+    color:#263238;
+    text-align:center;
+}
+
+header{
+    background:linear-gradient(135deg,#5c6bc0,#7e57c2);
+    color:white;
+    padding:18px 12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+header h1{
+    margin:0;
+    font-size:30px;
+}
+
+header p{
+    margin:6px 0 0;
+}
+
+.topbar{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    padding:12px;
+}
+
+button{
+    border:none;
+    border-radius:14px;
+    padding:12px 18px;
+    font-size:16px;
+    cursor:pointer;
+    background:#ffffff;
+    box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+.langBtn{
+    background:#ffca28;
+}
+
+.musicBtn{
+    background:#80cbc4;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:12px;
+}
+
+.hero{
+    background:white;
+    border-radius:24px;
+    padding:18px;
+    margin-top:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,.10);
+}
+
+.hero img{
+    max-width:150px;
+    max-height:150px;
+    object-fit:contain;
+}
+
+.mission{
+    margin-top:15px;
+    background:white;
+    border-radius:24px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.10);
+}
+
+.missionTitle{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.instruction{
+    font-size:20px;
+    margin:15px 0;
+    font-weight:bold;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    max-width:600px;
+    margin:20px auto;
+}
+
+.option{
+    min-height:100px;
+    font-size:24px;
+    background:#f5f5f5;
+    border:4px solid transparent;
+}
+
+.option:hover{
+    border-color:#7e57c2;
+}
+
+.feedback{
+    min-height:70px;
+    font-size:24px;
+    font-weight:bold;
+    padding:10px;
+}
+
+.badges{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+
+.badge{
+    background:#fff3cd;
+    padding:10px 14px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.next{
+    background:#66bb6a;
+    color:white;
+}
+
+.restart{
+    background:#42a5f5;
+    color:white;
+}
+
+.small{
+    font-size:13px;
+    opacity:.7;
+    margin-top:15px;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:600px){
+    header h1{
+        font-size:25px;
+    }
+
+    .options{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .option{
+        min-height:90px;
+        font-size:20px;
+    }
+
+    .instruction{
+        font-size:18px;
+    }
+}
+</style>
 </head>
 
-<body style="text-align:center; padding-top:50px; font-family:Arial;">
+<body>
 
-<h2>🎵 Autsnoboy Flute Music</h2>
+<header>
+    <h1>🦸 Autsnoboy</h1>
+    <p id="subtitle">Learning Adventure</p>
+</header>
 
-<button
-    onclick="playMusic()"
-    style="font-size:20px;padding:15px 25px;">
-    🎵 PLAY FLUTE
-</button>
+<div class="topbar">
 
-<button
-    onclick="stopMusic()"
-    style="font-size:20px;padding:15px 25px;">
-    🔇 STOP
-</button>
+    <button class="langBtn" onclick="toggleLanguage()">
+        🌐 <span id="langButton">हिन्दी</span>
+    </button>
 
+    <button class="musicBtn" id="musicButton" onclick="toggleMusic()">
+        🔊 Flute ON
+    </button>
+
+</div>
+
+<div class="container">
+
+    <div class="hero">
+
+        <img
+            src="autsnoboy.png"
+            alt="Autsnoboy"
+            onerror="this.style.display='none';">
+
+        <h2 id="welcome">Welcome to Autsnoboy!</h2>
+
+        <p id="welcomeText">
+            Learn through play, explore and keep trying.
+        </p>
+
+    </div>
+
+    <div class="mission">
+
+        <div class="missionTitle" id="missionTitle">
+            Mission 1
+        </div>
+
+        <div class="instruction" id="instruction">
+            Choose one of these.
+        </div>
+
+        <div class="options" id="options"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="controls">
+
+            <button class="next hidden" id="nextButton" onclick="nextMission()">
+                ➡️ Next Mission
+            </button>
+
+            <button class="restart" onclick="restartGame()">
+                🔄 Restart
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="mission">
+
+        <h3 id="progressTitle">🌟 Your Achievements</h3>
+
+        <div class="badges" id="badges"></div>
+
+        <p class="small" id="footerText">
+            Every try counts. Keep going!
+        </p>
+
+    </div>
+
+</div>
+
+<!-- REAL FLUTE MUSIC -->
 <audio
-    id="flute"
-    controls
+    id="backgroundFlute"
+    src="music.mp3"
     preload="auto"
-    loop
-    src="bmdkbandara-whispers-of-the-stream-417622.mp3">
+    loop>
+</audio>
+
+<!-- APPLAUSE -->
+<audio id="applause" preload="auto">
+    <source src="https://actions.google.com/sounds/v1/human_voices/applause.ogg" type="audio/ogg">
 </audio>
 
 <script>
 
-const flute = document.getElementById("flute");
+/* =========================
+   LANGUAGE
+========================= */
 
-function playMusic() {
-    flute.volume = 0.30;
+let language = "en";
+
+/* =========================
+   MUSIC
+========================= */
+
+const flute = document.getElementById("backgroundFlute");
+const musicButton = document.getElementById("musicButton");
+
+flute.loop = true;
+flute.volume = 0.25;
+
+let musicStarted = false;
+
+function startMusic(){
+
+    flute.volume = 0.25;
 
     flute.play()
-    .then(function() {
-        alert("🎵 Flute Music Started");
+    .then(function(){
+        musicStarted = true;
+        musicButton.innerText =
+            language === "en" ? "🔊 Flute ON" : "🔊 बाँसुरी ON";
     })
-    .catch(function(error) {
-        alert("Music Error: " + error.message);
+    .catch(function(){
+        /* Browser may require button press */
     });
 }
 
-function stopMusic() {
-    flute.pause();
+function toggleMusic(){
+
+    if(flute.paused){
+
+        flute.play()
+        .then(function(){
+
+            musicStarted = true;
+
+            musicButton.innerText =
+                language === "en" ? "🔊 Flute ON" : "🔊 बाँसुरी ON";
+
+        })
+        .catch(function(){});
+
+    }else{
+
+        flute.pause();
+
+        musicButton.innerText =
+            language === "en" ? "🔇 Flute OFF" : "🔇 बाँसुरी OFF";
+    }
 }
+
+/*
+   Do NOT automatically force music.
+   First user tap is allowed to start it.
+*/
+
+document.addEventListener("pointerdown", function(){
+
+    if(!musicStarted){
+        startMusic();
+    }
+
+}, {once:true});
+
+
+/* =========================
+   VOICE SYSTEM
+========================= */
+
+function speak(text){
+
+    if(!("speechSynthesis" in window)){
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    if(language === "hi"){
+
+        utterance.lang = "hi-IN";
+        utterance.rate = 0.85;
+        utterance.pitch = 1.05;
+
+    }else{
+
+        utterance.lang = "en-IN";
+        utterance.rate = 0.85;
+        utterance.pitch = 1.05;
+    }
+
+    utterance.volume = 1;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+
+/* =========================
+   APPLAUSE
+========================= */
+
+function applause(){
+
+    const sound = document.getElementById("applause");
+
+    try{
+        sound.currentTime = 0;
+        sound.volume = 0.7;
+        sound.play().catch(function(){});
+    }catch(e){}
+}
+
+
+/* =========================
+   FEEDBACK
+========================= */
+
+function correctFeedback(){
+
+    if(language === "en"){
+
+        document.getElementById("feedback").innerText =
+            "⭐ Well done! 👏👏";
+
+        speak("Well done!");
+
+    }else{
+
+        document.getElementById("feedback").innerText =
+            "⭐ शाबाश! 👏👏";
+
+        speak("शाबाश!");
+
+    }
+
+    applause();
+}
+
+
+function wrongFeedback(){
+
+    if(language === "en"){
+
+        document.getElementById("feedback").innerText =
+            "💪 Try again! You can do it.";
+
+        speak("Try again. You can do it.");
+
+    }else{
+
+        document.getElementById("feedback").innerText =
+            "💪 एक बार फिर कोशिश करें। आप कर सकते हैं।";
+
+        speak("एक बार फिर कोशिश करें। आप कर सकते हैं।");
+    }
+
+}
+
+
+/* =========================
+   MISSIONS
+========================= */
+
+const missions = [
+
+    {
+        titleEn:"🔴 Find the Red Object",
+        titleHi:"🔴 लाल वस्तु खोजें",
+
+        instructionEn:"Choose the red object.",
+        instructionHi:"लाल वस्तु चुनें।",
+
+        options:[
+            {text:"🔵", correct:false},
+            {text:"🔴", correct:true},
+            {text:"🟢", correct:false},
+            {text:"🟡", correct:false}
+        ],
+
+        badge:"Focus Explorer"
+    },
+
+    {
+        titleEn:"👯 Find the Same Pair",
+        titleHi:"👯 एक जैसी जोड़ी खोजें",
+
+        instructionEn:"Choose the two objects that are the same.",
+        instructionHi:"एक जैसी दो वस्तुएँ चुनें।",
+
+        options:[
+            {text:"🍎 🍎", correct:true},
+            {text:"🐶 🐱", correct:false},
+            {text:"⭐ 🌙", correct:false},
+            {text:"🚗 🚌", correct:false}
+        ],
+
+        badge:"Sharp Eyes"
+    },
+
+    {
+        titleEn:"🔷 Complete the Pattern",
+        titleHi:"🔷 पैटर्न पूरा करें",
+
+        instructionEn:"What comes next?",
+        instructionHi:"इसके बाद क्या आएगा?",
+
+        options:[
+            {text:"🔵", correct:false},
+            {text:"🔺", correct:true},
+            {text:"🟢", correct:false},
+            {text:"⭐", correct:false}
+        ],
+
+        badge:"Pattern Star"
+    },
+
+    {
+        titleEn:"😊 Find the Happy Face",
+        titleHi:"😊 खुश चेहरा खोजें",
+
+        instructionEn:"Choose the happy face.",
+        instructionHi:"खुश चेहरा चुनें।",
+
+        options:[
+            {text:"😢", correct:false},
+            {text:"😡", correct:false},
+            {text:"😊", correct:true},
+            {text:"😨", correct:false}
+        ],
+
+        badge:"Feelings Explorer"
+    },
+
+    {
+        titleEn:"🗣️ Ask for Help",
+        titleHi:"🗣️ मदद माँगें",
+
+        instructionEn:"Which one means HELP?",
+        instructionHi:"कौन सा शब्द HELP का मतलब बताता है?",
+
+        options:[
+            {text:"🍎", correct:false},
+            {text:"HELP 🤝", correct:true},
+            {text:"🚗", correct:false},
+            {text:"🌈", correct:false}
+        ],
+
+        badge:"Little Communicator"
+    },
+
+    {
+        titleEn:"🎵 Rhythm Time",
+        titleHi:"🎵 ताल का समय",
+
+        instructionEn:"Choose the matching rhythm.",
+        instructionHi:"सही ताल चुनें।",
+
+        options:[
+            {text:"👏 👏", correct:true},
+            {text:"👏 ⭐", correct:false},
+            {text:"⭐ ⭐", correct:false},
+            {text:"🎈 🚗", correct:false}
+        ],
+
+        badge:"Rhythm Star"
+    },
+
+    {
+        titleEn:"🧼 Daily Life",
+        titleHi:"🧼 रोज़मर्रा की ज़िंदगी",
+
+        instructionEn:"What should we do before eating?",
+        instructionHi:"खाना खाने से पहले हमें क्या करना चाहिए?",
+
+        options:[
+            {text:"🧼 Wash hands", correct:true},
+            {text:"📺 TV", correct:false},
+            {text:"🚗 Drive", correct:false},
+            {text:"😴 Sleep", correct:false}
+        ],
+
+        badge:"Daily Hero"
+    }
+
+];
+
+
+/* =========================
+   GAME STATE
+========================= */
+
+let currentMission = 0;
+let completed = [];
+let answeredCorrectly = false;
+
+
+/* =========================
+   LOAD MISSION
+========================= */
+
+function loadMission(){
+
+    answeredCorrectly = false;
+
+    const mission = missions[currentMission];
+
+    document.getElementById("missionTitle").innerText =
+        language === "en"
+        ? mission.titleEn
+        : mission.titleHi;
+
+    document.getElementById("instruction").innerText =
+        language === "en"
+        ? mission.instructionEn
+        : mission.instructionHi;
+
+    document.getElementById("feedback").innerText = "";
+
+    document.getElementById("nextButton").classList.add("hidden");
+
+    const optionsDiv = document.getElementById("options");
+
+    optionsDiv.innerHTML = "";
+
+    mission.options.forEach(function(option){
+
+        const btn = document.createElement("button");
+
+        btn.className = "option";
+        btn.innerText = option.text;
+
+        btn.onclick = function(){
+
+            if(answeredCorrectly){
+                return;
+            }
+
+            if(option.correct){
+
+                answeredCorrectly = true;
+
+                if(!completed.includes(currentMission)){
+                    completed.push(currentMission);
+                }
+
+                correctFeedback();
+
+                document.getElementById("nextButton")
+                    .classList.remove("hidden");
+
+                updateBadges();
+
+            }else{
+
+                wrongFeedback();
+            }
+
+        };
+
+        optionsDiv.appendChild(btn);
+
+    });
+
+    updateText();
+
+    /*
+       Speak the instruction after the user has interacted.
+       This avoids browser autoplay blocking.
+    */
+
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+function nextMission(){
+
+    if(currentMission < missions.length - 1){
+
+        currentMission++;
+
+        loadMission();
+
+        setTimeout(function(){
+
+            if(language === "en"){
+                speak("Choose one of these.");
+            }else{
+                speak("इनमें से एक चुनें।");
+            }
+
+        },300);
+
+    }else{
+
+        if(language === "en"){
+
+            document.getElementById("feedback").innerText =
+                "🏆 Amazing! You completed all missions!";
+
+            speak("Amazing! You completed all missions.");
+
+        }else{
+
+            document.getElementById("feedback").innerText =
+                "🏆 बहुत बढ़िया! आपने सभी मिशन पूरे कर लिए!";
+
+            speak("बहुत बढ़िया! आपने सभी मिशन पूरे कर लिए!");
+
+        }
+
+        applause();
+    }
+
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function toggleLanguage(){
+
+    language = language === "en" ? "hi" : "en";
+
+    updateText();
+
+    loadMission();
+
+}
+
+
+function updateText(){
+
+    if(language === "en"){
+
+        document.getElementById("langButton").innerText = "हिन्दी";
+
+        document.getElementById("subtitle").innerText =
+            "Learning Adventure";
+
+        document.getElementById("welcome").innerText =
+            "Welcome to Autsnoboy!";
+
+        document.getElementById("welcomeText").innerText =
+            "Learn through play, explore and keep trying.";
+
+        document.getElementById("progressTitle").innerText =
+            "🌟 Your Achievements";
+
+        document.getElementById("footerText").innerText =
+            "Every try counts. Keep going!";
+
+        musicButton.innerText =
+            flute.paused ? "🔇 Flute OFF" : "🔊 Flute ON";
+
+    }else{
+
+        document.getElementById("langButton").innerText = "English";
+
+        document.getElementById("subtitle").innerText =
+            "सीखने का रोमांच";
+
+        document.getElementById("welcome").innerText =
+            "Autsnoboy में आपका स्वागत है!";
+
+        document.getElementById("welcomeText").innerText =
+            "खेल-खेल में सीखें, खोजें और कोशिश करते रहें।";
+
+        document.getElementById("progressTitle").innerText =
+            "🌟 आपकी उपलब्धियाँ";
+
+        document.getElementById("footerText").innerText =
+            "हर कोशिश महत्वपूर्ण है। कोशिश करते रहें!";
+
+        musicButton.innerText =
+            flute.paused ? "🔇 बाँसुरी OFF" : "🔊 बाँसुरी ON";
+    }
+
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+function updateBadges(){
+
+    const badgeDiv = document.getElementById("badges");
+
+    badgeDiv.innerHTML = "";
+
+    completed.forEach(function(index){
+
+        const badge = document.createElement("div");
+
+        badge.className = "badge";
+
+        badge.innerText =
+            "🏅 " + missions[index].badge;
+
+        badgeDiv.appendChild(badge);
+
+    });
+
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+function restartGame(){
+
+    currentMission = 0;
+
+    completed = [];
+
+    document.getElementById("badges").innerHTML = "";
+
+    document.getElementById("feedback").innerText = "";
+
+    loadMission();
+
+    setTimeout(function(){
+
+        if(language === "en"){
+            speak("Choose one of these.");
+        }else{
+            speak("इनमें से एक चुनें।");
+        }
+
+    },300);
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+loadMission();
 
 </script>
 
 </body>
 </html>
+```
