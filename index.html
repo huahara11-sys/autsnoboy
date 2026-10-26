@@ -1,22 +1,1461 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Autsnoboy Test</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Autsnoboy Learning Adventure</title>
+
+<meta name="description"
+content="Autsnoboy - A fun learning adventure for children">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+    background:
+    linear-gradient(135deg,#eaf8ff,#fff8df);
+    color:#25324a;
+}
+
+header{
+    background:
+    linear-gradient(135deg,#596ff5,#8058df);
+    color:white;
+    text-align:center;
+    padding:18px 12px 20px;
+    border-radius:0 0 30px 30px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:32px;
+    font-weight:900;
+}
+
+.tagline{
+    font-size:15px;
+    margin-top:5px;
+}
+
+.owner{
+    font-size:12px;
+    margin-top:8px;
+    opacity:.9;
+}
+
+.topButtons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+
+.topButton{
+    border:0;
+    border-radius:18px;
+    padding:11px 17px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    background:white;
+    color:#4d5ed3;
+}
+
+.container{
+    width:100%;
+    max-width:850px;
+    margin:auto;
+    padding:18px;
+}
+
+.hero{
+    background:white;
+    border-radius:28px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    margin-bottom:18px;
+}
+
+.heroImage{
+    width:150px;
+    height:150px;
+    object-fit:contain;
+    border-radius:25px;
+}
+
+.hero h1{
+    font-size:28px;
+    margin-top:8px;
+}
+
+.heroText{
+    color:#69758a;
+    margin-top:7px;
+    font-size:16px;
+}
+
+.startButton{
+    margin-top:18px;
+    border:0;
+    border-radius:20px;
+    padding:15px 28px;
+    background:#50c878;
+    color:white;
+    font-size:20px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(80,200,120,.3);
+}
+
+.startButton:active,
+.topButton:active,
+.nextButton:active,
+.choice:active{
+    transform:scale(.96);
+}
+
+.audioStatus{
+    margin-top:13px;
+    padding:10px;
+    border-radius:14px;
+    background:#f1f4ff;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.progressCard{
+    background:white;
+    padding:15px;
+    border-radius:20px;
+    margin-bottom:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+.progressTop{
+    display:flex;
+    justify-content:space-between;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.progressBar{
+    width:100%;
+    height:14px;
+    border-radius:20px;
+    background:#e4e8f2;
+    overflow:hidden;
+}
+
+.progressFill{
+    height:100%;
+    width:0%;
+    background:
+    linear-gradient(90deg,#5b72f5,#64d5f5);
+    border-radius:20px;
+    transition:.4s;
+}
+
+.game{
+    background:white;
+    border-radius:30px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 6px 22px rgba(0,0,0,.09);
+}
+
+.missionBadge{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:20px;
+    background:#eef1ff;
+    color:#5266d8;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.missionTitle{
+    font-size:27px;
+    font-weight:900;
+}
+
+.question{
+    font-size:20px;
+    line-height:1.5;
+    margin:12px auto 20px;
+    max-width:700px;
+}
+
+.choices{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    max-width:650px;
+    margin:auto;
+}
+
+.choice{
+    min-height:125px;
+    border:3px solid #e4e8f5;
+    background:#f8f9ff;
+    border-radius:23px;
+    font-size:21px;
+    font-weight:bold;
+    cursor:pointer;
+    color:#25324a;
+    padding:12px;
+}
+
+.choice:hover{
+    background:#eef3ff;
+}
+
+.choice.correct{
+    background:#ddf9e7;
+    border-color:#45c873;
+}
+
+.choice.wrong{
+    background:#fff0d7;
+    border-color:#f0b63e;
+}
+
+.feedback{
+    margin-top:18px;
+    min-height:60px;
+    border-radius:18px;
+    background:#f5f7fb;
+    padding:14px;
+    font-size:18px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.nextButton{
+    display:none;
+    margin-top:16px;
+    border:0;
+    border-radius:18px;
+    padding:13px 24px;
+    background:#5b72f5;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.nextButton.show{
+    display:inline-block;
+}
+
+.badges{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:18px;
+}
+
+.badge{
+    background:#fff5bd;
+    border:2px solid #f1d65a;
+    padding:8px 12px;
+    border-radius:18px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.complete{
+    font-size:80px;
+    padding:15px;
+}
+
+.restartButton{
+    display:inline-block;
+    margin-top:15px;
+    border:0;
+    border-radius:18px;
+    padding:14px 25px;
+    background:#50c878;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#778196;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:600px){
+
+    .logo{
+        font-size:27px;
+    }
+
+    .heroImage{
+        width:125px;
+        height:125px;
+    }
+
+    .hero h1{
+        font-size:24px;
+    }
+
+    .missionTitle{
+        font-size:23px;
+    }
+
+    .question{
+        font-size:18px;
+    }
+
+    .choices{
+        gap:10px;
+    }
+
+    .choice{
+        min-height:105px;
+        font-size:18px;
+    }
+
+}
+
+</style>
+
 </head>
 
-<body style="text-align:center;font-family:Arial;padding:40px">
+<body>
 
-<h1>🦸 Autsnoboy</h1>
 
-<h2>App is working!</h2>
+<header>
 
-<p>Varun Mamta</p>
+<div class="logo">
+🦸 Autsnoboy
+</div>
 
-<button onclick="alert('Autsnoboy is working!')">
-START
+<div class="tagline" id="tagline">
+Learning Adventure for Every Child
+</div>
+
+<div class="owner">
+Owned & Developed by Varun Mamta
+</div>
+
+<div class="topButtons">
+
+<button class="topButton"
+onclick="changeLanguage()">
+🌐 English / हिंदी
 </button>
+
+<button class="topButton"
+onclick="musicButton()">
+🎵 Music
+</button>
+
+</div>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- HOME -->
+
+<div class="hero">
+
+<img
+src="autsnoboy.png"
+class="heroImage"
+alt="Autsnoboy">
+
+<h1 id="welcome">
+Welcome to Autsnoboy!
+</h1>
+
+<p class="heroText"
+id="welcomeText">
+Play, learn, explore and try again.
+</p>
+
+<div class="audioStatus"
+id="audioStatus">
+🎵 Music is ready
+</div>
+
+<button
+class="startButton"
+onclick="startAdventure()"
+id="startButton">
+
+🚀 Start Adventure
+
+</button>
+
+</div>
+
+
+<!-- PROGRESS -->
+
+<div class="progressCard">
+
+<div class="progressTop">
+
+<span id="progressText">
+Adventure Progress
+</span>
+
+<span id="progressNumber">
+0 / 7
+</span>
+
+</div>
+
+<div class="progressBar">
+
+<div
+class="progressFill"
+id="progressFill">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- GAME -->
+
+<div class="game">
+
+<div
+class="missionBadge"
+id="missionBadge">
+
+Mission 1
+
+</div>
+
+
+<div
+class="missionTitle"
+id="missionTitle">
+
+Focus Forest
+
+</div>
+
+
+<div
+class="question"
+id="question">
+
+Press Start Adventure to begin.
+
+</div>
+
+
+<div
+class="choices"
+id="choices">
+
+</div>
+
+
+<div
+class="feedback"
+id="feedback">
+
+🌟 Every Step Counts!
+
+</div>
+
+
+<button
+class="nextButton"
+id="nextButton"
+onclick="nextMission()">
+
+➡️ Next Mission
+
+</button>
+
+
+<div
+class="badges"
+id="badges">
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div>
+Autsnoboy is a fun educational learning game.
+</div>
+
+<div>
+It supports learning activities and is not a medical
+diagnostic or treatment tool.
+</div>
+
+<div>
+© 2026 Varun Mamta
+</div>
+
+</footer>
+
+
+<!-- MUSIC FILE -->
+
+<audio
+id="flute"
+src="bmdkbandara-whispers-of-the-stream-417622.mp3"
+loop
+preload="auto"
+playsinline>
+</audio>
+
+
+<script>
+
+
+/* =====================================
+   BASIC VARIABLES
+===================================== */
+
+let currentMission = -1;
+
+let hindi = false;
+
+let musicPlaying = false;
+
+let gameStarted = false;
+
+
+/* =====================================
+   MUSIC
+===================================== */
+
+const flute =
+document.getElementById("flute");
+
+
+function startMusic(){
+
+    flute.volume = 0.25;
+
+    flute.play()
+    .then(function(){
+
+        musicPlaying = true;
+
+        document.getElementById("audioStatus")
+        .innerText =
+        hindi
+        ? "🎵 संगीत चल रहा है"
+        : "🎵 Music is playing";
+
+    })
+    .catch(function(){
+
+        musicPlaying = false;
+
+        document.getElementById("audioStatus")
+        .innerText =
+        hindi
+        ? "🎵 Music शुरू करने के लिए Music दबाएँ"
+        : "🎵 Tap Music to start";
+
+    });
+
+}
+
+
+function musicButton(){
+
+    if(flute.paused){
+
+        startMusic();
+
+    }else{
+
+        flute.pause();
+
+        musicPlaying = false;
+
+        document.getElementById("audioStatus")
+        .innerText =
+        hindi
+        ? "🔇 संगीत बंद है"
+        : "🔇 Music is off";
+
+    }
+
+}
+
+
+/* =====================================
+   VOICE
+===================================== */
+
+function speak(text,language){
+
+    if(!("speechSynthesis" in window)){
+
+        return;
+
+    }
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+    new SpeechSynthesisUtterance(text);
+
+    speech.lang = language;
+
+    speech.rate = 0.82;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+    window.speechSynthesis.speak(speech);
+
+}
+
+
+/* =====================================
+   CLAP
+===================================== */
+
+function celebrateSound(){
+
+    try{
+
+        const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+        if(!AudioContext){
+
+            return;
+
+        }
+
+        const context =
+        new AudioContext();
+
+        const now =
+        context.currentTime;
+
+
+        for(let i=0;i<4;i++){
+
+            const oscillator =
+            context.createOscillator();
+
+            const gain =
+            context.createGain();
+
+            oscillator.type =
+            "triangle";
+
+            oscillator.frequency.value =
+            700 + (i * 80);
+
+            gain.gain.setValueAtTime(
+                0.001,
+                now + i * 0.12
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.25,
+                now + i * 0.12 + 0.01
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.001,
+                now + i * 0.12 + 0.10
+            );
+
+            oscillator.connect(gain);
+
+            gain.connect(context.destination);
+
+            oscillator.start(
+                now + i * 0.12
+            );
+
+            oscillator.stop(
+                now + i * 0.12 + 0.12
+            );
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+
+/* =====================================
+   MISSIONS
+===================================== */
+
+const missions = [
+
+{
+
+titleEN:"Focus Forest",
+
+titleHI:"फोकस जंगल",
+
+questionEN:"Find the RED object.",
+
+questionHI:"लाल वस्तु खोजो।",
+
+choices:[
+["🔴","red"],
+["🔵","blue"],
+["🟢","green"],
+["🟡","yellow"]
+],
+
+answer:"red",
+
+successEN:
+"Well done! You found the red object!",
+
+successHI:
+"शाबाश! तुमने लाल वस्तु खोज ली!",
+
+retryEN:
+"Good try! Look carefully and try again.",
+
+retryHI:
+"अच्छी कोशिश! ध्यान से देखो और फिर कोशिश करो।",
+
+badge:
+"🌟 Focus Explorer"
+
+},
+
+
+{
+
+titleEN:"Visual Valley",
+
+titleHI:"विजुअल वैली",
+
+questionEN:"Find the SAME pair.",
+
+questionHI:"एक जैसी जोड़ी खोजो।",
+
+choices:[
+["🍎 🍎","same"],
+["🍎 🍌","different"],
+["🐶 🐱","different"],
+["⭐ ❤️","different"]
+],
+
+answer:"same",
+
+successEN:
+"Great! You found the same pair!",
+
+successHI:
+"बहुत अच्छा! तुमने एक जैसी जोड़ी खोज ली!",
+
+retryEN:
+"Look carefully at both objects.",
+
+retryHI:
+"दोनों वस्तुओं को ध्यान से देखो।",
+
+badge:
+"👀 Sharp Eyes"
+
+},
+
+
+{
+
+titleEN:"Pattern Planet",
+
+titleHI:"पैटर्न ग्रह",
+
+questionEN:
+"What comes next? 🔵 🔴 🔵 ?",
+
+questionHI:
+"इसके बाद क्या आएगा? 🔵 🔴 🔵 ?",
+
+choices:[
+["🔴","red"],
+["🟢","green"],
+["🟡","yellow"],
+["⭐","star"]
+],
+
+answer:"red",
+
+successEN:
+"Fantastic! You understood the pattern!",
+
+successHI:
+"शानदार! तुमने पैटर्न समझ लिया!",
+
+retryEN:
+"Look at the pattern again.",
+
+retryHI:
+"पैटर्न को फिर से देखो।",
+
+badge:
+"🧩 Pattern Star"
+
+},
+
+
+{
+
+titleEN:"Emotion Island",
+
+titleHI:"भावना द्वीप",
+
+questionEN:
+"How does Autsnoboy feel? 😊",
+
+questionHI:
+"Autsnoboy कैसा महसूस कर रहा है? 😊",
+
+choices:[
+["😊 Happy","happy"],
+["😢 Sad","sad"],
+["😡 Angry","angry"],
+["😨 Scared","scared"]
+],
+
+answer:"happy",
+
+successEN:
+"Yes! Autsnoboy feels happy!",
+
+successHI:
+"हाँ! Autsnoboy खुश महसूस कर रहा है!",
+
+retryEN:
+"Look carefully at the face.",
+
+retryHI:
+"चेहरे को ध्यान से देखो।",
+
+badge:
+"😊 Feelings Explorer"
+
+},
+
+
+{
+
+titleEN:"Word Village",
+
+titleHI:"शब्द गाँव",
+
+questionEN:
+"What can you say when you need help?",
+
+questionHI:
+"जब तुम्हें मदद चाहिए तो क्या कह सकते हो?",
+
+choices:[
+["🆘 Help Please","help"],
+["😴 Sleep","sleep"],
+["🍎 Apple","apple"],
+["⚽ Ball","ball"]
+],
+
+answer:"help",
+
+successEN:
+"Wonderful! You can ask for help.",
+
+successHI:
+"बहुत बढ़िया! तुम मदद मांग सकते हो।",
+
+retryEN:
+"Think about what we say when we need help.",
+
+retryHI:
+"सोचो, जब हमें मदद चाहिए तो हम क्या कहते हैं।",
+
+badge:
+"🗣️ Little Communicator"
+
+},
+
+
+{
+
+titleEN:"Daily Life City",
+
+titleHI:"डेली लाइफ सिटी",
+
+questionEN:
+"What do we do before eating?",
+
+questionHI:
+"खाना खाने से पहले हम क्या करते हैं?",
+
+choices:[
+["🧼 Wash Hands","wash"],
+["😴 Sleep","sleep"],
+["📺 Watch TV","tv"],
+["⚽ Play","play"]
+],
+
+answer:"wash",
+
+successEN:
+"Great! Washing hands is a healthy habit.",
+
+successHI:
+"बहुत अच्छा! हाथ धोना एक अच्छी आदत है।",
+
+retryEN:
+"Think about keeping our hands clean.",
+
+retryHI:
+"सोचो, हाथ साफ रखने के लिए हम क्या करते हैं।",
+
+badge:
+"🧼 Daily Hero"
+
+},
+
+
+{
+
+titleEN:"Friendship World",
+
+titleHI:"दोस्ती की दुनिया",
+
+questionEN:
+"What should we do when it is someone else's turn?",
+
+questionHI:
+"जब किसी और की बारी हो तो हमें क्या करना चाहिए?",
+
+choices:[
+["⏳ Wait","wait"],
+["😡 Shout","shout"],
+["🏃 Run Away","run"],
+["❌ Stop Playing","stop"]
+],
+
+answer:"wait",
+
+successEN:
+"Excellent! Waiting for your turn is great.",
+
+successHI:
+"बहुत बढ़िया! अपनी बारी का इंतज़ार करना अच्छी बात है।",
+
+retryEN:
+"Let's think about taking turns.",
+
+retryHI:
+"चलो अपनी-अपनी बारी के बारे में सोचते हैं।",
+
+badge:
+"🤝 Friendship Star"
+
+}
+
+];
+
+
+/* =====================================
+   START ADVENTURE
+===================================== */
+
+function startAdventure(){
+
+    gameStarted = true;
+
+    currentMission = 0;
+
+    startMusic();
+
+    showMission();
+
+    document.getElementById("startButton")
+    .innerText =
+    hindi
+    ? "🔄 Adventure Restart"
+    : "🔄 Restart Adventure";
+
+}
+
+
+/* =====================================
+   SHOW MISSION
+===================================== */
+
+function showMission(){
+
+    const mission =
+    missions[currentMission];
+
+
+    document.getElementById("missionBadge")
+    .innerText =
+    hindi
+    ? "मिशन " + (currentMission + 1)
+    : "Mission " + (currentMission + 1);
+
+
+    document.getElementById("missionTitle")
+    .innerText =
+    hindi
+    ? mission.titleHI
+    : mission.titleEN;
+
+
+    document.getElementById("question")
+    .innerText =
+    hindi
+    ? mission.questionHI
+    : mission.questionEN;
+
+
+    document.getElementById("feedback")
+    .innerText =
+    hindi
+    ? "एक विकल्प चुनो। फिर कोशिश कर सकते हो!"
+    : "Choose an answer. You can try again!";
+
+
+    document.getElementById("nextButton")
+    .classList.remove("show");
+
+
+    const choices =
+    document.getElementById("choices");
+
+    choices.innerHTML = "";
+
+
+    mission.choices.forEach(function(item){
+
+        const button =
+        document.createElement("button");
+
+        button.className =
+        "choice";
+
+        button.innerHTML =
+        item[0];
+
+        button.onclick =
+        function(){
+
+            checkAnswer(
+                button,
+                item[1]
+            );
+
+        };
+
+        choices.appendChild(button);
+
+    });
+
+
+    updateProgress();
+
+
+    setTimeout(function(){
+
+        speak(
+            hindi
+            ? mission.questionHI
+            : mission.questionEN,
+
+            hindi
+            ? "hi-IN"
+            : "en-IN"
+        );
+
+    },500);
+
+}
+
+
+/* =====================================
+   CHECK ANSWER
+===================================== */
+
+function checkAnswer(button,value){
+
+    startMusic();
+
+
+    const mission =
+    missions[currentMission];
+
+
+    if(value === mission.answer){
+
+        button.classList.add("correct");
+
+
+        document.getElementById("feedback")
+        .innerText =
+        hindi
+        ? "⭐ शाबाश! बहुत अच्छा!"
+        : "⭐ Well done! Great job!";
+
+
+        celebrateSound();
+
+
+        speak(
+            hindi
+            ? mission.successHI
+            : mission.successEN,
+
+            hindi
+            ? "hi-IN"
+            : "en-IN"
+        );
+
+
+        document.querySelectorAll(".choice")
+        .forEach(function(choice){
+
+            choice.disabled = true;
+
+        });
+
+
+        document.getElementById("nextButton")
+        .classList.add("show");
+
+
+        addBadge(mission.badge);
+
+    }
+
+    else{
+
+        button.classList.add("wrong");
+
+
+        document.getElementById("feedback")
+        .innerText =
+        hindi
+        ? "💛 अच्छी कोशिश! फिर से देखो।"
+        : "💛 Good try! Look again.";
+
+
+        speak(
+            hindi
+            ? mission.retryHI
+            : mission.retryEN,
+
+            hindi
+            ? "hi-IN"
+            : "en-IN"
+        );
+
+
+        setTimeout(function(){
+
+            button.classList.remove("wrong");
+
+        },700);
+
+    }
+
+}
+
+
+/* =====================================
+   NEXT MISSION
+===================================== */
+
+function nextMission(){
+
+    currentMission++;
+
+
+    if(currentMission >= missions.length){
+
+        completeAdventure();
+
+        return;
+
+    }
+
+
+    showMission();
+
+}
+
+
+/* =====================================
+   PROGRESS
+===================================== */
+
+function updateProgress(){
+
+    const total =
+    missions.length;
+
+    const number =
+    currentMission + 1;
+
+    const percentage =
+    (number / total) * 100;
+
+
+    document.getElementById("progressFill")
+    .style.width =
+    percentage + "%";
+
+
+    document.getElementById("progressNumber")
+    .innerText =
+    number + " / " + total;
+
+}
+
+
+/* =====================================
+   BADGE
+===================================== */
+
+function addBadge(text){
+
+    const badges =
+    document.getElementById("badges");
+
+
+    const badge =
+    document.createElement("div");
+
+    badge.className =
+    "badge";
+
+    badge.innerText =
+    text;
+
+    badges.appendChild(badge);
+
+}
+
+
+/* =====================================
+   COMPLETE GAME
+===================================== */
+
+function completeAdventure(){
+
+    document.getElementById("missionBadge")
+    .innerText =
+    hindi
+    ? "🎉 पूरा हुआ!"
+    : "🎉 Complete!";
+
+
+    document.getElementById("missionTitle")
+    .innerText =
+    hindi
+    ? "Autsnoboy को तुम पर गर्व है!"
+    : "Autsnoboy is proud of you!";
+
+
+    document.getElementById("question")
+    .innerText =
+    hindi
+    ? "तुमने कोशिश की, सीखा और आगे बढ़े!"
+    : "You tried, learned and moved forward!";
+
+
+    document.getElementById("choices")
+    .innerHTML =
+    "<div class='complete'>🏆🌟🦸</div>";
+
+
+    document.getElementById("feedback")
+    .innerText =
+    hindi
+    ? "⭐ हर कोशिश मायने रखती है!"
+    : "⭐ Every Step Counts!";
+
+
+    document.getElementById("nextButton")
+    .classList.add("show");
+
+
+    document.getElementById("nextButton")
+    .innerText =
+    hindi
+    ? "🔄 फिर से खेलें"
+    : "🔄 Play Again";
+
+
+    document.getElementById("nextButton")
+    .onclick =
+    function(){
+
+        currentMission = 0;
+
+        document.getElementById("badges")
+        .innerHTML = "";
+
+        showMission();
+
+    };
+
+
+    document.getElementById("progressFill")
+    .style.width =
+    "100%";
+
+
+    document.getElementById("progressNumber")
+    .innerText =
+    "7 / 7";
+
+
+    celebrateSound();
+
+
+    speak(
+        hindi
+        ? "शाबाश! आपने सभी मिशन पूरे कर लिए!"
+        : "Amazing! You completed all the missions!",
+
+        hindi
+        ? "hi-IN"
+        : "en-IN"
+    );
+
+}
+
+
+/* =====================================
+   LANGUAGE
+===================================== */
+
+function changeLanguage(){
+
+    hindi = !hindi;
+
+
+    document.getElementById("tagline")
+    .innerText =
+    hindi
+    ? "हर बच्चे के लिए सीखने का रोमांच"
+    : "Learning Adventure for Every Child";
+
+
+    document.getElementById("welcome")
+    .innerText =
+    hindi
+    ? "Autsnoboy में आपका स्वागत है!"
+    : "Welcome to Autsnoboy!";
+
+
+    document.getElementById("welcomeText")
+    .innerText =
+    hindi
+    ? "खेलो, सीखो, खोजो और फिर कोशिश करो।"
+    : "Play, learn, explore and try again.";
+
+
+    document.getElementById("progressText")
+    .innerText =
+    hindi
+    ? "एडवेंचर प्रगति"
+    : "Adventure Progress";
+
+
+    document.getElementById("startButton")
+    .innerText =
+    hindi
+    ? "🚀 Adventure शुरू करें"
+    : "🚀 Start Adventure";
+
+
+    if(gameStarted){
+
+        showMission();
+
+    }
+
+}
+
+
+/* =====================================
+   PREVENT OLD SERVICE WORKER CACHE
+===================================== */
+
+if(
+    "serviceWorker" in navigator
+){
+
+    navigator.serviceWorker
+    .getRegistrations()
+    .then(function(registrations){
+
+        registrations.forEach(function(registration){
+
+            registration.unregister();
+
+        });
+
+    });
+
+}
+
+</script>
+
 
 </body>
 </html>
