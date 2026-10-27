@@ -1223,12 +1223,6 @@ fluteAudio.addEventListener("error",function(){
 <audio id="voiceWrongEn" src="wrong_en.mp3" preload="auto"></audio>
 <audio id="voiceLearningHi" src="learning_hi.mp3" preload="auto"></audio>
 <audio id="voiceLearningEn" src="learning_en.mp3" preload="auto"></audio>
-<script>
-["voiceCorrectHi","voiceCorrectEn","voiceWrongHi","voiceWrongEn","voiceLearningHi","voiceLearningEn"].forEach(function(id){
-  const a=document.getElementById(id);
-  if(a){a.setAttribute("playsinline","");a.load();a.addEventListener("error",function(){console.warn("Autsnoboy hologram voice file missing/unreadable:",id,a.src);});}
-});
-</script>
 
 </div>
 
@@ -1641,51 +1635,23 @@ function getEventVoiceId(type){
   return language === "hi" ? "voiceLearningHi" : "voiceLearningEn";
 }
 
-function speakEventFallback(type){
-  const text = type === "correct"
-    ? (language === "hi" ? "बहुत अच्छा! तुम्हारी पावर बढ़ रही है!" : "Amazing! Your power is growing!")
-    : type === "wrong"
-      ? (language === "hi" ? "कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!" : "That's okay! You can do it. Try again!")
-      : (language === "hi" ? "मैं तुम्हारे साथ हूँ! सीखते रहो!" : "I'm with you! Keep learning!");
-  speak(text);
-}
-
 function playEventVoice(type){
   const id=getEventVoiceId(type);
   const audio=document.getElementById(id);
-  return new Promise(function(resolve){
-    if(!audio){ speakEventFallback(type); resolve(); return; }
-    let finished=false;
-    function done(){
-      if(finished)return;
-      finished=true;
-      audio.onended=null;
-      audio.onerror=null;
-      resolve();
-    }
-    audio.onended=done;
-    audio.onerror=function(){
-      console.warn("Autsnoboy event voice failed:", audio.src);
-      speakEventFallback(type);
-      done();
-    };
-    try{ audio.pause(); audio.currentTime=0; audio.volume=1; }catch(e){}
-    const p=audio.play();
-    if(p && typeof p.catch === "function"){
-      p.catch(function(err){
-        console.warn("Autsnoboy event voice playback blocked:", err);
-        speakEventFallback(type);
-        done();
-      });
-    }
-  });
+  if(!audio) return Promise.resolve();
+  try{ audio.pause(); audio.currentTime=0; }catch(e){}
+  audio.volume=1;
+  const p=audio.play();
+  if(p && p.catch) return p.catch(function(){});
+  return Promise.resolve();
 }
 
 function showFullscreenHologram(type){
   const overlay=document.getElementById("holoOverlay");
   const face=document.getElementById("holoBigFace");
   const msg=document.getElementById("holoBigMsg");
-  if(!overlay || !face || !msg) return Promise.resolve();
+  if(!overlay || !face || !msg) return;
+
   overlay.className="holoOverlay show "+type;
   if(type === "correct"){
     face.innerText="👏✨🎉";
@@ -1697,10 +1663,13 @@ function showFullscreenHologram(type){
     face.innerText="🚀✨💙";
     msg.innerText=language === "hi" ? "मैं तुम्हारे साथ हूँ! सीखते रहो!" : "I'm with you! Keep learning!";
   }
+
+  playEventVoice(type);
+
   clearTimeout(window._holoTimer);
-  return playEventVoice(type).then(function(){
+  window._holoTimer=setTimeout(function(){
     overlay.classList.remove("show","correct","wrong","learning");
-  });
+  }, type === "correct" ? 4200 : 3800);
 }
 
 
@@ -1983,14 +1952,20 @@ function sayWord(en,hi){
    MISSIONS
 ========================= */
 
-async function startMission(index){
+function startMission(index){
+
+  showHologram("learning", true);
   currentMission=index;
   currentQuestion=0;
   missionScore=0;
+
   hideAll();
-  document.getElementById("mission").classList.remove("hidden");
-  await showFullscreenHologram("learning");
+
+  document.getElementById("mission")
+    .classList.remove("hidden");
+
   loadMissionQuestion();
+
 }
 
 
@@ -2062,7 +2037,7 @@ function loadMissionQuestion(){
 }
 
 
-async function checkMissionAnswer(
+function checkMissionAnswer(
   selected,
   correct
 ){
@@ -2093,7 +2068,7 @@ async function checkMissionAnswer(
       : "🎉 Great job! Correct!";
 
     playCheer();
-    await showFullscreenHologram("correct");
+    showHologram("correct", true);
 
     document.getElementById(
       "nextBtn"
@@ -2106,7 +2081,7 @@ async function checkMissionAnswer(
       ? "💙 कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
       : "💙 That's okay! You can do it. Try again!";
 
-    await showFullscreenHologram("wrong");
+    showHologram("wrong", true);
 
     buttons.forEach(
       function(btn){
@@ -2120,15 +2095,25 @@ async function checkMissionAnswer(
 }
 
 
-async function nextQuestion(){
+function nextQuestion(){
+
   currentQuestion++;
-  const total=missions[currentMission].questions.length;
+
+  const total=
+    missions[currentMission]
+    .questions.length;
+
   if(currentQuestion>=total){
+
     showMissionResult();
+
   }else{
-    await showFullscreenHologram("learning");
+
+    showHologram("learning", true);
     loadMissionQuestion();
+
   }
+
 }
 
 
@@ -2397,7 +2382,7 @@ function learnObject(index){
    HOUSEHOLD QUIZ
 ========================= */
 
-async function startHouseholdQuiz(){
+function startHouseholdQuiz(){
 
   const learned=
     getLearnedObjects();
@@ -2431,7 +2416,7 @@ async function startHouseholdQuiz(){
     "householdQuiz"
   ).classList.remove("hidden");
 
-  await showFullscreenHologram("learning");
+  showHologram("guide");
   loadHouseholdQuestion();
 
 }
@@ -2575,7 +2560,7 @@ function createHouseholdOptions(
 }
 
 
-async function checkHouseholdAnswer(
+function checkHouseholdAnswer(
   selected,
   correct
 ){
@@ -2602,7 +2587,7 @@ async function checkHouseholdAnswer(
       : "🎉 Correct!";
 
     playCheer();
-    await showFullscreenHologram("correct");
+    showHologram("correct");
 
     document.getElementById(
       "hqNext"
@@ -2632,14 +2617,20 @@ async function checkHouseholdAnswer(
       ? "💙 कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
       : "💙 That's okay! You can do it. Try again!";
 
-    await showFullscreenHologram("wrong");
+    showHologram("wrong");
+
+    speak(
+      language==="hi"
+      ? "फिर कोशिश करें"
+      : "Try again"
+    );
 
   }
 
 }
 
 
-async function nextHouseholdQuestion(){
+function nextHouseholdQuestion(){
 
   householdQuestion++;
 
