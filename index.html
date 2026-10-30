@@ -1,18 +1,631 @@
+/* =========================================================
+   AUTSNOBOY FINAL AUDIO + FULL SCREEN HOLOGRAM FIX
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. GET CORRECT AUDIO
+--------------------------------------------------------- */
+
 function getEventVoiceId(type){
 
   if(type === "correct"){
+
     return language === "hi"
       ? "voiceCorrectHi"
       : "voiceCorrectEn";
+
   }
 
   if(type === "wrong"){
+
     return language === "hi"
       ? "voiceWrongHi"
       : "voiceWrongEn";
+
   }
 
   return language === "hi"
     ? "voiceLearningHi"
     : "voiceLearningEn";
 }
+
+
+
+/* ---------------------------------------------------------
+   2. PLAY EVENT MP3
+--------------------------------------------------------- */
+
+function playEventVoice(type){
+
+  const id = getEventVoiceId(type);
+
+  const audio = document.getElementById(id);
+
+  if(!audio){
+
+    console.error("Autsnoboy audio not found:", id);
+
+    return Promise.resolve();
+
+  }
+
+
+  return new Promise(function(resolve){
+
+    let finished = false;
+
+
+    function finish(){
+
+      if(finished) return;
+
+      finished = true;
+
+      try{
+
+        audio.onended = null;
+        audio.onerror = null;
+
+      }catch(e){}
+
+      resolve();
+
+    }
+
+
+    try{
+
+      audio.pause();
+
+      audio.currentTime = 0;
+
+      audio.volume = 1;
+
+      audio.muted = false;
+
+    }catch(e){}
+
+
+    audio.onended = function(){
+
+      finish();
+
+    };
+
+
+    audio.onerror = function(){
+
+      console.error(
+        "Autsnoboy MP3 error:",
+        id
+      );
+
+      finish();
+
+    };
+
+
+    try{
+
+      const p = audio.play();
+
+      if(p && p.catch){
+
+        p.catch(function(error){
+
+          console.warn(
+            "Audio autoplay blocked:",
+            id,
+            error
+          );
+
+          finish();
+
+        });
+
+      }
+
+    }catch(error){
+
+      console.error(
+        "Audio playback error:",
+        id,
+        error
+      );
+
+      finish();
+
+    }
+
+  });
+
+}
+
+
+
+/* ---------------------------------------------------------
+   3. FULL SCREEN HOLOGRAM
+   MP3 MUST FINISH BEFORE NEXT SCREEN
+--------------------------------------------------------- */
+
+function showFullscreenHologram(type){
+
+  /*
+     Stop browser question voice immediately.
+  */
+
+  if(typeof stopSpeech === "function"){
+
+    stopSpeech();
+
+  }
+
+
+  return new Promise(function(resolve){
+
+    const overlay =
+      document.getElementById("holoOverlay");
+
+    const face =
+      document.getElementById("holoBigFace");
+
+    const msg =
+      document.getElementById("holoBigMsg");
+
+
+    if(!overlay || !face || !msg){
+
+      resolve();
+
+      return;
+
+    }
+
+
+    /*
+       SHOW FULL SCREEN
+    */
+
+    overlay.className =
+      "holoOverlay show " + type;
+
+
+    /*
+       CORRECT
+    */
+
+    if(type === "correct"){
+
+      face.innerText =
+        "👏✨🎉";
+
+      msg.innerText =
+        language === "hi"
+          ? "बहुत अच्छा! तुम्हारी power बढ़ रही है!"
+          : "Amazing! Your power is growing!";
+
+    }
+
+
+    /*
+       WRONG
+    */
+
+    else if(type === "wrong"){
+
+      face.innerText =
+        "💙🙂";
+
+      msg.innerText =
+        language === "hi"
+          ? "कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
+          : "That's okay! You can do it. Try again!";
+
+    }
+
+
+    /*
+       LEARNING
+    */
+
+    else{
+
+      face.innerText =
+        "🚀✨💙";
+
+      msg.innerText =
+        language === "hi"
+          ? "मैं तुम्हारे साथ हूँ! सीखते रहो!"
+          : "I'm with you! Keep learning!";
+
+    }
+
+
+    /*
+       SELECT MP3
+    */
+
+    const audioId =
+      getEventVoiceId(type);
+
+    const audio =
+      document.getElementById(audioId);
+
+
+    if(!audio){
+
+      console.error(
+        "Missing hologram audio:",
+        audioId
+      );
+
+
+      overlay.classList.remove(
+        "show",
+        "correct",
+        "wrong",
+        "learning"
+      );
+
+
+      resolve();
+
+      return;
+
+    }
+
+
+    let completed = false;
+
+
+    function finishHologram(){
+
+      if(completed) return;
+
+      completed = true;
+
+
+      try{
+
+        audio.pause();
+
+        audio.currentTime = 0;
+
+        audio.onended = null;
+
+        audio.onerror = null;
+
+      }catch(e){}
+
+
+      /*
+         Hologram closes ONLY after voice.
+      */
+
+      overlay.classList.remove(
+        "show",
+        "correct",
+        "wrong",
+        "learning"
+      );
+
+
+      resolve();
+
+    }
+
+
+    /*
+       WAIT FOR ACTUAL MP3 END
+    */
+
+    audio.onended =
+      finishHologram;
+
+
+    audio.onerror =
+      finishHologram;
+
+
+    try{
+
+      audio.pause();
+
+      audio.currentTime = 0;
+
+      audio.volume = 1;
+
+      audio.muted = false;
+
+
+      const playPromise =
+        audio.play();
+
+
+      if(playPromise &&
+         playPromise.catch){
+
+        playPromise.catch(function(error){
+
+          console.warn(
+            "Hologram audio could not play:",
+            error
+          );
+
+
+          /*
+             Do NOT start question voice.
+             Close hologram safely.
+          */
+
+          finishHologram();
+
+        });
+
+      }
+
+    }catch(error){
+
+      console.error(
+        "Hologram audio exception:",
+        error
+      );
+
+      finishHologram();
+
+    }
+
+  });
+
+}
+
+
+
+/* ---------------------------------------------------------
+   4. START MISSION
+   HOLOGRAM → MP3 → QUESTION → QUESTION VOICE
+--------------------------------------------------------- */
+
+function startMission(index){
+
+  currentMission = index;
+
+  currentQuestion = 0;
+
+  missionScore = 0;
+
+
+  hideAll();
+
+
+  document.getElementById("mission")
+    .classList.remove("hidden");
+
+
+  /*
+     IMPORTANT:
+
+     Question will NOT load now.
+
+     First hologram + MP3.
+  */
+
+  showFullscreenHologram("learning")
+
+    .then(function(){
+
+      loadMissionQuestion();
+
+    });
+
+}
+
+
+
+/* ---------------------------------------------------------
+   5. NEXT QUESTION
+   HOLOGRAM → MP3 → NEXT QUESTION
+--------------------------------------------------------- */
+
+function nextQuestion(){
+
+  currentQuestion++;
+
+
+  const total =
+    missions[currentMission]
+      .questions.length;
+
+
+  if(currentQuestion >= total){
+
+    showMissionResult();
+
+    return;
+
+  }
+
+
+  /*
+     First learning hologram.
+  */
+
+  showFullscreenHologram("learning")
+
+    .then(function(){
+
+      /*
+         Only after MP3 finishes,
+         load question.
+      */
+
+      loadMissionQuestion();
+
+    });
+
+}
+
+
+
+/* ---------------------------------------------------------
+   6. ANSWER CHECK
+--------------------------------------------------------- */
+
+function checkMissionAnswer(
+  selected,
+  correct
+){
+
+  const feedback =
+    document.getElementById("feedback");
+
+
+  const buttons =
+    document.querySelectorAll(
+      "#options .option"
+    );
+
+
+  /*
+     Temporarily disable buttons.
+  */
+
+  buttons.forEach(function(btn){
+
+    btn.disabled = true;
+
+  });
+
+
+
+  /* =====================================================
+     CORRECT ANSWER
+  ===================================================== */
+
+  if(selected === correct){
+
+    missionScore++;
+
+
+    feedback.innerText =
+      language === "hi"
+        ? "🎉 बहुत अच्छा! सही जवाब!"
+        : "🎉 Great job! Correct!";
+
+
+    /*
+       REAL APPLAUSE
+    */
+
+    if(typeof playCheer === "function"){
+
+      playCheer();
+
+    }
+
+
+    /*
+       FULL SCREEN HOLOGRAM
+       + CORRECT MP3
+    */
+
+    showFullscreenHologram("correct")
+
+      .then(function(){
+
+        /*
+           MP3 finished.
+           Now show Next button.
+        */
+
+        document.getElementById(
+          "nextBtn"
+        ).classList.remove("hidden");
+
+      });
+
+  }
+
+
+
+  /* =====================================================
+     WRONG ANSWER
+  ===================================================== */
+
+  else{
+
+    feedback.innerText =
+      language === "hi"
+        ? "💙 कोई बात नहीं! तुम कर सकते हो। दोबारा कोशिश करो!"
+        : "💙 That's okay! You can do it. Try again!";
+
+
+    /*
+       FULL SCREEN HOLOGRAM
+       + WRONG MP3
+    */
+
+    showFullscreenHologram("wrong")
+
+      .then(function(){
+
+        /*
+           MP3 finished.
+           Allow child to try again.
+        */
+
+        buttons.forEach(function(btn){
+
+          btn.disabled = false;
+
+        });
+
+      });
+
+  }
+
+}
+
+
+
+/* ---------------------------------------------------------
+   7. EXTRA SAFETY:
+      QUESTION VOICE NEVER PLAYS DURING HOLOGRAM
+--------------------------------------------------------- */
+
+function speakQuestion(){
+
+  /*
+     If hologram is currently visible,
+     DO NOT speak the question.
+  */
+
+  const overlay =
+    document.getElementById("holoOverlay");
+
+
+  if(
+    overlay &&
+    overlay.classList.contains("show")
+  ){
+
+    return;
+
+  }
+
+
+  const q =
+    missions[currentMission]
+      .questions[currentQuestion];
+
+
+  speak(q.q);
+
+}
+
+
+
+/* =========================================================
+   END OF FINAL AUDIO + HOLOGRAM FIX
+   ========================================================= */
